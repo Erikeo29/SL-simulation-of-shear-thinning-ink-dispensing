@@ -1012,7 +1012,25 @@ else:
 # ===== PAGE ACCUEIL =====
 if selected_page == gen_pages[0]:  # Accueil / Home
     st.title(t("title"))
-    st.markdown(load_file_content("accueil/accueil.md"))
+
+    # --- Layout côte-à-côte : note auteur (gauche) + GIF VOF (droite) ---
+    accueil_content = load_file_content("accueil/accueil.md")
+    parts = accueil_content.split("---", 1)
+
+    col_text, col_img = st.columns([3, 1])
+    with col_text:
+        st.markdown(parts[0])
+    with col_img:
+        vof_gif = os.path.join(ASSETS_PATH, "vof", "gif", "run_057_y_gap_buse0.12_x_gap_buse0_eta01.5_ratio_surface0.8.gif")
+        if os.path.exists(vof_gif):
+            html = load_media_as_base64(vof_gif)
+            if html:
+                st.markdown(html, unsafe_allow_html=True)
+            st.caption("VOF — OpenFOAM")
+
+    # --- Reste du contenu en pleine largeur ---
+    if len(parts) > 1:
+        st.markdown("---" + parts[1])
 
     st.markdown("---")
     st.header(t("overview_title"))
