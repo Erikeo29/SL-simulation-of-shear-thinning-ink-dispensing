@@ -993,6 +993,8 @@ if is_chatbot_enabled():
 
 st.sidebar.markdown("---")
 st.sidebar.markdown(t("version_info"))
+st.sidebar.markdown("")
+st.sidebar.markdown("© 2025 Eric QUEAU — [MIT License](https://opensource.org/licenses/MIT)")
 
 # --- Déterminer la page active ---
 # Priorité : modèles > annexes > général
@@ -1468,10 +1470,6 @@ elif selected_page == annex_pages[4]:  # Références bibliographiques / Bibliog
     st.title(selected_page)
     st.markdown("---")
     st.markdown(load_file_content("biblio/biblio.md"))
-
-# --- Footer licence ---
-st.markdown("---")
-st.markdown("© 2025 Eric QUEAU — [MIT License](https://opensource.org/licenses/MIT)")
 
 # --- Ancre de fin de page pour bouton scroll-to-bottom ---
 st.markdown('<div id="bottom"></div>', unsafe_allow_html=True)
