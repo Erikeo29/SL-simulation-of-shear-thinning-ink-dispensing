@@ -119,7 +119,7 @@ class InkDispenseSimulation:
             params = {}
 
         # ========== Propriétés Phase 1 : Encre ==========
-        self.rho_ink = params.get('rho_ink', 2200.0)      # kg/m³
+        self.rho_ink = params.get('rho_ink', 3000.0)      # kg/m³
         self.mu_0 = params.get('viscosity', 1.5)          # Pa·s (viscosité au repos)
         self.mu_inf = params.get('mu_inf', 0.05)          # Pa·s (viscosité infinie)
         self.lambda_c = params.get('lambda_c', 0.15)      # s (temps de relaxation)
@@ -781,7 +781,7 @@ if __name__ == "__main__":
         'needle_diameter': 150e-6,       # 150 µm
         'shift_x': 50e-6,                # 50 µm
         'shift_z': 30e-6,                # 30 µm
-        'viscosity': 20,                 # 20 Pa.s
+        'viscosity': 3.0,                # 3.0 Pa.s
         'angle_left': 45,
         'angle_right': 45,
         'angle_eg': 30,

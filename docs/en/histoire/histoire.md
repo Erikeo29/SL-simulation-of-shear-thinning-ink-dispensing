@@ -97,7 +97,7 @@ $$Oh = \frac{\mu}{\sqrt{\rho \sigma L}} = \frac{\sqrt{We}}{Re}$$
 
 ## 2. Rheology Pioneers
 
-### Isaac Newton (1642-1727)
+### Isaac Newton (1643-1727)
 
 **Nationality:** English | **Field:** Physics, Mathematics
 
@@ -112,7 +112,7 @@ A fluid whose viscosity $\mu$ is constant is called **Newtonian**. Water, air, a
 
 ### Wilhelm Ostwald (1853-1932) & Arnulph de Waele
 
-**Nationality:** Ostwald: German (Latvian by birth) | **Field:** Physical chemistry, Rheology
+**Nationality:** Ostwald: German (born in Riga, then Russian Empire) | **Field:** Physical chemistry, Rheology
 
 Wilhelm Ostwald received the **Nobel Prize in Chemistry in 1909** for his work on catalysis and chemical equilibria.
 
@@ -123,11 +123,11 @@ This law describes **shear-thinning** ($n < 1$) and **shear-thickening** ($n > 1
 
 ---
 
-### Pierre J. Carreau (born ~1940)
+### Pierre J. Carreau (born 1939)
 
 **Nationality:** Canadian | **Field:** Chemical engineering, Polymer rheology
 
-Professor emeritus at École Polytechnique de Montréal, Pierre Carreau founded CREPEC (Polymer Research Center). He earned his doctorate from the University of Wisconsin in 1968.
+Professor emeritus at École Polytechnique de Montréal, Pierre Carreau founded CRASP (later merged into CREPEC in 2002). He earned his doctorate from the University of Wisconsin in 1968.
 
 **The Carreau Model (1972):**
 $$\eta(\dot{\gamma}) = \eta_\infty + (\eta_0 - \eta_\infty)[1 + (\lambda\dot{\gamma})^2]^{(n-1)/2}$$
@@ -187,7 +187,7 @@ Maxwell was the first to conceive that gas molecules don't all have the same vel
 
 ### Prabhu Lal Bhatnagar (1912-1976), Eugene P. Gross (1926-1991) & Max Krook (1913-1985)
 
-**Nationalities:** Indian, American, Dutch/American | **Field:** Theoretical physics
+**Nationalities:** Indian, American, South African/American | **Field:** Theoretical physics
 
 **The BGK operator (1954):**
 $$\Omega_i = -\frac{1}{\tau}(f_i - f_i^{eq})$$
@@ -354,20 +354,18 @@ REYNOLDS  GALERKIN          MAXWELL-BOLTZMANN        WEBER-OHNESORGE
               │                        │
          PHASE-FIELD                  LBM
               │                        │
+              │                        │
+    MONAGHAN (1977)          HIRT-NICHOLS (1981)
+              │                        │
+             SPH                      VOF
+              │                        │
               └────────────┬───────────┘
-                           │
-                    MONAGHAN (1977)
-                           │
-                          SPH
-                           │
-                    HIRT-NICHOLS (1981)
-                           │
-                          VOF
                            │
               ┌────────────┴────────────┐
               │                         │
          THIS PROJECT              INDUSTRIAL
-    Shear-Thinning Ink Dispensing         APPLICATIONS
+    Shear-Thinning Ink              APPLICATIONS
+         Dispensing
 ```
 
 ---

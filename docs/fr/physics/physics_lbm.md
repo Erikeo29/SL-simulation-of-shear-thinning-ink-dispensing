@@ -157,7 +157,7 @@ Le mouillage est géré naturellement sans conditions aux limites explicites.
 
 | Bibliothèque | Langage | GPU | Focus |
 |--------------|---------|-----|-------|
-| **Palabos** | C++ | MPI | Référence open-source, tutoriels |
+| **Palabos** | C++ | Non | Référence open-source, tutoriels |
 | **OpenLB** | C++ | CUDA/OpenMP | Applications industrielles |
 | **waLBerla** | C++ | CUDA | HPC extrême, millions de cœurs |
 | **Sailfish** | Python/CUDA | CUDA natif | Interface Python |

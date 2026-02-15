@@ -16,7 +16,7 @@ This study enabled the modeling of shear-thinning ink dispensing into micro-via 
 
 The most realistic results were obtained using the VOF method (OpenFOAM), close to what can be expected from physics and from what commercial modeling tools can produce. Notably, the impact of nozzle position along the X-axis on overflow phenomena and filling uniformity was demonstrated. Similarly, expected physicochemical phenomena were reproduced: the influence of viscosity and contact angles (surface energy) on ink spreading corresponds to anticipated physical behaviors.
 
-Differences in results nevertheless appear depending on the models used, which is consistent given their very different numerical formulations (Eulerian vs Lagrangian, mesh-based vs meshless, macroscopic vs mesoscopic).
+Differences in results nevertheless appear depending on the models used, which is expected given their very different numerical formulations (Eulerian vs Lagrangian, mesh-based vs meshless, macroscopic vs mesoscopic).
 
 To go further, it would be necessary to continue improving the codes, refine the physicochemical models (particularly rheology and dynamic wetting) and optimize numerical parameters to improve result accuracy compared to experimental expectations.
 
@@ -53,7 +53,7 @@ The failure of the initial FEM/Phase-Field implementation (based on an attempt t
 ### Reinforcement Learning
 
 - **Principle:** it involves training a computer program, called an **"agent"**, to make the best possible decisions to achieve a goal. The agent learns through trial and error, being "rewarded" for good actions (e.g., a successful dispense) and "punished" for bad ones (an overflow).
-- **Application:** an agent could learn to dynamically adjust the nozzle's pressure or speed to ensure a perfect fill, even if the ink's properties change slightly.
+- **Application:** an agent could learn to dynamically adjust the nozzle's pressure or speed to ensure an optimal fill, even if the ink's properties change slightly.
 - **Tools:** open-source libraries like `Stable-Baselines3` (based on PyTorch) or `Ray RLlib` (for large-scale systems) are used to implement these algorithms.
 - **Potential:** enable machines to self-correct in real-time and adapt to variations in ink or the environment without human intervention.
 

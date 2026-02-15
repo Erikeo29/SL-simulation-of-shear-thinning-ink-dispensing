@@ -97,7 +97,7 @@ $$Oh = \frac{\mu}{\sqrt{\rho \sigma L}} = \frac{\sqrt{We}}{Re}$$
 
 ## 2. Pionniers de la rhéologie
 
-### Isaac Newton (1642-1727)
+### Isaac Newton (1643-1727)
 
 **Nationalité :** Anglaise | **Domaine :** Physique, Mathématiques
 
@@ -112,7 +112,7 @@ Un fluide dont la viscosité $\mu$ est constante est dit **newtonien**. L'eau, l
 
 ### Wilhelm Ostwald (1853-1932) & Arnulph de Waele
 
-**Nationalité :** Ostwald : Allemande (Letton de naissance) | **Domaine :** Chimie physique, Rhéologie
+**Nationalité :** Ostwald : Allemande (né à Riga, alors Empire russe) | **Domaine :** Chimie physique, Rhéologie
 
 Wilhelm Ostwald reçut le **Prix Nobel de Chimie en 1909** pour ses travaux sur la catalyse et les équilibres chimiques.
 
@@ -123,11 +123,11 @@ Cette loi décrit les fluides **rhéofluidifiants** ($n < 1$) et **rhéoépaissi
 
 ---
 
-### Pierre J. Carreau (né ~1940)
+### Pierre J. Carreau (né en 1939)
 
 **Nationalité :** Canadienne | **Domaine :** Génie chimique, Rhéologie des polymères
 
-Professeur émérite à l'École Polytechnique de Montréal, Pierre Carreau est le fondateur du CREPEC (Centre de recherche sur les polymères). Il obtint son doctorat à l'Université du Wisconsin en 1968.
+Professeur émérite à l'École Polytechnique de Montréal, Pierre Carreau est le fondateur du CRASP (devenu CREPEC en 2002). Il obtint son doctorat à l'Université du Wisconsin en 1968.
 
 **Le Modèle de Carreau (1972) :**
 $$\eta(\dot{\gamma}) = \eta_\infty + (\eta_0 - \eta_\infty)[1 + (\lambda\dot{\gamma})^2]^{(n-1)/2}$$
@@ -187,7 +187,7 @@ Maxwell fut le premier à concevoir que les molécules d'un gaz n'ont pas toutes
 
 ### Prabhu Lal Bhatnagar (1912-1976), Eugene P. Gross (1926-1991) & Max Krook (1913-1985)
 
-**Nationalités :** Indienne, Américaine, Néerlandaise/Américaine | **Domaine :** Physique théorique
+**Nationalités :** Indienne, Américaine, Sud-Africaine/Américaine | **Domaine :** Physique théorique
 
 **L'opérateur BGK (1954) :**
 $$\Omega_i = -\frac{1}{\tau}(f_i - f_i^{eq})$$
@@ -354,20 +354,18 @@ REYNOLDS  GALERKIN          MAXWELL-BOLTZMANN        WEBER-OHNESORGE
               │                        │
          PHASE-FIELD                  LBM
               │                        │
+              │                        │
+    MONAGHAN (1977)          HIRT-NICHOLS (1981)
+              │                        │
+             SPH                      VOF
+              │                        │
               └────────────┬───────────┘
-                           │
-                    MONAGHAN (1977)
-                           │
-                          SPH
-                           │
-                    HIRT-NICHOLS (1981)
-                           │
-                          VOF
                            │
               ┌────────────┴────────────┐
               │                         │
          CE PROJET              APPLICATIONS
-    Dispense d'encre rhéofluidifiante APPLICATONS INDUSTRIELLES
+    Dispense d'encre          INDUSTRIELLES
+   rhéofluidifiante
 ```
 
 ---

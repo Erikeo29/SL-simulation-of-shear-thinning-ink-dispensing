@@ -55,7 +55,7 @@ TRANSLATIONS = {
         "lbl_ca_plateau": "CA Plateau (°)",
         "lbl_gap": "Gap Buse (µm)",
         "lbl_ratio_drop": "Ratio goutte/puit",
-        "version_info": """**Version 3.5.0** — Jan 2026 - *EQU*
+        "version_info": """**Version 3.5.0** — Jan 2026
 
 **Nouveautés :**
 - Support bilingue FR/EN
@@ -158,7 +158,7 @@ La méthode SPH a été testée de manière exhaustive (~115 versions de codes d
         "lbl_ca_plateau": "CA Plateau (°)",
         "lbl_gap": "Nozzle Gap (µm)",
         "lbl_ratio_drop": "Drop/Well Ratio",
-        "version_info": """**Version 3.5.0** — Jan 2026 - *EQU*
+        "version_info": """**Version 3.5.0** — Jan 2026
 
 **New Features:**
 - Bilingual support FR/EN
@@ -993,6 +993,7 @@ if is_chatbot_enabled():
 
 st.sidebar.markdown("---")
 st.sidebar.markdown(t("version_info"))
+st.sidebar.markdown("")
 st.sidebar.markdown("")
 st.sidebar.markdown("© 2025 Eric QUEAU — [MIT License](https://opensource.org/licenses/MIT)")
 

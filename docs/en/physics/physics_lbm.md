@@ -157,7 +157,7 @@ Wetting is handled naturally without explicit boundary conditions.
 
 | Library | Language | GPU | Focus |
 |---------|----------|-----|-------|
-| **Palabos** | C++ | MPI | Open-source reference, tutorials |
+| **Palabos** | C++ | None | Open-source reference, tutorials |
 | **OpenLB** | C++ | CUDA/OpenMP | Industrial applications |
 | **waLBerla** | C++ | CUDA | Extreme HPC, millions of cores |
 | **Sailfish** | Python/CUDA | Native CUDA | Python interface |

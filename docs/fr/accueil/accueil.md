@@ -8,7 +8,7 @@
 
 *Tous les résultats présentés dans ce projet sont issus de modèles physiques analytiques et déterministes résolus par des solveurs numériques reconnus et validés.*
 
-*Les données utilisées pour alimenter le projet (équations, constantes et données physicochimiques...) sont disponibles en accès libres sur internet. Les codes sont originaux et s'appuient exclusivement sur des bibliothèques open-source. De fait, ce travail est mis à disposition sous licence MIT pour être utilisé, reproduit et amélioré à des fins d'apprentissage ou d'exploitation des modèles physiques et numériques présentés.*
+*Les données utilisées pour alimenter le projet (équations, constantes et données physicochimiques...) sont disponibles en accès libres sur internet. Les codes sont originaux et s'appuient exclusivement sur des bibliothèques open-source. De fait, ce travail est mis à disposition pour être utilisé, reproduit et amélioré à des fins d'apprentissage ou d'exploitation des modèles physiques et numériques présentés.*
 
 &nbsp;
 

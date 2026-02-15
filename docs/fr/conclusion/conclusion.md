@@ -16,7 +16,7 @@ Cette étude a permis de modéliser la dispense d'une encre rhéofluidifiante da
 
 Les résultats les plus réalistes ont été obtenus par la méthode VOF (OpenFOAM) et proches de ce qui peut être attendu d'après la physique et de ce que des outils commerciaux de modélisation peuvent produire. Notamment, l'impact de la position de la buse en X sur le phénomène d'overflow et sur l'uniformité du remplissage a pu être mis en évidence. De même, les phénomènes physicochimiques attendus ont été reproduits : l'influence de la viscosité et des angles de contact (énergie de surface) sur l'étalement de l'encre correspond aux comportements physiques anticipés.
 
-Des différences de résultats apparaissent néanmoins selon les modèles utilisés, ce qui est cohérent compte tenu de leurs formulations numériques très différentes (eulérien vs lagrangien, maillé vs sans maillage, macroscopique vs mésoscopique). 
+Des différences de résultats apparaissent néanmoins selon les modèles utilisés, ce qui est attendu compte tenu de leurs formulations numériques très différentes (eulérien vs lagrangien, maillé vs sans maillage, macroscopique vs mésoscopique). 
 
 Pour aller plus loin, il serait nécessaire de poursuivre l'amélioration des codes, d'affiner les modèles physicochimiques (notamment la rhéologie et le mouillage dynamique) et d'optimiser les paramètres numériques pour améliorer la justesse des résultats par rapport aux attentes  expérimentales.
 
@@ -55,7 +55,7 @@ Les **modèles de substitution** consistent à entraîner une "IA simplifiée" (
 ### Apprentissage par renforcement
 
 - **Principe :** il s'agit d'entraîner un programme informatique, appelé **"agent"**, à prendre les meilleures décisions possibles pour atteindre un objectif. L'agent apprend par essais-erreurs, en étant "récompensé" pour les bonnes actions (par exemple, une dispense réussie) et "puni" pour les mauvaises (un débordement).
-- **Application :** un agent pourrait apprendre à ajuster dynamiquement la pression ou la vitesse de la buse pour garantir un remplissage parfait, même si les propriétés de l'encre changent légèrement.
+- **Application :** un agent pourrait apprendre à ajuster dynamiquement la pression ou la vitesse de la buse pour garantir un remplissage optimal, même si les propriétés de l'encre changent légèrement.
 - **Outils :** des bibliothèques open-source comme `Stable-Baselines3` (basée sur PyTorch) ou `Ray RLlib` (pour les systèmes à grande échelle) permettent de mettre en œuvre ces algorithmes.
 - **Potentiel :** permettre aux machines de s'auto-corriger en temps réel et de s'adapter aux variations de l'encre ou de l'environnement, sans intervention humaine.
 
