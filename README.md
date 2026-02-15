@@ -72,4 +72,4 @@ Documentation includes:
 
 ## License
 
-Research project - Internal use
+This project is licensed under the MIT License — see the [LICENSE](LICENSE) file for details.

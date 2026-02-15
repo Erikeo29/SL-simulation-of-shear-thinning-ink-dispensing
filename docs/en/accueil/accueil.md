@@ -8,7 +8,7 @@
 
 *All results presented in this project are derived from analytical and deterministic physical models solved by recognized and validated numerical solvers.*
 
-*The data used in this project (equations, values...) is freely available on the internet. The codes are original and rely exclusively on open-source libraries. As such, this work is made available under the MIT license to be used, reproduced and improved for learning purposes or for the use of the physical and numerical models presented here.*
+*The data used in this project (equations, constants and physicochemical data...) is freely available on the internet. The codes are original and rely exclusively on open-source libraries. As such, this work is made available under the MIT license to be used, reproduced and improved for learning purposes or for the use of the physical and numerical models presented here.*
 
 &nbsp;
 
