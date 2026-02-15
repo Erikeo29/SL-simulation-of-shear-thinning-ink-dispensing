@@ -1,12 +1,14 @@
 &nbsp;
 
-**Note de l'auteur** — *Ce projet a été conçu intégralement par l'auteur, depuis une page blanche jusqu'à sa mise en ligne. Le contenu a été élaboré sur la base de ses connaissances complétées par des recherches en ligne pour la partie documentaire, définition des concepts physiques, mise en oeuvre des outils numériques pertinents...*
+**À propos de ce projet** — *Ce projet de modélisation physique a été conçu intégralement par l'auteur, depuis une page blanche jusqu'à sa mise en ligne sur ce site. Le contenu a été élaboré sur la base de ses connaissances complétées par une veille documentaire sur les concepts physiques et les outils numériques.*
 
-*Pour les sujets (très nombreux !) dépassant son domaine de compétence initial, des outils d'intelligence artificielle et d'automatisation ont été utilisés pour réaliser des recherches internet approfondies (paramétrage des équations des modèles physiques, sélection et utilisation des bibliothèques numériques), la rédaction, le test et la correction des codes (Python, C++), la création de l'interface de cette application, la traduction automatique français / anglais...*
+*L'objectif est de permettre la réalisation de modélisations multiphysiques avancées au moyen d'outils open-source gratuits.*
 
-*Il n'en demeure pas moins que tous les résultats présentés dans ce projet sont issus de modèles physiques analytiques et déterministes résolus par des solveurs numériques reconnus et validés. L'objectif est de permettre la réalisation de modélisations multiphysiques avancées au moyen d'outils open-source et gratuits.*
+*Pour les sujets - nombreux - dépassant son domaine de compétence initial, des outils d'intelligence artificielle et d'automatisation (LLM, agents de recherche) ont été utilisés pour réaliser des recherches internet approfondies (paramétrage des modèles physiques, utilisation des bibliothèques numériques), la rédaction et la restructuration des codes (Python, C++), l'interface de cette application, la traduction automatique français / anglais.*
 
-*Les données d'entrées utilisées (équations, valeurs...) sont publiques et disponibles en accès libres sur internet même si très éparpillées. Les codes sont originaux même si non innovants. De fait, ce travail est mis à disposition pour être librement utilisé, reproduit et amélioré à des fins d'apprentissage ou d'exploitation des modèles physiques et numériques présentés.*
+*Tous les résultats présentés dans ce projet sont issus de modèles physiques analytiques et déterministes résolus par des solveurs numériques reconnus et validés.*
+
+*Les données utilisées pour alimenter le projet (équations, valeurs...) sont disponibles en accès libres sur internet. Les codes sont originaux et s'appuient exclusivement sur des bibliothèques open-source. De fait, ce travail est mis à disposition sous licence MIT pour être utilisé, reproduit et amélioré à des fins d'apprentissage ou d'exploitation des modèles physiques et numériques présentés.*
 
 &nbsp;
 

@@ -1,12 +1,14 @@
 &nbsp;
 
-**Author's note** — *This project was designed entirely by the author, from a blank page through to its deployment online. The content was developed based on the author's own knowledge, supplemented by online research for the documentary part, definition of physical concepts, implementation of relevant numerical tools...*
+**About this project** — *This physical modeling project was designed entirely by the author, from a blank page through to its deployment on this website. The content was developed based on the author's own knowledge, supplemented by a documentary watch on physical concepts and numerical tools.*
 
-*For the (very many!) topics beyond the author's initial area of expertise, artificial intelligence and automation tools were used to conduct in-depth internet research (parameterization of physical model equations, selection and use of numerical libraries), writing, testing and debugging code (Python, C++), creating this application's interface, automatic French/English translation...*
+*The objective is to enable advanced multiphysics modeling using free and open-source tools.*
 
-*Nonetheless, all results presented in this project are derived from analytical and deterministic physical models solved by recognized and validated numerical solvers. The objective is to enable advanced multiphysics modeling using free and open-source tools.*
+*For the many topics beyond the author's initial area of expertise, artificial intelligence and automation tools (LLMs, research agents) were used to conduct in-depth internet research (parameterization of physical models, use of numerical libraries), writing and restructuring code (Python, C++), this application's interface, automatic French/English translation.*
 
-*The input data used (equations, values...) is public and freely available on the internet, although widely scattered. The codes are original even if not innovative. As such, this work is made available to be freely used, reproduced and improved for learning purposes or for the use of the physical and numerical models presented here.*
+*All results presented in this project are derived from analytical and deterministic physical models solved by recognized and validated numerical solvers.*
+
+*The data used in this project (equations, values...) is freely available on the internet. The codes are original and rely exclusively on open-source libraries. As such, this work is made available under the MIT license to be used, reproduced and improved for learning purposes or for the use of the physical and numerical models presented here.*
 
 &nbsp;
 
