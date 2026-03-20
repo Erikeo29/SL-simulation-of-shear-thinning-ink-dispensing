@@ -74,6 +74,7 @@ TRANSLATIONS = {
         "chat_close": "Fermer",
         "chat_clear": "Effacer",
         "chat_api_missing": "⚠️ Clé API manquante. Configurez GROQ_API_KEY.",
+        "chat_disclaimer": "⚠️ Réponse générée par IA — peut contenir des erreurs ou omissions. Vérifiez toujours les informations auprès des sources scientifiques reconnues.",
         "chat_toggle": "Assistant IA",
         # Comparison page
         "lbl_empty_mesh": "Maillage vide",
@@ -177,6 +178,7 @@ La méthode SPH a été testée de manière exhaustive (~115 versions de codes d
         "chat_close": "Close",
         "chat_clear": "Clear",
         "chat_api_missing": "⚠️ API key missing. Configure GROQ_API_KEY.",
+        "chat_disclaimer": "⚠️ AI-generated response — may contain errors or omissions. Always verify information against recognized scientific sources.",
         "chat_toggle": "AI Assistant",
         # Comparison page
         "lbl_empty_mesh": "Empty Mesh",
@@ -983,6 +985,10 @@ if is_chatbot_enabled():
             with st.chat_message(msg["role"]):
                 st.markdown(msg["content"])
 
+        # Disclaimer après les réponses
+        if st.session_state.chat_messages:
+            st.caption(t("chat_disclaimer"))
+
         # Zone de saisie
         if prompt := st.chat_input(t("chat_placeholder")):
             with st.chat_message("user"):
@@ -990,6 +996,7 @@ if is_chatbot_enabled():
             with st.chat_message("assistant"):
                 # Streaming : affichage progressif mot par mot !
                 st.write_stream(stream_groq_response(prompt))
+            st.caption(t("chat_disclaimer"))
 
 st.sidebar.markdown("---")
 st.sidebar.markdown(t("version_info"))
