@@ -1,4 +1,5 @@
 import streamlit as st
+import base64
 import os
 import pandas as pd
 from groq import Groq
@@ -1051,7 +1052,8 @@ if selected_page == gen_pages[0]:  # Accueil / Home
         st.markdown("#### 3. SPH (PySPH)")
         if os.path.exists(SPH_GIF_EX):
             with open(SPH_GIF_EX, "rb") as f:
-                st.image(f.read(), use_container_width=True)
+                data = base64.b64encode(f.read()).decode()
+            st.markdown(f'<img src="data:image/gif;base64,{data}" style="width:100%">', unsafe_allow_html=True)
         st.caption(t("caption_sph"))
 
 # ===== PAGE INTRODUCTION =====
@@ -1420,14 +1422,24 @@ elif selected_page == model_pages[2]:  # SPH
             if os.path.exists(path):
                 with col:
                     with open(path, "rb") as f:
-                        st.image(f.read(), use_container_width=True)
+                        data = base64.b64encode(f.read()).decode()
+                    st.markdown(
+                        f'<img src="data:image/gif;base64,{data}" '
+                        f'style="width:100%; border: 3px solid red; border-radius: 8px;">',
+                        unsafe_allow_html=True,
+                    )
                     st.caption(f"✗ {sph_captions[key]}")
 
         # SPlisHSPlasH — full width
         path = sph_gifs["geyser"]
         if os.path.exists(path):
             with open(path, "rb") as f:
-                st.image(f.read(), use_container_width=True)
+                data = base64.b64encode(f.read()).decode()
+            st.markdown(
+                f'<img src="data:image/gif;base64,{data}" '
+                f'style="width:100%; border: 3px solid dodgerblue; border-radius: 8px;">',
+                unsafe_allow_html=True,
+            )
             st.caption(sph_captions["geyser"])
 
 # ===== PAGE CONCLUSION ET PERSPECTIVES =====
