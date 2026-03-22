@@ -1050,7 +1050,8 @@ if selected_page == gen_pages[0]:  # Accueil / Home
     with col3:
         st.markdown("#### 3. SPH (PySPH)")
         if os.path.exists(SPH_GIF_EX):
-            st.image(SPH_GIF_EX, use_container_width=True)
+            with open(SPH_GIF_EX, "rb") as f:
+                st.image(f.read(), use_container_width=True)
         st.caption(t("caption_sph"))
 
 # ===== PAGE INTRODUCTION =====
@@ -1418,13 +1419,15 @@ elif selected_page == model_pages[2]:  # SPH
             path = sph_gifs[key]
             if os.path.exists(path):
                 with col:
-                    st.image(path, use_container_width=True)
+                    with open(path, "rb") as f:
+                        st.image(f.read(), use_container_width=True)
                     st.caption(f"✗ {sph_captions[key]}")
 
         # SPlisHSPlasH — full width
         path = sph_gifs["geyser"]
         if os.path.exists(path):
-            st.image(path, use_container_width=True)
+            with open(path, "rb") as f:
+                st.image(f.read(), use_container_width=True)
             st.caption(sph_captions["geyser"])
 
 # ===== PAGE CONCLUSION ET PERSPECTIVES =====
