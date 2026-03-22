@@ -1418,17 +1418,13 @@ elif selected_page == model_pages[2]:  # SPH
             path = sph_gifs[key]
             if os.path.exists(path):
                 with col:
-                    st.markdown('<div style="border: 3px solid red; border-radius: 8px; overflow: hidden;">', unsafe_allow_html=True)
                     st.image(path, use_container_width=True)
-                    st.markdown('</div>', unsafe_allow_html=True)
-                    st.caption(sph_captions[key])
+                    st.caption(f"✗ {sph_captions[key]}")
 
         # SPlisHSPlasH — full width
         path = sph_gifs["geyser"]
         if os.path.exists(path):
-            st.markdown('<div style="border: 3px solid dodgerblue; border-radius: 8px; overflow: hidden;">', unsafe_allow_html=True)
             st.image(path, use_container_width=True)
-            st.markdown('</div>', unsafe_allow_html=True)
             st.caption(sph_captions["geyser"])
 
 # ===== PAGE CONCLUSION ET PERSPECTIVES =====
