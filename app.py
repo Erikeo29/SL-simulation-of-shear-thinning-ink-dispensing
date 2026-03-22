@@ -1,5 +1,4 @@
 import streamlit as st
-import base64
 import os
 import pandas as pd
 from groq import Groq
@@ -414,17 +413,6 @@ def load_file_content(relative_path):
         with open(full_path, 'r', encoding='utf-8') as f: return f.read()
     except Exception:
         return f"Document not found / Document non trouvé : {os.path.join(lang, relative_path)}"
-
-def load_media_as_base64(file_path):
-    try:
-        with open(file_path, "rb") as file:
-            contents = file.read()
-        data_url = base64.b64encode(contents).decode("utf-8")
-        if file_path.lower().endswith(('.jpg', '.jpeg')): mime_type = 'image/jpeg'
-        elif file_path.lower().endswith('.gif'): mime_type = 'image/gif'
-        else: mime_type = 'image/png'
-        return f'<img src="data:{mime_type};base64,{data_url}" style="width:100%; max-width:600px;">'
-    except Exception: return None
 
 def display_smart_markdown(content):
     if "```python" in content:
@@ -1033,9 +1021,7 @@ if selected_page == gen_pages[0]:  # Accueil / Home
     with col_img:
         vof_gif = os.path.join(ASSETS_PATH, "vof", "gif", "run_057_y_gap_buse0.12_x_gap_buse0_eta01.5_ratio_surface0.8.gif")
         if os.path.exists(vof_gif):
-            html = load_media_as_base64(vof_gif)
-            if html:
-                st.markdown(html, unsafe_allow_html=True)
+            st.image(vof_gif, use_container_width=True)
             st.caption("VOF — OpenFOAM")
 
     # --- Reste du contenu en pleine largeur ---
@@ -1052,19 +1038,19 @@ if selected_page == gen_pages[0]:  # Accueil / Home
     with col1:
         st.markdown("#### 1. VOF (OpenFOAM)")
         if os.path.exists(VOF_GIF_EX):
-            st.markdown(load_media_as_base64(VOF_GIF_EX), unsafe_allow_html=True)
+            st.image(VOF_GIF_EX, use_container_width=True)
         st.caption(t("caption_vof"))
 
     with col2:
         st.markdown("#### 2. LBM (Palabos)")
         if os.path.exists(LBM_GIF_EX):
-            st.markdown(load_media_as_base64(LBM_GIF_EX), unsafe_allow_html=True)
+            st.image(LBM_GIF_EX, use_container_width=True)
         st.caption(t("caption_lbm"))
 
     with col3:
         st.markdown("#### 3. SPH (PySPH)")
         if os.path.exists(SPH_GIF_EX):
-            st.markdown(load_media_as_base64(SPH_GIF_EX), unsafe_allow_html=True)
+            st.image(SPH_GIF_EX, use_container_width=True)
         st.caption(t("caption_sph"))
 
 # ===== PAGE INTRODUCTION =====
@@ -1203,7 +1189,7 @@ elif selected_page == model_pages[0]:  # VOF
                     with res_cols[0]:
                         st.subheader(t("sim_1"))
                         if files[0] and os.path.exists(files[0]):
-                            st.markdown(load_media_as_base64(files[0]), unsafe_allow_html=True)
+                            st.image(files[0], use_container_width=True)
                         else:
                             st.warning(t("image_unavailable"))
 
@@ -1211,7 +1197,7 @@ elif selected_page == model_pages[0]:  # VOF
                     with res_cols[1]:
                         st.subheader(t("sim_2"))
                         if files[1] and os.path.exists(files[1]):
-                            st.markdown(load_media_as_base64(files[1]), unsafe_allow_html=True)
+                            st.image(files[1], use_container_width=True)
                         else:
                             st.warning(t("image_unavailable"))
         else:
@@ -1258,14 +1244,14 @@ elif selected_page == model_pages[0]:  # VOF
                     with res_cols[0]:
                         st.subheader(t("sim_1"))
                         if files_p[0] and os.path.exists(files_p[0]):
-                            st.markdown(load_media_as_base64(files_p[0]), unsafe_allow_html=True)
+                            st.image(files_p[0], use_container_width=True)
                         else:
                             st.warning(t("image_unavailable"))
 
                     with res_cols[1]:
                         st.subheader(t("sim_2"))
                         if files_p[1] and os.path.exists(files_p[1]):
-                            st.markdown(load_media_as_base64(files_p[1]), unsafe_allow_html=True)
+                            st.image(files_p[1], use_container_width=True)
                         else:
                             st.warning(t("image_unavailable"))
         else:
@@ -1324,15 +1310,15 @@ elif selected_page == model_pages[1]:  # LBM
                     with res_cols[0]:
                         st.subheader(t("sim_1"))
                         if files[0] and os.path.exists(files[0]):
-                            st.markdown(load_media_as_base64(files[0]), unsafe_allow_html=True)
+                            st.image(files[0], use_container_width=True)
                         else:
                             st.warning(t("image_unavailable"))
-                    
+
                     # Sim 2
                     with res_cols[1]:
                         st.subheader(t("sim_2"))
                         if files[1] and os.path.exists(files[1]):
-                            st.markdown(load_media_as_base64(files[1]), unsafe_allow_html=True)
+                            st.image(files[1], use_container_width=True)
                         else:
                             st.warning(t("image_unavailable"))
         else:
@@ -1342,7 +1328,7 @@ elif selected_page == model_pages[1]:  # LBM
         c_title, c_pop = st.columns([0.7, 0.3])
         with c_title:
             st.subheader(t("png_viewer"))
-        
+
         _, df_p_origin = load_lbm_png_mapping()
         
         with c_pop:
@@ -1379,14 +1365,14 @@ elif selected_page == model_pages[1]:  # LBM
                     with res_cols[0]:
                         st.subheader(t("sim_1"))
                         if files_p[0] and os.path.exists(files_p[0]):
-                            st.markdown(load_media_as_base64(files_p[0]), unsafe_allow_html=True)
+                            st.image(files_p[0], use_container_width=True)
                         else:
                             st.warning(t("image_unavailable"))
-                    
+
                     with res_cols[1]:
                         st.subheader(t("sim_2"))
                         if files_p[1] and os.path.exists(files_p[1]):
-                            st.markdown(load_media_as_base64(files_p[1]), unsafe_allow_html=True)
+                            st.image(files_p[1], use_container_width=True)
                         else:
                             st.warning(t("image_unavailable"))
         else:
@@ -1431,23 +1417,19 @@ elif selected_page == model_pages[2]:  # SPH
         for col, key in zip([col1, col2], ["NOK_1", "NOK_3"]):
             path = sph_gifs[key]
             if os.path.exists(path):
-                gif_html = load_media_as_base64(path)
-                if gif_html:
-                    gif_html = gif_html.replace('max-width:600px;', 'max-width:1200px;')
-                    gif_html = gif_html.replace('style="', 'style="border: 3px solid red; border-radius: 8px; ')
-                    with col:
-                        st.markdown(gif_html, unsafe_allow_html=True)
-                        st.caption(sph_captions[key])
+                with col:
+                    st.markdown('<div style="border: 3px solid red; border-radius: 8px; overflow: hidden;">', unsafe_allow_html=True)
+                    st.image(path, use_container_width=True)
+                    st.markdown('</div>', unsafe_allow_html=True)
+                    st.caption(sph_captions[key])
 
         # SPlisHSPlasH — full width
         path = sph_gifs["geyser"]
         if os.path.exists(path):
-            gif_html = load_media_as_base64(path)
-            if gif_html:
-                gif_html = gif_html.replace('max-width:600px;', 'max-width:1200px;')
-                gif_html = gif_html.replace('style="', 'style="border: 3px solid dodgerblue; border-radius: 8px; ')
-                st.markdown(gif_html, unsafe_allow_html=True)
-                st.caption(sph_captions["geyser"])
+            st.markdown('<div style="border: 3px solid dodgerblue; border-radius: 8px; overflow: hidden;">', unsafe_allow_html=True)
+            st.image(path, use_container_width=True)
+            st.markdown('</div>', unsafe_allow_html=True)
+            st.caption(sph_captions["geyser"])
 
 # ===== PAGE CONCLUSION ET PERSPECTIVES =====
 elif selected_page == annex_pages[0]:  # Conclusion et perspectives
