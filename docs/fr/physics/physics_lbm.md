@@ -144,8 +144,8 @@ Le mouillage est géré naturellement sans conditions aux limites explicites.
 | Configuration | Grille | Δx | Temps | Hardware |
 |---------------|--------|-----|-------|----------|
 | **Ce projet** | 240×100 | 5 µm | **~10 min** | 6 cœurs |
-| Haute résolution | 1200×500 | 1 µm | 1–2 h | GPU |
-| 3D (D3Q19) | 300³ | 4 µm | 1–2 h | 1× GPU |
+| Haute résolution | 1200×500 | 1 µm | 1-2 h | GPU |
+| 3D (D3Q19) | 300³ | 4 µm | 1-2 h | 1× GPU |
 
 > **Interprétation :** Une grille 240×100 avec Δx = 5 µm couvre exactement le domaine 1.2×0.5 mm. Le LBM est particulièrement rapide grâce à sa structure régulière optimisée pour le parallélisme.
 

@@ -61,7 +61,7 @@ $$\eta(\dot{\gamma}) = \eta_{\infty} + (\eta_0 - \eta_{\infty})\left[1 + (\lambd
 
 | Parameter | Symbol | Value | Unit |
 |-----------|--------|-------|------|
-| Zero-shear viscosity | η₀ | 1.5 – 5 | Pa·s |
+| Zero-shear viscosity | η₀ | 1.5 - 5 | Pa·s |
 | Infinite-shear viscosity | η∞ | 0.05 | Pa·s |
 | Relaxation time | λ | 0.15 | s |
 | Power-law index | n | 0.7 | - |
@@ -78,8 +78,8 @@ where H(φ) is a regularized Heaviside function.
 | Surface | Condition |
 |---------|-----------|
 | Walls | No-slip: **v** = **0** |
-| Gold electrode | Contact angle: θ = 35–75° |
-| Micro-via walls | Contact angle: θ = 35–90° |
+| Gold electrode | Contact angle: θ = 35-75° |
+| Micro-via walls | Contact angle: θ = 35-90° |
 | Inlet (nozzle) | Imposed velocity: v = 0.1 m/s |
 | Outlet | Atmospheric pressure: p = 0 |
 
@@ -112,11 +112,11 @@ This combination ensures inf-sup stability and avoids pressure oscillations.
 
 | Configuration | Elements | Mesh size | Time | Hardware |
 |---------------|----------|-----------|------|----------|
-| **This project** | ~20k | 5–10 µm | **1–2 h** | 8 cores |
-| High resolution | ~100k | 1–2 µm | 4–8 h | 16 cores |
-| 3D complete | ~500k | 5 µm | 30–50 h | Cluster |
+| **This project** | ~20k | 5-10 µm | **1-2 h** | 8 cores |
+| High resolution | ~100k | 1-2 µm | 4-8 h | 16 cores |
+| 3D complete | ~500k | 5 µm | 30-50 h | Cluster |
 
-> **Interpretation:** 20k triangular elements on a 1.2×0.5 mm domain yield an average mesh size of 5–10 µm, sufficient to capture the diffuse interface (ε ~ 2–5 µm).
+> **Interpretation:** 20k triangular elements on a 1.2×0.5 mm domain yield an average mesh size of 5-10 µm, sufficient to capture the diffuse interface (ε ~ 2-5 µm).
 
 **Note:** Classical FEM (matrix assembly) benefits little from GPU acceleration, unlike LBM.
 

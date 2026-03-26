@@ -181,7 +181,7 @@ def create_equations(self):
 
 ## 7. Configuration du Solveur et Pas de Temps
 
-Le solveur est configuré pour utiliser un pas de temps adaptatif ou fixe basé sur les critères CFL (Courant–Friedrichs–Lewy), visqueux et capillaire.
+Le solveur est configuré pour utiliser un pas de temps adaptatif ou fixe basé sur les critères CFL (Courant-Friedrichs-Lewy), visqueux et capillaire.
 
 ```python
 # templates/pysph/droplet_spreading.py

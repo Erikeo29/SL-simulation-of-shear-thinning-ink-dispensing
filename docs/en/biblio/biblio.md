@@ -87,9 +87,9 @@ This page gathers references describing the principles used in this project. **A
 
 ## 8. Online Resources
 
-- [OpenFOAM Documentation](https://openfoam.org) — VOF solvers (interFoam, isoAdvector)
-- [FEniCS Project](https://fenicsproject.org) — Python/C++ finite elements
-- [Palabos](https://palabos.unige.ch) — Open-source LBM (C++)
-- [PySPH Documentation](https://pysph.readthedocs.io) — SPH in Python
-- [CFD Online Forums](https://www.cfd-online.com/Forums/) — CFD community
-- [Basilisk](http://basilisk.fr/) — Adaptive VOF (Popinet)
+- [OpenFOAM Documentation](https://openfoam.org) - VOF solvers (interFoam, isoAdvector)
+- [FEniCS Project](https://fenicsproject.org) - Python/C++ finite elements
+- [Palabos](https://palabos.unige.ch) - Open-source LBM (C++)
+- [PySPH Documentation](https://pysph.readthedocs.io) - SPH in Python
+- [CFD Online Forums](https://www.cfd-online.com/Forums/) - CFD community
+- [Basilisk](http://basilisk.fr/) - Adaptive VOF (Popinet)

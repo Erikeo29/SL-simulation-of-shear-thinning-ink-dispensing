@@ -94,8 +94,8 @@ $$\eta_{eff}(\dot{\gamma}) = \eta_\infty + (\eta_0 - \eta_\infty) [1 + (\lambda 
 | Parameter | Symbol | Value | Unit |
 |-----------|--------|-------|------|
 | Density | ρ | 3000 | kg/m³ |
-| Zero-shear viscosity | η₀ | 0.5 – 5 | Pa·s |
-| Infinite-shear viscosity | η∞ | 0.05 – 0.15 | Pa·s |
+| Zero-shear viscosity | η₀ | 0.5 - 5 | Pa·s |
+| Infinite-shear viscosity | η∞ | 0.05 - 0.15 | Pa·s |
 | Relaxation time | λ | 0.15 | s |
 | Power-law index | n | 0.7 | - |
 | Surface tension | σ | 0.04 | N/m |
@@ -124,7 +124,7 @@ sigma sigma [1 0 -2 0 0 0 0] 0.04;
 | Proven robustness (>25 years) | Numerical interface diffusion |
 | Perfect mass conservation | Fine meshes required near interface |
 | Industrial standard (OpenFOAM) | Multiple coalescences difficult |
-| Interface precision 0.1–1 µm (with PLIC) | Complex rheology (thixotropy) difficult |
+| Interface precision 0.1-1 µm (with PLIC) | Complex rheology (thixotropy) difficult |
 | GPU support since OpenFOAM 10 (not achieved in this project)| Memory cost for AMR |
 
 ---
@@ -135,13 +135,13 @@ sigma sigma [1 0 -2 0 0 0 0] 0.04;
 
 | Configuration | Cells | Resolution | Time | Hardware |
 |---------------|-------|------------|------|----------|
-| **This project** | ~50k | ~5 µm | **0.5–2 h** | 6 cores |
-| High resolution | ~500k | ~1.5 µm | 4–8 h | 16 cores |
-| With AMR | 50k–500k | 1–10 µm (adaptive) | 2–4 h | 16 cores |
+| **This project** | ~50k | ~5 µm | **0.5-2 h** | 6 cores |
+| High resolution | ~500k | ~1.5 µm | 4-8 h | 16 cores |
+| With AMR | 50k-500k | 1-10 µm (adaptive) | 2-4 h | 16 cores |
 
 > **Interpretation:** 50k hexahedral cells on 1.2×0.5 mm correspond to ~5 µm resolution, compatible with PLIC interface reconstruction.
 
-**GPU Acceleration:** x5–x10 for matrix operations (OpenFOAM ≥ v10 with CUDA).
+**GPU Acceleration:** x5-x10 for matrix operations (OpenFOAM ≥ v10 with CUDA).
 
 ---
 

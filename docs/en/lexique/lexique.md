@@ -164,7 +164,7 @@
 | **GLS** | Galerkin Least-Squares | Combined FEM stabilization |
 | **ALE** | Arbitrary Lagrangian-Eulerian | Moving mesh |
 | **AMR** | Adaptive Mesh Refinement | Adaptive meshing |
-| **CFL** | Courant–Friedrichs–Lewy | Time stability condition (Co = vΔt/Δx ≤ 1) |
+| **CFL** | Courant-Friedrichs-Lewy | Time stability condition (Co = vΔt/Δx ≤ 1) |
 | **MULES** | Multidimensional Universal Limiter | OpenFOAM limiter for VOF |
 | **DFSPH** | Divergence-Free Smoothed Particle Hydrodynamics | Incompressible SPH solver (Bender & Koschier 2015) |
 

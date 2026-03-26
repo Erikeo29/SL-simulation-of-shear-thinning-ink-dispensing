@@ -5,12 +5,12 @@
 4. Tension superficielle
 5. Conditions aux limites
 6. Nombres adimensionnels fondamentaux
-   - 6.1 Reynolds — Régimes d'écoulement
-   - 6.2 Weber — Stabilité des gouttes
-   - 6.3 Ohnesorge — Éjection et filaments
-   - 6.4 Deborah — Effets viscoélastiques
-   - 6.5 Capillaire — Étalement et mouillage
-   - 6.6 Bond — Gravité vs Capillarité
+   - 6.1 Reynolds - Régimes d'écoulement
+   - 6.2 Weber - Stabilité des gouttes
+   - 6.3 Ohnesorge - Éjection et filaments
+   - 6.4 Deborah - Effets viscoélastiques
+   - 6.5 Capillaire - Étalement et mouillage
+   - 6.6 Bond - Gravité vs Capillarité
 7. Tableau comparatif des modèles
 8. Synthèse
 
@@ -95,9 +95,9 @@ $$\eta(\dot{\gamma}) = K \dot{\gamma}^{n-1}$$
 
 | Paramètre | Signification | Valeur typique |
 |-----------|---------------|----------------|
-| $K$ | Consistance | 0.01 – 10 Pa·s$^n$ |
-| $n$ | Indice de comportement | 0.3 – 0.9 (rhéofluidifiant) |
-| $\dot{\gamma}$ | Taux de cisaillement | 1 – 10$^5$ s$^{-1}$ |
+| $K$ | Consistance | 0.01 - 10 Pa·s$^n$ |
+| $n$ | Indice de comportement | 0.3 - 0.9 (rhéofluidifiant) |
+| $\dot{\gamma}$ | Taux de cisaillement | 1 - 10$^5$ s$^{-1}$ |
 
 **Comportement :**
 - $n < 1$ : **Rhéofluidifiant** (viscosité ↓ quand cisaillement ↑)
@@ -114,10 +114,10 @@ $$\eta(\dot{\gamma}) = \eta_\infty + (\eta_0 - \eta_\infty) \left[ 1 + (\lambda 
 
 | Paramètre | Signification | Valeur typique (encre rhéofluidifiante) |
 |-----------|---------------|-------------------------------|
-| $\eta_0$ | Viscosité au repos | 0.5 – 5 Pa·s |
+| $\eta_0$ | Viscosité au repos | 0.5 - 5 Pa·s |
 | $\eta_\infty$ | Viscosité à fort cisaillement | 0.05 Pa·s |
-| $\lambda$ | Temps de relaxation | 0.1 – 0.2 s |
-| $n$ | Indice de comportement | 0.6 – 0.8 |
+| $\lambda$ | Temps de relaxation | 0.1 - 0.2 s |
+| $n$ | Indice de comportement | 0.6 - 0.8 |
 
 **Avantage :** Évite la singularité de la loi de puissance grâce aux plateaux $\eta_0$ et $\eta_\infty$.
 
@@ -301,7 +301,7 @@ La modélisation de la dispense de fluides implique plusieurs phénomènes physi
 
 | Nombre | Expression | Signification | Valeur typique | Interprétation physique |
 |--------|------------|---------------|----------------|-------------------------|
-| **Reynolds** | $Re = \frac{\rho v D}{\eta}$ | Effets inertiels vs visqueux | 10 – 100 | Rapport entre forces d'inertie et forces visqueuses. Détermine le régime d'écoulement. |
+| **Reynolds** | $Re = \frac{\rho v D}{\eta}$ | Effets inertiels vs visqueux | 10 - 100 | Rapport entre forces d'inertie et forces visqueuses. Détermine le régime d'écoulement. |
 | **Weber** | $We = \frac{\rho v^2 L}{\sigma}$ | Forces inertielles vs tension superficielle | $We < 10$ | Rapport entre énergie cinétique et énergie de surface. Contrôle la déformation des gouttes. |
 | **Ohnesorge** | $Oh = \frac{\eta}{\sqrt{\rho \sigma D}}$ | Viscosité, tension superficielle et taille | $Oh < 0.5$ | Combine viscosité, capillarité et inertie. Prédit la stabilité des jets et filaments. |
 | **Deborah** | $De = \lambda \dot{\gamma}$ | Effets viscoélastiques | Variable | Rapport entre temps de relaxation du fluide et temps caractéristique de l'écoulement. |
@@ -310,7 +310,7 @@ La modélisation de la dispense de fluides implique plusieurs phénomènes physi
 
 ---
 
-### 6.1 Nombre de Reynolds ($Re$) — Régimes d'écoulement
+### 6.1 Nombre de Reynolds ($Re$) - Régimes d'écoulement
 
 | Plage de $Re$ | Régime | Description physique |
 |---------------|--------|----------------------|
@@ -324,7 +324,7 @@ La modélisation de la dispense de fluides implique plusieurs phénomènes physi
 
 ---
 
-### 6.2 Nombre de Weber ($We$) — Stabilité des gouttes
+### 6.2 Nombre de Weber ($We$) - Stabilité des gouttes
 
 | Plage de $We$ | Comportement | Description physique |
 |---------------|--------------|----------------------|
@@ -337,7 +337,7 @@ La modélisation de la dispense de fluides implique plusieurs phénomènes physi
 
 ---
 
-### 6.3 Nombre d'Ohnesorge ($Oh$) — Éjection et formation de filaments
+### 6.3 Nombre d'Ohnesorge ($Oh$) - Éjection et formation de filaments
 
 | Plage de $Oh$ | Comportement | Description physique |
 |---------------|--------------|----------------------|
@@ -350,7 +350,7 @@ La modélisation de la dispense de fluides implique plusieurs phénomènes physi
 
 ---
 
-### 6.4 Nombre de Deborah ($De$) — Effets viscoélastiques
+### 6.4 Nombre de Deborah ($De$) - Effets viscoélastiques
 
 | Plage de $De$ | Comportement | Description physique |
 |---------------|--------------|----------------------|
@@ -362,7 +362,7 @@ La modélisation de la dispense de fluides implique plusieurs phénomènes physi
 
 ---
 
-### 6.5 Nombre Capillaire ($Ca$) — Étalement et mouillage
+### 6.5 Nombre Capillaire ($Ca$) - Étalement et mouillage
 
 | Plage de $Ca$ | Comportement | Description physique |
 |---------------|--------------|----------------------|
@@ -370,11 +370,11 @@ La modélisation de la dispense de fluides implique plusieurs phénomènes physi
 | $0.01 < Ca < 0.1$ | **Visco-capillaire** | Compétition entre étalement visqueux et tension superficielle. Dynamique de mouillage contrôlée. |
 | $Ca > 0.1$ | **Visqueux dominant** | L'écoulement visqueux déforme l'interface. Entraînement de film, déformation importante de la ligne de contact. |
 
-**Application dispense :** $Ca \approx 0.01$ — l'étalement est contrôlé par la capillarité avec influence visqueuse modérée.
+**Application dispense :** $Ca \approx 0.01$ - l'étalement est contrôlé par la capillarité avec influence visqueuse modérée.
 
 ---
 
-### 6.6 Nombre de Bond ($Bo$) — Gravité vs Capillarité
+### 6.6 Nombre de Bond ($Bo$) - Gravité vs Capillarité
 
 | Plage de $Bo$ | Comportement | Description physique |
 |---------------|--------------|----------------------|
@@ -382,7 +382,7 @@ La modélisation de la dispense de fluides implique plusieurs phénomènes physi
 | $0.1 < Bo < 1$ | **Transition** | Gravité et capillarité comparables. Gouttes légèrement aplaties, forme intermédiaire. |
 | $Bo > 1$ | **Gravité dominante** | Les gouttes s'aplatissent sous leur poids. Forme de "flaque", drainage gravitaire. |
 
-**Application micro-via :** Avec $L \approx 500$ µm → $Bo \approx 0.01$ — la gravité est négligeable, le remplissage est dominé par la capillarité et le mouillage.
+**Application micro-via :** Avec $L \approx 500$ µm → $Bo \approx 0.01$ - la gravité est négligeable, le remplissage est dominé par la capillarité et le mouillage.
 
 ---
 

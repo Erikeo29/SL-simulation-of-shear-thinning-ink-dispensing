@@ -144,8 +144,8 @@ Wetting is handled naturally without explicit boundary conditions.
 | Configuration | Grid | Δx | Time | Hardware |
 |---------------|------|-----|------|----------|
 | **This project** | 240×100 | 5 µm | **~10 min** | 6 cores |
-| High resolution | 1200×500 | 1 µm | 1–2 h | GPU |
-| 3D (D3Q19) | 300³ | 4 µm | 1–2 h | 1× GPU |
+| High resolution | 1200×500 | 1 µm | 1-2 h | GPU |
+| 3D (D3Q19) | 300³ | 4 µm | 1-2 h | 1× GPU |
 
 > **Interpretation:** A 240×100 grid with Δx = 5 µm exactly covers the 1.2×0.5 mm domain. LBM is particularly fast due to its regular structure optimized for parallelism.
 

@@ -94,8 +94,8 @@ $$\eta_{eff}(\dot{\gamma}) = \eta_\infty + (\eta_0 - \eta_\infty) [1 + (\lambda 
 | Paramètre | Symbole | Valeur | Unité |
 |-----------|---------|--------|-------|
 | Masse volumique | ρ | 3000 | kg/m³ |
-| Viscosité au repos | η₀ | 0.5 – 5 | Pa·s |
-| Viscosité à cisaillement infini | η∞ | 0.05 – 0.15 | Pa·s |
+| Viscosité au repos | η₀ | 0.5 - 5 | Pa·s |
+| Viscosité à cisaillement infini | η∞ | 0.05 - 0.15 | Pa·s |
 | Temps de relaxation | λ | 0.15 | s |
 | Indice de pseudoplasticité | n | 0.7 | - |
 | Tension de surface | σ | 0.04 | N/m |
@@ -124,7 +124,7 @@ sigma sigma [1 0 -2 0 0 0 0] 0.04;
 | Robustesse éprouvée (>25 ans) | Diffusion numérique de l'interface |
 | Conservation de masse parfaite | Maillages fins requis près de l'interface |
 | Standard industriel (OpenFOAM) | Coalescences multiples difficiles |
-| Précision interfaciale 0.1–1 µm (avec PLIC) | Rhéologie complexe (thixotropie) difficile |
+| Précision interfaciale 0.1-1 µm (avec PLIC) | Rhéologie complexe (thixotropie) difficile |
 | Support GPU depuis OpenFOAM 10 (non réussi dans ce projet)| Coût mémoire pour AMR |
 
 ---
@@ -135,13 +135,13 @@ sigma sigma [1 0 -2 0 0 0 0] 0.04;
 
 | Configuration | Cellules | Résolution | Temps | Hardware |
 |---------------|----------|------------|-------|----------|
-| **Ce projet** | ~50k | ~5 µm | **0.5–2 h** | 6 cœurs |
-| Haute résolution | ~500k | ~1.5 µm | 4–8 h | 16 cœurs |
-| Avec AMR | 50k–500k | 1–10 µm (adaptatif) | 2–4 h | 16 cœurs |
+| **Ce projet** | ~50k | ~5 µm | **0.5-2 h** | 6 cœurs |
+| Haute résolution | ~500k | ~1.5 µm | 4-8 h | 16 cœurs |
+| Avec AMR | 50k-500k | 1-10 µm (adaptatif) | 2-4 h | 16 cœurs |
 
 > **Interprétation :** 50k cellules hexaédriques sur 1.2×0.5 mm correspondent à une résolution de ~5 µm, compatible avec la reconstruction PLIC de l'interface.
 
-**Accélération GPU :** x5–x10 pour les opérations matricielles (OpenFOAM ≥ v10 avec CUDA).
+**Accélération GPU :** x5-x10 pour les opérations matricielles (OpenFOAM ≥ v10 avec CUDA).
 
 ---
 

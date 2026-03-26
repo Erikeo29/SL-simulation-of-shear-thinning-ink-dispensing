@@ -143,13 +143,13 @@ where:
 
 | Configuration | Particles | Spacing | Time | Hardware |
 |---------------|-----------|---------|------|----------|
-| **This project** | ~1k | 15–20 µm | **1–2 h** | 6 cores |
-| High resolution | ~10k | 5–10 µm | 4–8 h | 8 cores |
-| 3D standard | ~1M | 5 µm | 5–10 h | GPU |
+| **This project** | ~1k | 15-20 µm | **1-2 h** | 6 cores |
+| High resolution | ~10k | 5-10 µm | 4-8 h | 8 cores |
+| 3D standard | ~1M | 5 µm | 5-10 h | GPU |
 
-> **Interpretation:** ~1000 particles on 1.2×0.5 mm yield an average spacing of 15–20 µm. The smoothing length $h$ is typically 1.3× this spacing. Unoptimized PySPH code.
+> **Interpretation:** ~1000 particles on 1.2×0.5 mm yield an average spacing of 15-20 µm. The smoothing length $h$ is typically 1.3× this spacing. Unoptimized PySPH code.
 
-**GPU Acceleration:** x10–x15 vs CPU for simulations > 100k particles.
+**GPU Acceleration:** x10-x15 vs CPU for simulations > 100k particles.
 
 ---
 

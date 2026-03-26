@@ -181,7 +181,7 @@ def create_equations(self):
 
 ## 7. Solver Configuration and Time Step
 
-The solver is configured to use an adaptive or fixed time step based on CFL (Courant–Friedrichs–Lewy), viscous, and capillary criteria.
+The solver is configured to use an adaptive or fixed time step based on CFL (Courant-Friedrichs-Lewy), viscous, and capillary criteria.
 
 ```python
 # templates/pysph/droplet_spreading.py

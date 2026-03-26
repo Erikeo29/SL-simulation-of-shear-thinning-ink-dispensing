@@ -49,7 +49,7 @@ $$\eta(\dot{\gamma}) = \eta_\infty + \frac{\eta_0 - \eta_\infty}{[1 + (k\dot{\ga
 
 where $\eta_0$ and $\eta_\infty$ are the zero-shear and infinite-shear viscosities, and $k$, $a$ are fitting parameters.
 
-**Example:** A shear-thinning ink can exhibit $\eta_0 = 0.5$–$15$ Pa·s (at rest) and $\eta_\infty = 0.05$ Pa·s under high shear.
+**Example:** A shear-thinning ink can exhibit $\eta_0 = 0.5$-$15$ Pa·s (at rest) and $\eta_\infty = 0.05$ Pa·s under high shear.
 
 ---
 
@@ -72,8 +72,8 @@ where $\eta_0$ and $\eta_\infty$ are the zero-shear and infinite-shear viscositi
 ### 4.1 Geometric Configuration
 
 The modeled system consists of:
-- **Dispensing nozzle**: diameter 200–350 µm, positioned above the micro-via.
-- **Micro-via**: diameter 800–1500 µm, depth ~130 µm.
+- **Dispensing nozzle**: diameter 200-350 µm, positioned above the micro-via.
+- **Micro-via**: diameter 800-1500 µm, depth ~130 µm.
 - **Fluid**: shear-thinning ink ($\rho$ = 3000 kg/m³).
 - **Environment**: ambient temperature (~20°C) and atmospheric pressure.
 
@@ -81,16 +81,16 @@ The modeled system consists of:
 
 | Parameter | Range | Unit |
 |-----------|-------|------|
-| Micro-via diameter | 800 – 1500 | µm |
-| Nozzle diameter | 200 – 350 | µm |
+| Micro-via diameter | 800 - 1500 | µm |
+| Nozzle diameter | 200 - 350 | µm |
 | Horizontal offset (nozzle vs well center) | 0, -75, -150 | µm |
 | Vertical offset (nozzle vs well top) | -30, 0, 30, 60 | µm |
 | Zero-shear viscosity $\eta_0$ | 0.5, 1.5, 5 | Pa·s |
-| Viscosity $\eta_\infty$ | 0.05 – 0.5 | Pa·s |
-| Wall contact angle | 15 – 120 | ° |
-| Micro-via bottom contact angle | 15 – 65 | ° |
-| Substrate contact angle (plateau) | 15 – 120 | ° |
-| Dispensing time | 20 – 40 | ms |
+| Viscosity $\eta_\infty$ | 0.05 - 0.5 | Pa·s |
+| Wall contact angle | 15 - 120 | ° |
+| Micro-via bottom contact angle | 15 - 65 | ° |
+| Substrate contact angle (plateau) | 15 - 120 | ° |
+| Dispensing time | 20 - 40 | ms |
 
 ---
 

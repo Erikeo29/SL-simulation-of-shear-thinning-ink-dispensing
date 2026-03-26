@@ -1,6 +1,6 @@
 &nbsp;
 
-**About this project** — *This physical modeling project was designed entirely by the author, from a blank page through to its deployment on this website. The content was developed based on the author's own knowledge, supplemented by a documentary watch on physical concepts and numerical tools.*
+**About this project** - *This physical modeling project was designed entirely by the author, from a blank page through to its deployment on this website. The content was developed based on the author's own knowledge, supplemented by a documentary watch on physical concepts and numerical tools.*
 
 *The objective is to enable advanced multiphysics modeling using free and open-source tools.*
 

@@ -61,7 +61,7 @@ $$\eta(\dot{\gamma}) = \eta_{\infty} + (\eta_0 - \eta_{\infty})\left[1 + (\lambd
 
 | Paramètre | Symbole | Valeur | Unité |
 |-----------|---------|--------|-------|
-| Viscosité au repos | η₀ | 1.5 – 5 | Pa·s |
+| Viscosité au repos | η₀ | 1.5 - 5 | Pa·s |
 | Viscosité à cisaillement infini | η∞ | 0.05 | Pa·s |
 | Temps de relaxation | λ | 0.15 | s |
 | Indice de pseudoplasticité | n | 0.7 | - |
@@ -78,8 +78,8 @@ où H(φ) est une fonction de Heaviside régularisée.
 | Surface | Condition |
 |---------|-----------|
 | Parois | Non-glissement : **v** = **0** |
-| Électrode or | Angle de contact : θ = 35–75° |
-| Parois micro-via | Angle de contact : θ = 35–90° |
+| Électrode or | Angle de contact : θ = 35-75° |
+| Parois micro-via | Angle de contact : θ = 35-90° |
 | Entrée (buse) | Vitesse imposée : v = 0.1 m/s |
 | Sortie | Pression atmosphérique : p = 0 |
 
@@ -112,11 +112,11 @@ Cette combinaison garantit la stabilité inf-sup et évite les oscillations de p
 
 | Configuration | Éléments | Taille maille | Temps | Hardware |
 |---------------|----------|---------------|-------|----------|
-| **Ce projet** | ~20k | 5–10 µm | **1–2 h** | 8 cœurs |
-| Haute résolution | ~100k | 1–2 µm | 4–8 h | 16 cœurs |
-| 3D complet | ~500k | 5 µm | 30–50 h | Cluster |
+| **Ce projet** | ~20k | 5-10 µm | **1-2 h** | 8 cœurs |
+| Haute résolution | ~100k | 1-2 µm | 4-8 h | 16 cœurs |
+| 3D complet | ~500k | 5 µm | 30-50 h | Cluster |
 
-> **Interprétation :** 20k éléments triangulaires sur un domaine 1.2×0.5 mm donnent une taille de maille moyenne de 5–10 µm, suffisante pour capturer l'interface diffuse (ε ~ 2–5 µm).
+> **Interprétation :** 20k éléments triangulaires sur un domaine 1.2×0.5 mm donnent une taille de maille moyenne de 5-10 µm, suffisante pour capturer l'interface diffuse (ε ~ 2-5 µm).
 
 **Note :** La FEM classique (assemblage matriciel) bénéficie peu de l'accélération GPU, contrairement à LBM.
 

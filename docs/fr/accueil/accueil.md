@@ -1,6 +1,6 @@
 &nbsp;
 
-**À propos de ce projet** — *Ce projet de modélisation physique a été conçu intégralement par l'auteur, depuis une page blanche jusqu'à sa mise en ligne sur ce site. Le contenu a été élaboré sur la base de ses connaissances complétées par une veille documentaire sur les concepts physiques et les outils numériques.*
+**À propos de ce projet** - *Ce projet de modélisation physique a été conçu intégralement par l'auteur, depuis une page blanche jusqu'à sa mise en ligne sur ce site. Le contenu a été élaboré sur la base de ses connaissances complétées par une veille documentaire sur les concepts physiques et les outils numériques.*
 
 *L'objectif est de permettre la réalisation de modélisations multiphysiques avancées au moyen d'outils open-source gratuits.*
 

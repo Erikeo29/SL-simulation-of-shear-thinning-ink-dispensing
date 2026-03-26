@@ -5,12 +5,12 @@
 4. Surface Tension
 5. Boundary Conditions
 6. Fundamental Dimensionless Numbers
-   - 6.1 Reynolds — Flow Regimes
-   - 6.2 Weber — Droplet Stability
-   - 6.3 Ohnesorge — Ejection and Filaments
-   - 6.4 Deborah — Viscoelastic Effects
-   - 6.5 Capillary — Spreading and Wetting
-   - 6.6 Bond — Gravity vs Capillarity
+   - 6.1 Reynolds - Flow Regimes
+   - 6.2 Weber - Droplet Stability
+   - 6.3 Ohnesorge - Ejection and Filaments
+   - 6.4 Deborah - Viscoelastic Effects
+   - 6.5 Capillary - Spreading and Wetting
+   - 6.6 Bond - Gravity vs Capillarity
 7. Model Comparison Table
 8. Summary
 
@@ -95,9 +95,9 @@ $$\eta(\dot{\gamma}) = K \dot{\gamma}^{n-1}$$
 
 | Parameter | Meaning | Typical value |
 |-----------|---------|---------------|
-| $K$ | Consistency | 0.01 – 10 Pa·s$^n$ |
-| $n$ | Flow behavior index | 0.3 – 0.9 (shear-thinning) |
-| $\dot{\gamma}$ | Shear rate | 1 – 10$^5$ s$^{-1}$ |
+| $K$ | Consistency | 0.01 - 10 Pa·s$^n$ |
+| $n$ | Flow behavior index | 0.3 - 0.9 (shear-thinning) |
+| $\dot{\gamma}$ | Shear rate | 1 - 10$^5$ s$^{-1}$ |
 
 **Behavior:**
 - $n < 1$: **Shear-thinning** (viscosity ↓ when shear ↑)
@@ -114,10 +114,10 @@ $$\eta(\dot{\gamma}) = \eta_\infty + (\eta_0 - \eta_\infty) \left[ 1 + (\lambda 
 
 | Parameter | Meaning | Typical value (shear-thinning ink) |
 |-----------|---------|----------------------------|
-| $\eta_0$ | Zero-shear viscosity | 0.5 – 5 Pa·s |
+| $\eta_0$ | Zero-shear viscosity | 0.5 - 5 Pa·s |
 | $\eta_\infty$ | Infinite-shear viscosity | 0.05 Pa·s |
-| $\lambda$ | Relaxation time | 0.1 – 0.2 s |
-| $n$ | Flow behavior index | 0.6 – 0.8 |
+| $\lambda$ | Relaxation time | 0.1 - 0.2 s |
+| $n$ | Flow behavior index | 0.6 - 0.8 |
 
 **Advantage:** Avoids power law singularity thanks to $\eta_0$ and $\eta_\infty$ plateaus.
 
@@ -301,7 +301,7 @@ Fluid dispensing modeling involves several interdependent physical phenomena, ch
 
 | Number | Expression | Meaning | Typical Value | Physical Interpretation |
 |--------|------------|---------|---------------|-------------------------|
-| **Reynolds** | $Re = \frac{\rho v D}{\eta}$ | Inertial vs viscous effects | 10 – 100 | Ratio of inertial to viscous forces. Determines flow regime. |
+| **Reynolds** | $Re = \frac{\rho v D}{\eta}$ | Inertial vs viscous effects | 10 - 100 | Ratio of inertial to viscous forces. Determines flow regime. |
 | **Weber** | $We = \frac{\rho v^2 L}{\sigma}$ | Inertial forces vs surface tension | $We < 10$ | Ratio of kinetic energy to surface energy. Controls droplet deformation. |
 | **Ohnesorge** | $Oh = \frac{\eta}{\sqrt{\rho \sigma D}}$ | Viscosity, surface tension, and size | $Oh < 0.5$ | Combines viscosity, capillarity, and inertia. Predicts jet and filament stability. |
 | **Deborah** | $De = \lambda \dot{\gamma}$ | Viscoelastic effects | Variable | Ratio of fluid relaxation time to characteristic flow time. |
@@ -310,7 +310,7 @@ Fluid dispensing modeling involves several interdependent physical phenomena, ch
 
 ---
 
-### 6.1 Reynolds Number ($Re$) — Flow Regimes
+### 6.1 Reynolds Number ($Re$) - Flow Regimes
 
 | $Re$ Range | Regime | Physical Description |
 |------------|--------|----------------------|
@@ -324,7 +324,7 @@ Fluid dispensing modeling involves several interdependent physical phenomena, ch
 
 ---
 
-### 6.2 Weber Number ($We$) — Droplet Stability
+### 6.2 Weber Number ($We$) - Droplet Stability
 
 | $We$ Range | Behavior | Physical Description |
 |------------|----------|----------------------|
@@ -337,7 +337,7 @@ Fluid dispensing modeling involves several interdependent physical phenomena, ch
 
 ---
 
-### 6.3 Ohnesorge Number ($Oh$) — Ejection and Filament Formation
+### 6.3 Ohnesorge Number ($Oh$) - Ejection and Filament Formation
 
 | $Oh$ Range | Behavior | Physical Description |
 |------------|----------|----------------------|
@@ -350,7 +350,7 @@ Fluid dispensing modeling involves several interdependent physical phenomena, ch
 
 ---
 
-### 6.4 Deborah Number ($De$) — Viscoelastic Effects
+### 6.4 Deborah Number ($De$) - Viscoelastic Effects
 
 | $De$ Range | Behavior | Physical Description |
 |------------|----------|----------------------|
@@ -362,7 +362,7 @@ Fluid dispensing modeling involves several interdependent physical phenomena, ch
 
 ---
 
-### 6.5 Capillary Number ($Ca$) — Spreading and Wetting
+### 6.5 Capillary Number ($Ca$) - Spreading and Wetting
 
 | $Ca$ Range | Behavior | Physical Description |
 |------------|----------|----------------------|
@@ -370,11 +370,11 @@ Fluid dispensing modeling involves several interdependent physical phenomena, ch
 | $0.01 < Ca < 0.1$ | **Visco-capillary** | Competition between viscous spreading and surface tension. Controlled wetting dynamics. |
 | $Ca > 0.1$ | **Viscous dominant** | Viscous flow deforms the interface. Film entrainment, significant contact line deformation. |
 
-**Dispensing application:** $Ca \approx 0.01$ — spreading is controlled by capillarity with moderate viscous influence.
+**Dispensing application:** $Ca \approx 0.01$ - spreading is controlled by capillarity with moderate viscous influence.
 
 ---
 
-### 6.6 Bond Number ($Bo$) — Gravity vs Capillarity
+### 6.6 Bond Number ($Bo$) - Gravity vs Capillarity
 
 | $Bo$ Range | Behavior | Physical Description |
 |------------|----------|----------------------|
@@ -382,7 +382,7 @@ Fluid dispensing modeling involves several interdependent physical phenomena, ch
 | $0.1 < Bo < 1$ | **Transition** | Gravity and capillarity comparable. Slightly flattened droplets, intermediate shape. |
 | $Bo > 1$ | **Gravity dominant** | Droplets flatten under their weight. "Puddle" shape, gravitational drainage. |
 
-**Micro-via application:** With $L \approx 500$ µm → $Bo \approx 0.01$ — gravity is negligible, filling is dominated by capillarity and wetting.
+**Micro-via application:** With $L \approx 500$ µm → $Bo \approx 0.01$ - gravity is negligible, filling is dominated by capillarity and wetting.
 
 ---
 

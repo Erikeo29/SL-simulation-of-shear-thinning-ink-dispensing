@@ -55,7 +55,7 @@ TRANSLATIONS = {
         "lbl_ca_plateau": "CA Plateau (°)",
         "lbl_gap": "Gap Buse (µm)",
         "lbl_ratio_drop": "Ratio goutte/puit",
-        "version_info": """**Version 3.5.0** — Jan 2026
+        "version_info": """**Version 3.5.0** - Jan 2026
 
 **Nouveautés :**
 - Support bilingue FR/EN
@@ -74,24 +74,24 @@ TRANSLATIONS = {
         "chat_close": "Fermer",
         "chat_clear": "Effacer",
         "chat_api_missing": "⚠️ Clé API manquante. Configurez GROQ_API_KEY.",
-        "chat_disclaimer": "⚠️ Réponse générée par IA — peut contenir des erreurs ou omissions. Vérifiez toujours les informations auprès des sources scientifiques reconnues.",
+        "chat_disclaimer": "⚠️ Réponse générée par IA - peut contenir des erreurs ou omissions. Vérifiez toujours les informations auprès des sources scientifiques reconnues.",
         "chat_toggle": "Assistant IA",
         # Comparison page
         "lbl_empty_mesh": "Maillage vide",
         "lbl_with_droplet": "Avec goutte (état final)",
         # SPH
         "sph_example_title": "Résultats de Simulation SPH",
-        "sph_preliminary": "🔴 **Résultats non concluants à ce jour** — La méthode SPH s'est avérée inadaptée pour ce problème.",
+        "sph_preliminary": "🔴 **Résultats non concluants à ce jour** - La méthode SPH s'est avérée inadaptée pour ce problème.",
         "sph_failure_title": "Pourquoi SPH ne fonctionne pas ici ?",
         "sph_failure_details": """
 La méthode SPH a été testée de manière exhaustive (~115 versions de codes différentes) avec deux solveurs (**PySPH** et **SPlisHSPlasH**) et s'est avérée **inadaptée** pour la simulation de dépôt d'encre rhéofluidifiante en micro-cavité. Les principales raisons sont :
 
 **1. Tension de surface mal prise en compte**
 - Le modèle CSF (*Continuum Surface Force*) utilisé dans PySPH crée des **artefacts de splitting** : la goutte se scinde artificiellement au milieu pendant l'étalement, ce qui est non physique.
-- La contrainte CFL (Courant–Friedrichs–Lewy) capillaire impose un pas de temps extrêmement petit : $\\Delta t \\propto \\sqrt{\\rho h^3 / \\sigma} \\approx 10^{-8}$ s à la résolution de 10 µm, rendant les calculs prohibitifs (~2h pour 30 ms de temps physique).
+- La contrainte CFL (Courant-Friedrichs-Lewy) capillaire impose un pas de temps extrêmement petit : $\\Delta t \\propto \\sqrt{\\rho h^3 / \\sigma} \\approx 10^{-8}$ s à la résolution de 10 µm, rendant les calculs prohibitifs (~2h pour 30 ms de temps physique).
 
 **2. Résolution insuffisante**
-- Avec 700 à 1200 particules (résolution typique de 10–20 µm), les dynamiques fines d'étalement et de mouillage ne sont pas capturées correctement.
+- Avec 700 à 1200 particules (résolution typique de 10-20 µm), les dynamiques fines d'étalement et de mouillage ne sont pas capturées correctement.
 - Augmenter la résolution aggrave encore le problème du pas de temps.
 
 **3. Modèles d'adhésion limités**
@@ -99,15 +99,15 @@ La méthode SPH a été testée de manière exhaustive (~115 versions de codes d
 - La calibration du paramètre d'adhésion α reste empirique et sensible à la résolution.
 
 **4. Solveur alternatif (SPlisHSPlasH)**
-- Le solveur SPlisHSPlasH (DFSPH — Divergence-Free SPH + Akinci 2013) est beaucoup plus rapide (~1000× avec la GPU) mais ne fonctionne qu'à **échelle macroscopique** (échelle ×1000).
+- Le solveur SPlisHSPlasH (DFSPH - Divergence-Free SPH + Akinci 2013) est beaucoup plus rapide (~1000× avec la GPU) mais ne fonctionne qu'à **échelle macroscopique** (échelle ×1000).
 - Pas de contrôle des angles de contact par paroi.
 - Résultats visuellement "spectaculaires" (éclaboussures et vagues réalistes : voir dernière image ci-dessous) mais **physiquement faux** pour le dépôt d'une encre visqueuse à l'échelle du µm.
 
 **Conclusion** : Pour ce type de problème (goutte µm, tension de surface élevée, angles de contact variables), les méthodes **VOF** (OpenFOAM) et **Phase Field** (FEM) sont plus adaptées.
 """,
-        "sph_nok_caption_1": "PySPH — Splitting de la goutte (artefact CSF)",
-        "sph_nok_caption_2": "PySPH — Splitting de la goutte (artefact CSF)",
-        "sph_nok_caption_3": "PySPH — Angle contact 60°: OK. Particules s'échappant de la cavité",
+        "sph_nok_caption_1": "PySPH - Splitting de la goutte (artefact CSF)",
+        "sph_nok_caption_2": "PySPH - Splitting de la goutte (artefact CSF)",
+        "sph_nok_caption_3": "PySPH - Angle contact 60°: OK. Particules s'échappant de la cavité",
         "sph_geyser_caption": "SPlisHSPlasH (échelle ×1000, non réaliste pour une encre visqueuse ! )",
         # Errors
         "mapping_missing": "Données de mapping manquantes.",
@@ -159,7 +159,7 @@ La méthode SPH a été testée de manière exhaustive (~115 versions de codes d
         "lbl_ca_plateau": "CA Plateau (°)",
         "lbl_gap": "Nozzle Gap (µm)",
         "lbl_ratio_drop": "Drop/Well Ratio",
-        "version_info": """**Version 3.5.0** — Jan 2026
+        "version_info": """**Version 3.5.0** - Jan 2026
 
 **New Features:**
 - Bilingual support FR/EN
@@ -178,24 +178,24 @@ La méthode SPH a été testée de manière exhaustive (~115 versions de codes d
         "chat_close": "Close",
         "chat_clear": "Clear",
         "chat_api_missing": "⚠️ API key missing. Configure GROQ_API_KEY.",
-        "chat_disclaimer": "⚠️ AI-generated response — may contain errors or omissions. Always verify information against recognized scientific sources.",
+        "chat_disclaimer": "⚠️ AI-generated response - may contain errors or omissions. Always verify information against recognized scientific sources.",
         "chat_toggle": "AI Assistant",
         # Comparison page
         "lbl_empty_mesh": "Empty Mesh",
         "lbl_with_droplet": "With Droplet (final state)",
         # SPH
         "sph_example_title": "SPH Simulation Results",
-        "sph_preliminary": "🔴 **Inconclusive results to date** — The SPH method proved unsuitable for this problem.",
+        "sph_preliminary": "🔴 **Inconclusive results to date** - The SPH method proved unsuitable for this problem.",
         "sph_failure_title": "Why SPH does not work here?",
         "sph_failure_details": """
 The SPH method was extensively tested (~115 different code versions) with two solvers (**PySPH** and **SPlisHSPlasH**) and proved **unsuitable** for simulating shear-thinning ink deposition in micro-cavities. The main reasons are:
 
 **1. Poor surface tension handling**
 - The CSF (*Continuum Surface Force*) model used in PySPH creates **splitting artifacts**: the droplet artificially splits in the middle during spreading, which is non-physical.
-- The capillary CFL (Courant–Friedrichs–Lewy) constraint imposes an extremely small time step: $\\Delta t \\propto \\sqrt{\\rho h^3 / \\sigma} \\approx 10^{-8}$ s at 10 µm resolution, making computations prohibitive (~2h for 30 ms of physical time).
+- The capillary CFL (Courant-Friedrichs-Lewy) constraint imposes an extremely small time step: $\\Delta t \\propto \\sqrt{\\rho h^3 / \\sigma} \\approx 10^{-8}$ s at 10 µm resolution, making computations prohibitive (~2h for 30 ms of physical time).
 
 **2. Insufficient resolution**
-- With 700 to 1,200 particles (typical 10–20 µm resolution), the fine dynamics of spreading and wetting are not captured correctly.
+- With 700 to 1,200 particles (typical 10-20 µm resolution), the fine dynamics of spreading and wetting are not captured correctly.
 - Increasing resolution further worsens the time step problem.
 
 **3. Limited adhesion models**
@@ -203,15 +203,15 @@ The SPH method was extensively tested (~115 different code versions) with two so
 - Calibration of the adhesion parameter α remains empirical and resolution-dependent.
 
 **4. Alternative solver (SPlisHSPlasH)**
-- The SPlisHSPlasH solver (DFSPH — Divergence-Free SPH + Akinci 2013) is much faster (~1,000× with the GPU) but only works at **macroscopic scale** (×1000 simulation).
+- The SPlisHSPlasH solver (DFSPH - Divergence-Free SPH + Akinci 2013) is much faster (~1,000× with the GPU) but only works at **macroscopic scale** (×1000 simulation).
 - No per-wall contact angle control.
 - Visually "spectacular" results (realistic splashing and waves: see last image below) but **physically wrong** for viscous ink deposition at the µm scale.
 
 **Conclusion**: For this type of problem (µm droplet, high surface tension, variable contact angles), **VOF** (OpenFOAM) and **Phase Field** (FEM) methods are more suitable.
 """,
-        "sph_nok_caption_1": "PySPH — Droplet splitting (CSF artifact)",
-        "sph_nok_caption_2": "PySPH — Droplet splitting (CSF artifact)",
-        "sph_nok_caption_3": "PySPH — Contact angle 60°: OK. Particles escaping the cavity",
+        "sph_nok_caption_1": "PySPH - Droplet splitting (CSF artifact)",
+        "sph_nok_caption_2": "PySPH - Droplet splitting (CSF artifact)",
+        "sph_nok_caption_3": "PySPH - Contact angle 60°: OK. Particles escaping the cavity",
         "sph_geyser_caption": "SPlisHSPlasH (×1000 scale, not realistic for a viscous ink!)",
         # Errors
         "mapping_missing": "Mapping data missing.",
@@ -991,7 +991,7 @@ st.sidebar.markdown("---")
 st.sidebar.markdown(t("version_info"))
 st.sidebar.markdown("")
 st.sidebar.markdown("")
-st.sidebar.markdown("© 2025 Eric QUEAU — [MIT License](https://opensource.org/licenses/MIT)")
+st.sidebar.markdown("© 2025 Eric QUEAU - [MIT License](https://opensource.org/licenses/MIT)")
 
 # --- Déterminer la page active ---
 # Priorité : modèles > annexes > général
@@ -1023,7 +1023,7 @@ if selected_page == gen_pages[0]:  # Accueil / Home
         vof_gif = os.path.join(ASSETS_PATH, "vof", "gif", "run_057_y_gap_buse0.12_x_gap_buse0_eta01.5_ratio_surface0.8.gif")
         if os.path.exists(vof_gif):
             st.image(vof_gif, use_container_width=True)
-            st.caption("VOF — OpenFOAM")
+            st.caption("VOF - OpenFOAM")
 
     # --- Reste du contenu en pleine largeur ---
     if len(parts) > 1:
@@ -1400,7 +1400,7 @@ elif selected_page == model_pages[2]:  # SPH
         with st.expander(t('sph_failure_title'), expanded=True):
             st.markdown(t("sph_failure_details"))
 
-        # GIFs with red border (NOK results) — below explanation
+        # GIFs with red border (NOK results) - below explanation
         st.markdown("---")
         sph_gifs = {
             "NOK_1": os.path.join(ASSETS_PATH, "sph/gif/NOK_1.gif"),
@@ -1430,7 +1430,7 @@ elif selected_page == model_pages[2]:  # SPH
                     )
                     st.caption(f"✗ {sph_captions[key]}")
 
-        # SPlisHSPlasH — full width
+        # SPlisHSPlasH - full width
         path = sph_gifs["geyser"]
         if os.path.exists(path):
             with open(path, "rb") as f:

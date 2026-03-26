@@ -143,13 +143,13 @@ où :
 
 | Configuration | Particules | Espacement | Temps | Hardware |
 |---------------|------------|------------|-------|----------|
-| **Ce projet** | ~1k | 15–20 µm | **1–2 h** | 6 cœurs |
-| Haute résolution | ~10k | 5–10 µm | 4–8 h | 8 cœurs |
-| 3D standard | ~1M | 5 µm | 5–10 h | GPU |
+| **Ce projet** | ~1k | 15-20 µm | **1-2 h** | 6 cœurs |
+| Haute résolution | ~10k | 5-10 µm | 4-8 h | 8 cœurs |
+| 3D standard | ~1M | 5 µm | 5-10 h | GPU |
 
-> **Interprétation :** ~1000 particules sur 1.2×0.5 mm donnent un espacement moyen de 15–20 µm. La longueur de lissage $h$ est typiquement 1.3× cet espacement. Code PySPH non optimisé.
+> **Interprétation :** ~1000 particules sur 1.2×0.5 mm donnent un espacement moyen de 15-20 µm. La longueur de lissage $h$ est typiquement 1.3× cet espacement. Code PySPH non optimisé.
 
-**Accélération GPU :** x10–x15 vs CPU pour simulations > 100k particules.
+**Accélération GPU :** x10-x15 vs CPU pour simulations > 100k particules.
 
 ---
 

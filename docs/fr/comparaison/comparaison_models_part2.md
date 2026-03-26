@@ -51,15 +51,15 @@ Les temps ci-dessous correspondent au cas de référence : dispense d'une goutte
 |--------|----------------|------------|-------|-----------|
 | **VOF** | ~50k cellules | ~5 µm | **0.5-2 h** | OpenFOAM optimisé C++ |
 | **LBM** | 240×100 nœuds | 5 µm | **~10 min** | Parallélisation efficace (GPU) |
-| **SPH** | ~1k particules | 15–20 µm | **1–2 h** | PySPH |
+| **SPH** | ~1k particules | 15-20 µm | **1-2 h** | PySPH |
 
 ### 4.2 Configurations indicatives
 
 | Gamme | Configuration type | Budget indicatif | Utilisation |
 |-------|-------------------|------------------|-------------|
-| **PC standard** | 6-12 cœurs, 16-32 Go RAM | 800–1 500 € | VOF/LBM simples, SPH 2D, FEM 2D|
-| **PC dopé** | 12-16 cœurs, 32-64 Go RAM, GPU 8 Go | 1 500–3 000 € | VOF 3D, études paramétriques |
-| **Serveur** | 32+ cœurs, 128+ Go RAM | 5 000–15 000 € | grandes séries d'études |
+| **PC standard** | 6-12 cœurs, 16-32 Go RAM | 800-1 500 € | VOF/LBM simples, SPH 2D, FEM 2D|
+| **PC dopé** | 12-16 cœurs, 32-64 Go RAM, GPU 8 Go | 1 500-3 000 € | VOF 3D, études paramétriques |
+| **Serveur** | 32+ cœurs, 128+ Go RAM | 5 000-15 000 € | grandes séries d'études |
 | **Cloud** | AWS, Google Cloud, Azure | 1-5 €/h | Pour calculs ponctuels intensifs |
 
 ### 4.3 Remarques pratiques
@@ -74,8 +74,8 @@ Les temps ci-dessous correspondent au cas de référence : dispense d'une goutte
 
 | Critère | VOF | LBM | SPH |
 |---------|-----|-----|-----|
-| **Précision interface** | 0.1–1 µm | 0.2–2 µm | 0.5–5 µm |
-| **Temps par simulation unitaire (ce projet)** | 0.5-2 h | ~10 min | 1–2 h |
+| **Précision interface** | 0.1-1 µm | 0.2-2 µm | 0.5-5 µm |
+| **Temps par simulation unitaire (ce projet)** | 0.5-2 h | ~10 min | 1-2 h |
 | **Conservation masse** | Rigoureuse | Approximative | Par sommation |
 | **Rhéologie Carreau** | Natif | Implémentable | Implémentable |
 | **Courbe d'apprentissage** | Élevée (C++, CLI) | Élevée (physique spécifique) | Moyenne (Python) |
