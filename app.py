@@ -1,4 +1,5 @@
 import streamlit as st
+import streamlit.components.v1 as components
 import base64
 import os
 import pandas as pd
@@ -1004,6 +1005,14 @@ elif st.session_state.nav_gen_idx is not None:
     selected_page = gen_pages[st.session_state.nav_gen_idx]
 else:
     selected_page = gen_pages[0]  # Default: Accueil/Home
+
+# --- Auto-scroll to top on page change ---
+if st.session_state.get("_last_page") != selected_page:
+    st.session_state["_last_page"] = selected_page
+    components.html(
+        '<script>window.parent.document.querySelector("section.main").scrollTo(0, 0);</script>',
+        height=0,
+    )
 
 # --- Pages ---
 # (gen_pages, model_pages, annex_pages déjà définis avant les radios)
