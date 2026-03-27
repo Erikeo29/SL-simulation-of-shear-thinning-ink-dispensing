@@ -1007,8 +1007,9 @@ else:
     selected_page = gen_pages[0]  # Default: Accueil/Home
 
 # --- Auto-scroll to top on page change ---
-if st.session_state.get("_last_page") != selected_page:
-    st.session_state["_last_page"] = selected_page
+_page_id = f"{st.session_state.nav_gen_idx}_{st.session_state.nav_model_idx}_{st.session_state.nav_annex_idx}"
+if st.session_state.get("_last_page") != _page_id:
+    st.session_state["_last_page"] = _page_id
     components.html(
         '<script>window.parent.document.querySelector("section.main").scrollTo(0, 0);</script>',
         height=0,
