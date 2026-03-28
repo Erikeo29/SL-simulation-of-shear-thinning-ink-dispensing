@@ -8,6 +8,24 @@ from groq import Groq
 # --- Configuration de la page ---
 st.set_page_config(page_title="Simulation Dispense", layout="wide", initial_sidebar_state="expanded")
 
+# --- Auto-scroll to top on page change ---
+import streamlit.components.v1 as _components
+_pid = f"{st.session_state.get('nav_gen_idx')}_{st.session_state.get('nav_model_idx')}_{st.session_state.get('nav_annex_idx')}"
+if st.session_state.get("_last_page") != _pid:
+    st.session_state["_last_page"] = _pid
+    _components.html(
+        '<script>'
+        'function scrollTop(){'
+        'var e=window.parent.document;'
+        'var targets=["section.main","[data-testid=stAppViewContainer]",".main"];'
+        'targets.forEach(function(s){var el=e.querySelector(s);if(el)el.scrollTo(0,0);});'
+        'e.scrollingElement.scrollTo(0,0);'
+        '}'
+        'scrollTop();setTimeout(scrollTop,100);setTimeout(scrollTop,300);'
+        '</script>',
+        height=0,
+    )
+
 # --- Dictionnaire de Traduction UI ---
 TRANSLATIONS = {
     "fr": {
@@ -1006,24 +1024,6 @@ elif st.session_state.nav_gen_idx is not None:
 else:
     selected_page = gen_pages[0]  # Default: Accueil/Home
 
-# --- Auto-scroll to top on page change ---
-_page_id = f"{st.session_state.nav_gen_idx}_{st.session_state.nav_model_idx}_{st.session_state.nav_annex_idx}"
-if st.session_state.get("_last_page") != _page_id:
-    st.session_state["_last_page"] = _page_id
-    components.html(
-        (
-            '<script>'
-            'function scrollTop(){'
-            'var e=window.parent.document;'
-            'var targets=["section.main","[data-testid=stAppViewContainer]",".main"];'
-            'targets.forEach(function(s){var el=e.querySelector(s);if(el)el.scrollTo(0,0);});'
-            'e.scrollingElement.scrollTo(0,0);'
-            '}'
-            'scrollTop();setTimeout(scrollTop,100);setTimeout(scrollTop,300);'
-            '</script>'
-        ),
-        height=0,
-    )
 
 # --- Pages ---
 # (gen_pages, model_pages, annex_pages déjà définis avant les radios)
