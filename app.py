@@ -1,5 +1,4 @@
 import streamlit as st
-import streamlit.components.v1 as components
 import base64
 import os
 import pandas as pd
@@ -8,23 +7,6 @@ from groq import Groq
 # --- Configuration de la page ---
 st.set_page_config(page_title="Simulation Dispense", layout="wide", initial_sidebar_state="expanded")
 
-# --- Auto-scroll to top on page change ---
-import streamlit.components.v1 as _components
-_pid = f"{st.session_state.get('nav_gen_idx')}_{st.session_state.get('nav_model_idx')}_{st.session_state.get('nav_annex_idx')}"
-if st.session_state.get("_last_page") != _pid:
-    st.session_state["_last_page"] = _pid
-    _components.html(
-        '<script>'
-        'function scrollTop(){'
-        'var e=window.parent.document;'
-        'var targets=["section.main","[data-testid=stAppViewContainer]",".main"];'
-        'targets.forEach(function(s){var el=e.querySelector(s);if(el)el.scrollTo(0,0);});'
-        'e.scrollingElement.scrollTo(0,0);'
-        '}'
-        'scrollTop();setTimeout(scrollTop,100);setTimeout(scrollTop,300);'
-        '</script>',
-        height=0,
-    )
 
 # --- Dictionnaire de Traduction UI ---
 TRANSLATIONS = {
@@ -349,7 +331,7 @@ def load_vof_gif_mapping():
         # Assurer que les entiers sont bien des entiers
         df['gap'] = df['gap buse (µm)'].astype(int)
         df['shift'] = df['shift buse (µm)'].astype(int)
-        
+
         mapping = {}
         for _, row in df.iterrows():
             key = (
@@ -372,7 +354,7 @@ def load_vof_png_mapping():
         df['viscosity'] = df['Viscosite eta0 (Pa.s)'].apply(lambda x: float(str(x).replace(',', '.')))
         df['gap'] = df['gap buse (µm)'].astype(int)
         df['shift'] = df['shift buse (µm)'].astype(int)
-        
+
         mapping = {}
         for _, row in df.iterrows():
             key = (
@@ -747,48 +729,8 @@ def render_fem_png_cascading_filters(df_origin: pd.DataFrame, key_prefix: str,
     return None
 
 
-# --- Callbacks pour Navigation ---
-def on_change_gen():
-    # Récupérer l'index sélectionné depuis le widget
-    selected = st.session_state.get('_radio_gen')
-    if selected is not None:
-        gen_pages = TRANSLATIONS[st.session_state.get('lang', 'fr')]["gen_pages"]
-        try:
-            st.session_state.nav_gen_idx = gen_pages.index(selected)
-        except ValueError:
-            st.session_state.nav_gen_idx = 0
-    st.session_state.nav_model_idx = None
-    st.session_state.nav_annex_idx = None
-
-def on_change_model():
-    selected = st.session_state.get('_radio_model')
-    if selected is not None:
-        model_pages = TRANSLATIONS[st.session_state.get('lang', 'fr')]["model_pages"]
-        try:
-            st.session_state.nav_model_idx = model_pages.index(selected)
-        except ValueError:
-            st.session_state.nav_model_idx = 0
-    st.session_state.nav_gen_idx = None
-    st.session_state.nav_annex_idx = None
-
-def on_change_annex():
-    selected = st.session_state.get('_radio_annex')
-    if selected is not None:
-        annex_pages = TRANSLATIONS[st.session_state.get('lang', 'fr')]["annex_pages"]
-        try:
-            st.session_state.nav_annex_idx = annex_pages.index(selected)
-        except ValueError:
-            st.session_state.nav_annex_idx = 0
-    st.session_state.nav_gen_idx = None
-    st.session_state.nav_model_idx = None
-
 # --- Initialisation Centralisée des États ---
-# Toutes les variables session_state sont initialisées ici pour éviter KeyError
 DEFAULT_SESSION_STATES = {
-    # Navigation (stocke l'INDEX, pas le texte - indépendant de la langue)
-    'nav_gen_idx': 0,     # Index dans gen_pages (0 = Accueil/Home par défaut)
-    'nav_model_idx': None,
-    'nav_annex_idx': None,
     # FEM Visualization
     'run_g': False,           # GIF viewer actif
     'run_p': False,           # PNG viewer actif
@@ -812,75 +754,7 @@ for key, default in DEFAULT_SESSION_STATES.items():
     if key not in st.session_state:
         st.session_state[key] = default
 
-# Initialisation spéciale : Accueil (index 0) au tout premier chargement
-# (quand aucun groupe n'est sélectionné)
-if (st.session_state.nav_gen_idx is None and
-    st.session_state.nav_model_idx is None and
-    st.session_state.nav_annex_idx is None):
-    st.session_state.nav_gen_idx = 0
-
-# --- Barre Latérale ---
-
-# Sélecteur de langue avec conservation de la page
-old_lang = st.session_state.get('lang', 'fr')
-lang_selection = st.sidebar.radio(
-    "Language",
-    ["Français", "English"],
-    horizontal=True,
-    label_visibility="collapsed",
-    index=0 if old_lang == "fr" else 1
-)
-new_lang = "fr" if "Français" in lang_selection else "en"
-
-# Si la langue change, simplement rerun (les index sont indépendants de la langue)
-if new_lang != old_lang:
-    st.session_state.lang = new_lang
-    st.rerun()
-
-st.session_state.lang = new_lang
-
-st.sidebar.title(t("sidebar_title"))
-st.sidebar.markdown("---")
-
-# Navigation par groupes avec callbacks
-# Les index sont stockés dans session_state (indépendants de la langue)
-gen_pages = t("gen_pages")
-model_pages = t("model_pages")
-annex_pages = t("annex_pages")
-
-st.sidebar.subheader(t("gen_header"))
-nav_gen = st.sidebar.radio(
-    "Nav Gen",
-    gen_pages,
-    key="_radio_gen",
-    index=st.session_state.nav_gen_idx,
-    on_change=on_change_gen,
-    label_visibility="collapsed"
-)
-
-st.sidebar.markdown("---")
-st.sidebar.subheader(t("models_header"))
-nav_model = st.sidebar.radio(
-    "Nav Models",
-    model_pages,
-    key="_radio_model",
-    index=st.session_state.nav_model_idx,
-    on_change=on_change_model,
-    label_visibility="collapsed"
-)
-
-st.sidebar.markdown("---")
-st.sidebar.subheader(t("annex_header"))
-nav_annex = st.sidebar.radio(
-    "Nav Annex",
-    annex_pages,
-    key="_radio_annex",
-    index=st.session_state.nav_annex_idx,
-    on_change=on_change_annex,
-    label_visibility="collapsed"
-)
-
-# --- Chatbot dans la Sidebar (avec toggle ON/OFF) ---
+# --- Chatbot ---
 
 def is_chatbot_enabled():
     """Vérifie si le chatbot doit être affiché."""
@@ -903,7 +777,7 @@ def is_chatbot_enabled():
     except Exception:
         return True  # Par défaut activé si clé présente
 
-# System prompt contextuel pour l'assistant (défini hors du if)
+# System prompt contextuel pour l'assistant
 SYSTEM_PROMPT = """Tu es un assistant expert en simulation numérique de la dispense d'encre rhéofluidifiante dans des micro-puits.
 
 Tu connais parfaitement les 4 méthodes numériques comparées dans cette application :
@@ -973,9 +847,8 @@ def stream_groq_response(user_message: str):
         error_msg = f"{t('chat_error')} ({str(e)[:50]}...)"
         yield error_msg
 
-# Interface chatbot dans la sidebar (seulement si activé)
-if is_chatbot_enabled():
-    st.sidebar.markdown("---")
+def render_chatbot():
+    """Affiche le chatbot dans un popover sidebar."""
     with st.sidebar.popover(f"{t('chat_title')}", use_container_width=True):
         # Bouton effacer
         if st.button(t("chat_clear"), use_container_width=True):
@@ -1006,30 +879,12 @@ if is_chatbot_enabled():
                 st.write_stream(stream_groq_response(prompt))
             st.caption(t("chat_disclaimer"))
 
-st.sidebar.markdown("---")
-st.sidebar.markdown(t("version_info"))
-st.sidebar.markdown("")
-st.sidebar.markdown("")
-st.sidebar.markdown("© 2025 Eric QUEAU - [MIT License](https://opensource.org/licenses/MIT)")
 
-# --- Déterminer la page active ---
-# Priorité : modèles > annexes > général
-selected_page = None
-if st.session_state.nav_model_idx is not None:
-    selected_page = model_pages[st.session_state.nav_model_idx]
-elif st.session_state.nav_annex_idx is not None:
-    selected_page = annex_pages[st.session_state.nav_annex_idx]
-elif st.session_state.nav_gen_idx is not None:
-    selected_page = gen_pages[st.session_state.nav_gen_idx]
-else:
-    selected_page = gen_pages[0]  # Default: Accueil/Home
+# =====================================================================
+# Page functions
+# =====================================================================
 
-
-# --- Pages ---
-# (gen_pages, model_pages, annex_pages déjà définis avant les radios)
-
-# ===== PAGE ACCUEIL =====
-if selected_page == gen_pages[0]:  # Accueil / Home
+def page_home():
     st.title(t("title"))
 
     # --- Layout côte-à-côte : note auteur (gauche) + GIF VOF (droite) ---
@@ -1076,15 +931,16 @@ if selected_page == gen_pages[0]:  # Accueil / Home
             st.markdown(f'<img src="data:image/gif;base64,{data}" style="width:100%">', unsafe_allow_html=True)
         st.caption(t("caption_sph"))
 
-# ===== PAGE INTRODUCTION =====
-elif selected_page == gen_pages[1]:  # Introduction
+
+def page_introduction():
     st.title("Introduction")
     st.markdown("---")
     st.markdown(load_file_content("intro/intro_project.md"))
 
-# ===== PAGE COMPARAISON =====
-elif selected_page == gen_pages[2]:  # Comparaison des modèles
-    st.title(selected_page)
+
+def page_comparison():
+    gen_pages = t("gen_pages")
+    st.title(gen_pages[2])
     st.markdown("---")
     # Partie 1: Sections 1-3.3
     st.markdown(load_file_content("comparaison/comparaison_models.md"))
@@ -1159,8 +1015,8 @@ elif selected_page == gen_pages[2]:  # Comparaison des modèles
     # Partie 2: Sections 4-9 (après les images)
     st.markdown(load_file_content("comparaison/comparaison_models_part2.md"))
 
-# ===== PAGE VOF =====
-elif selected_page == model_pages[0]:  # VOF
+
+def page_vof():
     st.title(t("title_model_1"))
     tabs = st.tabs(t("tabs_dual"))
 
@@ -1280,8 +1136,8 @@ elif selected_page == model_pages[0]:  # VOF
         else:
             st.warning(t("mapping_missing"))
 
-# ===== PAGE LBM =====
-elif selected_page == model_pages[1]:  # LBM
+
+def page_lbm():
     st.title(t("title_model_2"))
     tabs = st.tabs(t("tabs_dual"))
 
@@ -1295,9 +1151,9 @@ elif selected_page == model_pages[1]:  # LBM
         c_title, c_pop = st.columns([0.7, 0.3])
         with c_title:
             st.subheader(t("gif_viewer"))
-        
+
         _, df_g_origin = load_lbm_gif_mapping()
-        
+
         with c_pop:
             with st.popover(t("lbl_avail_sims"), use_container_width=True):
                 if not df_g_origin.empty:
@@ -1328,7 +1184,7 @@ elif selected_page == model_pages[1]:  # LBM
                 with st.container(border=True):
                     res_cols = st.columns(2)
                     files = st.session_state.files_lbm_g
-                    
+
                     # Sim 1
                     with res_cols[0]:
                         st.subheader(t("sim_1"))
@@ -1353,7 +1209,7 @@ elif selected_page == model_pages[1]:  # LBM
             st.subheader(t("png_viewer"))
 
         _, df_p_origin = load_lbm_png_mapping()
-        
+
         with c_pop:
             with st.popover(t("lbl_avail_sims"), use_container_width=True):
                 if not df_p_origin.empty:
@@ -1384,7 +1240,7 @@ elif selected_page == model_pages[1]:  # LBM
                 with st.container(border=True):
                     res_cols = st.columns(2)
                     files_p = st.session_state.files_lbm_p
-                    
+
                     with res_cols[0]:
                         st.subheader(t("sim_1"))
                         if files_p[0] and os.path.exists(files_p[0]):
@@ -1401,8 +1257,8 @@ elif selected_page == model_pages[1]:  # LBM
         else:
             st.warning(t("mapping_missing"))
 
-# ===== PAGE SPH =====
-elif selected_page == model_pages[2]:  # SPH
+
+def page_sph():
     st.title(t("title_model_3"))
     tabs = st.tabs(t("tabs_other"))
 
@@ -1462,35 +1318,145 @@ elif selected_page == model_pages[2]:  # SPH
             )
             st.caption(sph_captions["geyser"])
 
-# ===== PAGE CONCLUSION ET PERSPECTIVES =====
-elif selected_page == annex_pages[0]:  # Conclusion et perspectives
-    st.title(selected_page)
+
+def page_conclusion():
+    annex_pages = t("annex_pages")
+    st.title(annex_pages[0])
     st.markdown("---")
     st.markdown(load_file_content("conclusion/conclusion.md"))
 
-# ===== PAGE LEXIQUE =====
-elif selected_page == annex_pages[1]:  # Lexique / Glossary
-    st.title(selected_page)
+
+def page_lexique():
+    annex_pages = t("annex_pages")
+    st.title(annex_pages[1])
     st.markdown("---")
     st.markdown(load_file_content("lexique/lexique.md"))
 
-# ===== PAGE ÉQUATIONS CLÉS =====
-elif selected_page == annex_pages[2]:  # Équations clés / Key Equations
-    st.title(selected_page)
+
+def page_equations():
+    annex_pages = t("annex_pages")
+    st.title(annex_pages[2])
     st.markdown("---")
     st.markdown(load_file_content("equations/equations_clef.md"))
 
-# ===== PAGE HISTOIRE =====
-elif selected_page == annex_pages[3]:  # Un peu d'histoire / A Bit of History
-    st.title(selected_page)
+
+def page_histoire():
+    annex_pages = t("annex_pages")
+    st.title(annex_pages[3])
     st.markdown("---")
     st.markdown(load_file_content("histoire/histoire.md"))
 
-# ===== PAGE RÉFÉRENCES BIBLIOGRAPHIQUES =====
-elif selected_page == annex_pages[4]:  # Références bibliographiques / Bibliographical References
-    st.title(selected_page)
+
+def page_biblio():
+    annex_pages = t("annex_pages")
+    st.title(annex_pages[4])
     st.markdown("---")
     st.markdown(load_file_content("biblio/biblio.md"))
+
+
+# =====================================================================
+# Sidebar + Navigation
+# =====================================================================
+
+# Sélecteur de langue avec conservation de la page
+old_lang = st.session_state.get('lang', 'fr')
+lang_selection = st.sidebar.radio(
+    "Language",
+    ["Français", "English"],
+    horizontal=True,
+    label_visibility="collapsed",
+    index=0 if old_lang == "fr" else 1
+)
+new_lang = "fr" if "Français" in lang_selection else "en"
+
+# Si la langue change, simplement rerun (les url_path sont stables)
+if new_lang != old_lang:
+    st.session_state.lang = new_lang
+    st.rerun()
+
+st.session_state.lang = new_lang
+
+st.sidebar.title(t("sidebar_title"))
+st.sidebar.markdown("---")
+
+# Listes de titres de pages (traduites)
+gen_pages = t("gen_pages")
+model_pages = t("model_pages")
+annex_pages = t("annex_pages")
+
+# Construction des objets st.Page (url_path stable pour survie au changement de langue)
+_GEN_PAGES = [
+    st.Page(func, title=title, url_path=url, default=(url == "home"))
+    for func, title, url in zip(
+        [page_home, page_introduction, page_comparison],
+        gen_pages,
+        ["home", "introduction", "comparison"],
+    )
+]
+_MODEL_PAGES = [
+    st.Page(func, title=title, url_path=url)
+    for func, title, url in zip(
+        [page_vof, page_lbm, page_sph],
+        model_pages,
+        ["vof", "lbm", "sph"],
+    )
+]
+_ANNEX_PAGES = [
+    st.Page(func, title=title, url_path=url)
+    for func, title, url in zip(
+        [page_conclusion, page_lexique, page_equations, page_histoire, page_biblio],
+        annex_pages,
+        ["conclusion", "glossary", "equations", "history", "bibliography"],
+    )
+]
+
+# Routing via st.navigation (caché - sidebar custom ci-dessous)
+nav = st.navigation(
+    {
+        t("gen_header"): _GEN_PAGES,
+        t("models_header"): _MODEL_PAGES,
+        t("annex_header"): _ANNEX_PAGES,
+    },
+    position="hidden",
+)
+
+# Sidebar custom avec st.page_link (fiable avec st.navigation)
+_GROUPS = [
+    (t("gen_header"), _GEN_PAGES),
+    (t("models_header"), _MODEL_PAGES),
+    (t("annex_header"), _ANNEX_PAGES),
+]
+
+for header, pages in _GROUPS:
+    st.sidebar.subheader(header)
+    for page in pages:
+        is_active = page is nav
+        st.sidebar.page_link(
+            page,
+            label=f"**{page.title}**" if is_active else page.title,
+            icon=":material/arrow_right:" if is_active else None,
+            use_container_width=True,
+        )
+    st.sidebar.markdown("---")
+
+# Sidebar extras
+if is_chatbot_enabled():
+    render_chatbot()
+    st.sidebar.markdown("---")
+
+st.sidebar.markdown(t("version_info"))
+st.sidebar.markdown("")
+st.sidebar.markdown("")
+st.sidebar.markdown("© 2025 Eric QUEAU - [MIT License](https://opensource.org/licenses/MIT)")
+
+# --- Forcer l'accueil à chaque nouvelle session ---
+if "app_initialized" not in st.session_state:
+    st.session_state.app_initialized = True
+    if nav != _GEN_PAGES[0]:
+        st.switch_page(_GEN_PAGES[0])
+
+# --- Exécution de la page sélectionnée ---
+nav.run()
 
 # --- Ancre de fin de page pour bouton scroll-to-bottom ---
 st.markdown('<div id="bottom"></div>', unsafe_allow_html=True)

@@ -182,6 +182,26 @@ h1, h2, h3 {
     color: white;
 }
 
+/* Page links dans la sidebar (st.navigation) */
+.stPageLink {
+    margin-top: -0.3rem !important;
+    margin-bottom: -0.3rem !important;
+}
+.stPageLink a {
+    padding-top: 2px !important;
+    padding-bottom: 2px !important;
+    border-left: 3px solid transparent !important;
+}
+.stPageLink a:hover {
+    background-color: rgba(0, 75, 135, 0.20) !important;
+    border-left-color: #004b87 !important;
+}
+.stPageLink:has(strong) a,
+.stPageLink:has(b) a {
+    background-color: rgba(0, 75, 135, 0.20) !important;
+    border-left-color: #004b87 !important;
+}
+
 /* --- Boutons Réinitialiser (secondary) en ROUGE --- */
 button[kind="secondary"] {
     background-color: #dc3545 !important;
