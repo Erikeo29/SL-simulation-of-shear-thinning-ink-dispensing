@@ -12,6 +12,7 @@ st.set_page_config(page_title="Simulation Dispense", layout="wide", initial_side
 TRANSLATIONS = {
     "fr": {
         "title": "Simulation de Dispense d'Encre Rhéofluidifiante",
+        "hero_subtitle": "Comparaison VOF, LBM, SPH - rhéologie et dispense en micro-puits",
         "sidebar_title": "Modélisation de la dispense d'encre",
         "nav_header": "Navigation",
         "gen_header": "Général",
@@ -116,6 +117,7 @@ La méthode SPH a été testée de manière exhaustive (~115 versions de codes d
     },
     "en": {
         "title": "Shear-Thinning Ink Dispensing Simulation",
+        "hero_subtitle": "VOF, LBM, SPH comparison - rheology and micro-well dispensing",
         "sidebar_title": "Ink Dispensing Modeling",
         "nav_header": "Navigation",
         "gen_header": "General",
@@ -885,7 +887,12 @@ def render_chatbot():
 # =====================================================================
 
 def page_home():
-    st.title(t("title"))
+    st.markdown(f"""
+    <div class="hero-banner">
+        <h1>{t("title")}</h1>
+        <p>{t("hero_subtitle")}</p>
+    </div>
+    """, unsafe_allow_html=True)
 
     # --- Layout côte-à-côte : note auteur (gauche) + GIF VOF (droite) ---
     accueil_content = load_file_content("accueil/accueil.md")
