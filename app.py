@@ -11,8 +11,8 @@ st.set_page_config(page_title="Simulation Dispense", layout="wide", initial_side
 # --- Dictionnaire de Traduction UI ---
 TRANSLATIONS = {
     "fr": {
-        "title": "Simulation de Dispense d'Encre Rhéofluidifiante",
-        "hero_subtitle": "Comparaison VOF, LBM, SPH - rhéologie et dispense en micro-puits",
+        "title": "Simulation de dispense d'encre rhéofluidifiante",
+        "hero_subtitle": "Comparaison VOF, LBM, SPH - rhéologie et dispense en micro-via",
         "sidebar_title": "Modélisation de la dispense d'encre",
         "nav_header": "Navigation",
         "gen_header": "Général",
@@ -117,7 +117,7 @@ La méthode SPH a été testée de manière exhaustive (~115 versions de codes d
     },
     "en": {
         "title": "Shear-Thinning Ink Dispensing Simulation",
-        "hero_subtitle": "VOF, LBM, SPH comparison - rheology and micro-well dispensing",
+        "hero_subtitle": "VOF, LBM, SPH comparison - rheology and micro-via dispensing",
         "sidebar_title": "Ink Dispensing Modeling",
         "nav_header": "Navigation",
         "gen_header": "General",
