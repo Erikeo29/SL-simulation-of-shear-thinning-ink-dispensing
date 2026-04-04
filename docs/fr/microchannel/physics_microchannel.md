@@ -11,7 +11,7 @@
 
 ## 1. Contexte applicatif
 
-Ce projet modélise le **remplissage capillaire** d'un micro-canal destiné à un capteur microfluidique (dispositif d'analyse microfluidique, µTAS). L'objectif est de comprendre comment les propriétés physicochimiques du canal influencent la vitesse de remplissage par capillarité, paramètre critique pour le temps de réponse du capteur.
+Ce projet modélise le **remplissage capillaire** d'un micro-canal destiné à un capteur microfluidique (µTAS - Micro Total Analysis System : système d'analyse miniaturisé intégrant sur une seule puce les étapes de prélèvement, transport et détection d'un échantillon liquide). L'objectif est de comprendre comment les propriétés physicochimiques du canal influencent la vitesse de remplissage par capillarité, paramètre critique pour le temps de réponse du capteur.
 
 **Application :** Micro-électrodes pour biosenseurs (détection d'analytes dans le liquide).
 

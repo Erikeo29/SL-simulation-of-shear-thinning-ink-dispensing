@@ -14,9 +14,11 @@ TRANSLATIONS = {
         "title": "Simulation de dispense d'encre rhéofluidifiante",
         "hero_subtitle": "Comparaison VOF, LBM, SPH - rhéologie et dispense en micro-via",
         "sidebar_title": "Modélisation de la dispense d'encre",
+        "sidebar_subtitle": "et autres exemples de µfluidique : en cours d'étude",
         "nav_header": "Navigation",
         "gen_header": "Général",
-        "models_header": "Résultats de modélisation",
+        "models_header": "Modélisation de dispense",
+        "vof_3d_nav": "Exemple de dispense en 3D (VOF)",
         "annex_header": "Annexes",
         "gen_pages": ["Accueil", "Introduction", "Comparaison des modèles"],
         "model_pages": ["1. VOF (OpenFOAM)", "2. LBM (Palabos)", "3. SPH (PySPH)"],
@@ -36,7 +38,7 @@ TRANSLATIONS = {
         "gif_viewer": "Visualisation dynamique (GIF)",
         "png_viewer": "Visualisation état final (PNG)",
         "3d_viewer": "Visualisation 3D interactive",
-        "3d_viewer_desc": "Rendus 3D interactifs des simulations OpenFOAM (rotation, zoom, animation).",
+        "3d_viewer_desc": "Rendus 3D interactifs de simulations en 3D (rotation, zoom, animation). Il s'agit de 3D issus de modélisation déterministes comme les 2D précédents.\n\nL'intérêt est plutôt visuel que scientifiquement intéressant. Le challenge était principalement sur la capacité et le temps de calcul ainsi que sur la faisabilité de montrer un résultat visuellement exploitable.\n\nSuite à la taille des fichiers (> 10 Mb), seuls 2 exemples sont donnés :\n- buse centrée (étalement symétrique),\n- buse décalée (étalement dissymétrique avec migration de l'encre en dehors du via).",
         "3d_select": "Configuration de la buse",
         "3d_label_centered": "Buse centree (run 003)",
         "3d_label_offset": "Buse decentree (run 016)",
@@ -63,11 +65,12 @@ TRANSLATIONS = {
         "lbl_ca_plateau": "CA Plateau (°)",
         "lbl_gap": "Gap Buse (µm)",
         "lbl_ratio_drop": "Ratio goutte/puit",
-        "version_info": """**Version 3.5.0** - Jan 2026
+        "version_info": """**Version 3.5.1** - Jan 2026
 
 **Nouveautés :**
 - Support bilingue FR/EN
-- Références bibliographiques
+- Exemple de dispense en 3D (VOF)
+- Autres simulations de µfluidique
 - Assistant IA
 - Navigation améliorée""",
         "caption_fem": "Méthode des éléments finis - Python/FEniCS",
@@ -121,9 +124,9 @@ La méthode SPH a été testée de manière exhaustive (~115 versions de codes d
         "mapping_missing": "Données de mapping manquantes.",
         "data_not_found": "Données non trouvées",
         # Micro-canal (µTAS)
-        "other_models_header": "Autres modélisations fluidiques",
+        "other_models_header": "Autres simulations de µfluidique",
         "title_microchannel": "Micro-canal µTAS : remplissage capillaire",
-        "mc_nav": "► Micro-canal (µTAS)",
+        "mc_nav": "Micro-canal (µTAS)",
         "mc_tabs": ["Physique", "Code", "▸ Résultats"],
         "mc_sim_select": "Sélectionner une simulation",
         "mc_comparison": "Comparaison globale",
@@ -150,7 +153,7 @@ La méthode SPH a été testée de manière exhaustive (~115 versions de codes d
         },
         # Encapsulation (COB glob top)
         "title_encapsulation": "Encapsulation glob top : Chip-On-Board (COB)",
-        "enc_nav": "► Encapsulation (COB)",
+        "enc_nav": "Encapsulation (COB)",
         "enc_tabs": ["Physique", "Code", "▸ Résultats"],
         "enc_sim_select": "Sélectionner une simulation",
         "enc_geometry": "Géométrie du domaine",
@@ -170,9 +173,11 @@ La méthode SPH a été testée de manière exhaustive (~115 versions de codes d
         "title": "Shear-Thinning Ink Dispensing Simulation",
         "hero_subtitle": "VOF, LBM, SPH comparison - rheology and micro-via dispensing",
         "sidebar_title": "Ink Dispensing Modeling",
+        "sidebar_subtitle": "and other µfluidic examples: under study",
         "nav_header": "Navigation",
         "gen_header": "General",
-        "models_header": "Modeling Results",
+        "models_header": "Dispensing modeling",
+        "vof_3d_nav": "3D dispensing example (VOF)",
         "annex_header": "Appendices",
         "gen_pages": ["Home", "Introduction", "Model Comparison"],
         "model_pages": ["1. VOF (OpenFOAM)", "2. LBM (Palabos)", "3. SPH (PySPH)"],
@@ -192,7 +197,7 @@ La méthode SPH a été testée de manière exhaustive (~115 versions de codes d
         "gif_viewer": "Dynamic Visualization (GIF)",
         "png_viewer": "Final State Visualization (PNG)",
         "3d_viewer": "Interactive 3D visualization",
-        "3d_viewer_desc": "Interactive 3D renders of OpenFOAM simulations (rotate, zoom, animate).",
+        "3d_viewer_desc": "Interactive 3D renders of deterministic simulations (rotate, zoom, animate), similar to the previous 2D results.\n\nThe interest is more visual than scientifically significant. The challenge was primarily in computational capacity and time, as well as the feasibility of producing a visually exploitable result.\n\nDue to file sizes (> 10 Mb), only 2 examples are provided:\n- centered nozzle (symmetric spreading),\n- offset nozzle (asymmetric spreading with ink migration outside the via).",
         "3d_select": "Nozzle configuration",
         "3d_label_centered": "Centered nozzle (run 003)",
         "3d_label_offset": "Offset nozzle (run 016)",
@@ -219,11 +224,12 @@ La méthode SPH a été testée de manière exhaustive (~115 versions de codes d
         "lbl_ca_plateau": "CA Plateau (°)",
         "lbl_gap": "Nozzle Gap (µm)",
         "lbl_ratio_drop": "Drop/Well Ratio",
-        "version_info": """**Version 3.5.0** - Jan 2026
+        "version_info": """**Version 3.5.1** - Jan 2026
 
 **New Features:**
 - Bilingual support FR/EN
-- Bibliographical References
+- 3D dispensing example (VOF)
+- Other µfluidic simulations
 - AI Assistant
 - Improved navigation""",
         "caption_fem": "Finite Element Method - Python/FEniCS",
@@ -277,9 +283,9 @@ The SPH method was extensively tested (~115 different code versions) with two so
         "mapping_missing": "Mapping data missing.",
         "data_not_found": "Data not found",
         # Micro-channel (µTAS)
-        "other_models_header": "Other fluidic models",
+        "other_models_header": "Other µfluidic simulations",
         "title_microchannel": "µTAS Micro-channel: capillary filling",
-        "mc_nav": "► Micro-channel (µTAS)",
+        "mc_nav": "Micro-channel (µTAS)",
         "mc_tabs": ["Physics", "Code", "▸ Results"],
         "mc_sim_select": "Select a simulation",
         "mc_comparison": "Global comparison",
@@ -306,7 +312,7 @@ The SPH method was extensively tested (~115 different code versions) with two so
         },
         # Encapsulation (COB glob top)
         "title_encapsulation": "Glob Top Encapsulation: Chip-On-Board (COB)",
-        "enc_nav": "► Encapsulation (COB)",
+        "enc_nav": "Encapsulation (COB)",
         "enc_tabs": ["Physics", "Code", "▸ Results"],
         "enc_sim_select": "Select a simulation",
         "enc_geometry": "Domain geometry",
@@ -1277,6 +1283,32 @@ def page_vof():
             st.warning(t("image_unavailable"))
 
 
+def page_vof_3d():
+    st.title(t("vof_3d_nav"))
+    st.info(t("3d_viewer_desc"))
+
+    vof_3d_options = {
+        t("3d_label_centered"): "vof_3d_003_cylindrical_slip_piston.html",
+        t("3d_label_offset"): "vof_3d_016_v0175ms_CA15plateau.html",
+    }
+
+    selected_3d = st.radio(
+        t("3d_select"),
+        list(vof_3d_options.keys()),
+        horizontal=True,
+        key="vof_3d_page_select",
+    )
+
+    filename = vof_3d_options[selected_3d]
+    filepath = os.path.join("static", filename)
+    if os.path.exists(filepath):
+        with open(filepath, "r", encoding="utf-8") as f_3d:
+            html_3d = f_3d.read()
+        st.components.v1.html(html_3d, height=650, scrolling=False)
+    else:
+        st.warning(t("image_unavailable"))
+
+
 def page_lbm():
     st.title(t("title_model_2"))
     tabs = st.tabs(t("tabs_dual"))
@@ -1728,6 +1760,7 @@ if new_lang != old_lang:
 st.session_state.lang = new_lang
 
 st.sidebar.title(t("sidebar_title"))
+st.sidebar.markdown(f'<p style="font-size:0.95em; margin-top:-10px; color:#666;"><em>({t("sidebar_subtitle")})</em></p>', unsafe_allow_html=True)
 st.sidebar.markdown("---")
 
 # Listes de titres de pages (traduites)
@@ -1748,9 +1781,11 @@ _MODEL_PAGES = [
     st.Page(func, title=title, url_path=url)
     for func, title, url in zip(
         [page_vof, page_lbm, page_sph],
-        model_pages,
+        model_pages[:3],
         ["vof", "lbm", "sph"],
     )
+] + [
+    st.Page(page_vof_3d, title=t("vof_3d_nav"), url_path="vof-3d"),
 ]
 _ANNEX_PAGES = [
     st.Page(func, title=title, url_path=url)

@@ -11,7 +11,7 @@
 
 ## 1. Application Context
 
-This project models the **capillary filling** of a micro-channel designed for a microfluidic analysis device (µTAS). The objective is to understand how the physicochemical properties of the channel influence the capillary filling speed, a critical parameter for sensor response time.
+This project models the **capillary filling** of a micro-channel designed for a microfluidic sensor (µTAS - Micro Total Analysis System: a miniaturized analysis system integrating sampling, transport and detection of a liquid sample on a single chip). The objective is to understand how the physicochemical properties of the channel influence the capillary filling speed, a critical parameter for sensor response time.
 
 **Application:** Micro-electrodes for biosensors (physiological fluid analysis (blood, sweat, etc.)).
 
