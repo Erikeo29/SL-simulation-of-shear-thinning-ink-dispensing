@@ -36,9 +36,10 @@ TRANSLATIONS = {
         "gif_viewer": "Visualisation dynamique (GIF)",
         "png_viewer": "Visualisation état final (PNG)",
         "3d_viewer": "Visualisation 3D interactive",
-        "3d_viewer_desc": "Rendus 3D interactifs des simulations OpenFOAM (rotation, zoom, animation). Cliquer sur une visualisation pour l'ouvrir.",
-        "3d_sim_016": "Run 016 - v = 0.0175 m/s, angle plateau = 15 deg.",
-        "3d_sim_003": "Run 003 - geometrie cylindrique, piston glissant.",
+        "3d_viewer_desc": "Rendus 3D interactifs des simulations OpenFOAM (rotation, zoom, animation).",
+        "3d_select": "Configuration de la buse",
+        "3d_label_centered": "Buse centree (run 016)",
+        "3d_label_offset": "Buse decentree (run 003)",
         "lbl_avail_sims": "📋 Simulations disponibles",
         # Titres Modèles
         "title_model_1": "Modèle 1 : Méthode Volume of Fluid (OpenFOAM)",
@@ -191,9 +192,10 @@ La méthode SPH a été testée de manière exhaustive (~115 versions de codes d
         "gif_viewer": "Dynamic Visualization (GIF)",
         "png_viewer": "Final State Visualization (PNG)",
         "3d_viewer": "Interactive 3D visualization",
-        "3d_viewer_desc": "Interactive 3D renders of OpenFOAM simulations (rotate, zoom, animate). Click a visualization to open it.",
-        "3d_sim_016": "Run 016 - v = 0.0175 m/s, plateau angle = 15 deg.",
-        "3d_sim_003": "Run 003 - cylindrical geometry, slip piston.",
+        "3d_viewer_desc": "Interactive 3D renders of OpenFOAM simulations (rotate, zoom, animate).",
+        "3d_select": "Nozzle configuration",
+        "3d_label_centered": "Centered nozzle (run 016)",
+        "3d_label_offset": "Offset nozzle (run 003)",
         "lbl_avail_sims": "📋 Available Simulations",
         # Model Titles
         "title_model_1": "Model 1 : Volume of Fluid Method (OpenFOAM)",
@@ -1253,23 +1255,26 @@ def page_vof():
         st.subheader(t("3d_viewer"))
         st.info(t("3d_viewer_desc"))
 
-        vof_3d_files = {
-            "3d_sim_016": "vof_3d_016_v0175ms_CA15plateau.html",
-            "3d_sim_003": "vof_3d_003_cylindrical_slip_piston.html",
+        vof_3d_options = {
+            t("3d_label_centered"): "vof_3d_016_v0175ms_CA15plateau.html",
+            t("3d_label_offset"): "vof_3d_003_cylindrical_slip_piston.html",
         }
 
-        col1, col2 = st.columns(2)
-        for idx, (label_key, filename) in enumerate(vof_3d_files.items()):
-            with [col1, col2][idx]:
-                st.markdown(f"**{t(label_key)}**")
-                if os.path.exists(os.path.join("static", filename)):
-                    st.components.v1.iframe(
-                        f"/_stcore/static/{filename}",
-                        height=600,
-                        scrolling=False,
-                    )
-                else:
-                    st.warning(t("image_unavailable"))
+        selected_3d = st.radio(
+            t("3d_select"),
+            list(vof_3d_options.keys()),
+            horizontal=True,
+            key="vof_3d_select",
+        )
+
+        filename = vof_3d_options[selected_3d]
+        filepath = os.path.join("static", filename)
+        if os.path.exists(filepath):
+            with open(filepath, "r", encoding="utf-8") as f_3d:
+                html_3d = f_3d.read()
+            st.components.v1.html(html_3d, height=650, scrolling=False)
+        else:
+            st.warning(t("image_unavailable"))
 
 
 def page_lbm():
