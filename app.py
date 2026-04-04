@@ -114,6 +114,51 @@ La méthode SPH a été testée de manière exhaustive (~115 versions de codes d
         # Errors
         "mapping_missing": "Données de mapping manquantes.",
         "data_not_found": "Données non trouvées",
+        # Micro-canal (µTAS)
+        "other_models_header": "Autres modélisations fluidiques",
+        "title_microchannel": "Micro-canal µTAS : remplissage capillaire",
+        "mc_nav": "► Micro-canal (µTAS)",
+        "mc_tabs": ["Physique", "Code", "▸ Résultats"],
+        "mc_sim_select": "Sélectionner une simulation",
+        "mc_comparison": "Comparaison globale",
+        "mc_combined_gif": "Vue combinée des 7 cas",
+        "mc_filling_curves": "Courbes de remplissage : position du front vs temps.",
+        "mc_filling_curves_v2": "Courbes de remplissage : temps vs position du front.",
+        "mc_case_labels": {
+            "001_baseline": "001 : Baseline (référence), θ_sub=121°, θ_top=22°, θ_elec=96°, σ=72 mN/m, μ=0.90 mPa·s",
+            "002_theta90":  "002 : Substrat neutre, θ_sub=90°",
+            "003_theta60":  "003 : Substrat hydrophile, θ_sub=60°",
+            "004_visco15x": "004 : Viscosité ×1.5, μ=1.35 mPa·s",
+            "005_sigma05x": "005 : Surfactant (σ×0.5), σ=36 mN/m",
+            "006_step45":   "006 : Électrodes hydrophiles, θ_elec=45°",
+            "007_top45":    "007 : Paroi sup. moins hydrophile, θ_top=45°",
+        },
+        "mc_fill_times": {
+            "001_baseline": "t_fill = 13.7 ms",
+            "002_theta90":  "t_fill = 11.9 ms (−13%)",
+            "003_theta60":  "t_fill = 10.6 ms (−23%)",
+            "004_visco15x": "t_fill = 20.2 ms (+47%)",
+            "005_sigma05x": "t_fill = 16.2 ms (+18%)",
+            "006_step45":   "t_fill = 10.8 ms (−21%)",
+            "007_top45":    "t_fill = 16.3 ms (+19%)",
+        },
+        # Encapsulation (COB glob top)
+        "title_encapsulation": "Encapsulation glob top : Chip-On-Board (COB)",
+        "enc_nav": "► Encapsulation (COB)",
+        "enc_tabs": ["Physique", "Code", "▸ Résultats"],
+        "enc_sim_select": "Sélectionner une simulation",
+        "enc_geometry": "Géométrie du domaine",
+        "enc_case_labels": {
+            "025_best_case":    "025 : Meilleur cas (buse décalée), die=96%, spillage=0%",
+            "026_baseline":     "026 : Baseline physique corrigée, die~90%",
+            "028_mesh_10um":    "028 : Maillage 10 µm, die=95%",
+            "033_symmetric":    "033 : Dispensing symétrique + buse, die=100%, asymétrie L/R",
+            "034_10um_nozzle":  "034 : 10 µm + buse mobile, die=100%",
+            "035_long_settle":  "035 : Settling étendu (t₁=0.8 s), die=100%",
+            "036_low_viscosity":"036 : Viscosité faible (η₀=7.5), die=55%, drainage",
+            "037_low_sigma":    "037 : Tension de surface réduite (σ=35 mN/m), die=100%",
+            "038_fast_nozzle":  "038 : Buse rapide (v=5 mm/s), die=90%",
+        },
     },
     "en": {
         "title": "Shear-Thinning Ink Dispensing Simulation",
@@ -219,6 +264,51 @@ The SPH method was extensively tested (~115 different code versions) with two so
         # Errors
         "mapping_missing": "Mapping data missing.",
         "data_not_found": "Data not found",
+        # Micro-channel (µTAS)
+        "other_models_header": "Other fluidic models",
+        "title_microchannel": "µTAS Micro-channel: capillary filling",
+        "mc_nav": "► Micro-channel (µTAS)",
+        "mc_tabs": ["Physics", "Code", "▸ Results"],
+        "mc_sim_select": "Select a simulation",
+        "mc_comparison": "Global comparison",
+        "mc_combined_gif": "Combined view of all 7 cases",
+        "mc_filling_curves": "Filling curves: front position vs time.",
+        "mc_filling_curves_v2": "Filling curves: time vs front position.",
+        "mc_case_labels": {
+            "001_baseline": "001: Baseline (reference), θ_sub=121°, θ_top=22°, θ_elec=96°, σ=72 mN/m, μ=0.90 mPa·s",
+            "002_theta90":  "002: Neutral substrate, θ_sub=90°",
+            "003_theta60":  "003: Hydrophilic substrate, θ_sub=60°",
+            "004_visco15x": "004: Viscosity ×1.5, μ=1.35 mPa·s",
+            "005_sigma05x": "005: Surfactant (σ×0.5), σ=36 mN/m",
+            "006_step45":   "006: Hydrophilic electrodes, θ_elec=45°",
+            "007_top45":    "007: Less hydrophilic cover plate, θ_top=45°",
+        },
+        "mc_fill_times": {
+            "001_baseline": "t_fill = 13.7 ms",
+            "002_theta90":  "t_fill = 11.9 ms (−13%)",
+            "003_theta60":  "t_fill = 10.6 ms (−23%)",
+            "004_visco15x": "t_fill = 20.2 ms (+47%)",
+            "005_sigma05x": "t_fill = 16.2 ms (+18%)",
+            "006_step45":   "t_fill = 10.8 ms (−21%)",
+            "007_top45":    "t_fill = 16.3 ms (+19%)",
+        },
+        # Encapsulation (COB glob top)
+        "title_encapsulation": "Glob Top Encapsulation: Chip-On-Board (COB)",
+        "enc_nav": "► Encapsulation (COB)",
+        "enc_tabs": ["Physics", "Code", "▸ Results"],
+        "enc_sim_select": "Select a simulation",
+        "enc_geometry": "Domain geometry",
+        "enc_case_labels": {
+            "025_best_case":    "025: Best case (offset nozzle), die=96%, spillage=0%",
+            "026_baseline":     "026: Corrected physics baseline, die~90%",
+            "028_mesh_10um":    "028: 10 µm mesh, die=95%",
+            "033_symmetric":    "033: Symmetric dispensing + nozzle, die=100%, L/R asymmetry",
+            "034_10um_nozzle":  "034: 10 µm + mobile nozzle, die=100%",
+            "035_long_settle":  "035: Extended settling (t₁=0.8 s), die=100%",
+            "036_low_viscosity":"036: Low viscosity (η₀=7.5), die=55%, drainage",
+            "037_low_sigma":    "037: Reduced surface tension (σ=35 mN/m), die=100%",
+            "038_fast_nozzle":  "038: Fast nozzle (v=5 mm/s), die=90%",
+        },
     }
 }
 
@@ -748,6 +838,12 @@ DEFAULT_SESSION_STATES = {
     'run_vof_p': False,
     'files_vof_g': (None, None),
     'files_vof_p': (None, None),
+    # Micro-channel
+    'run_mc_g': False,
+    'files_mc_g': (None, None),
+    # Encapsulation
+    'run_enc_g': False,
+    'files_enc_g': (None, None),
     # Chatbot
     'chat_messages': [],
 }
@@ -1361,6 +1457,217 @@ def page_biblio():
     st.markdown(load_file_content("biblio/biblio.md"))
 
 
+def page_microchannel():
+    st.title(t("title_microchannel"))
+    tabs = st.tabs(t("mc_tabs"))
+
+    with tabs[0]:  # Physique
+        st.markdown(load_file_content("microchannel/physics_microchannel.md"))
+
+    with tabs[1]:  # Code
+        display_smart_markdown(load_file_content("microchannel/code_microchannel.md"))
+
+    with tabs[2]:  # Résultats
+        case_labels = t("mc_case_labels")
+        fill_times = t("mc_fill_times")
+        case_ids = list(case_labels.keys())
+
+        # --- Comparaison 2 à 2 ---
+        st.subheader(t("gif_viewer"))
+        with st.container(border=True):
+            col_s1, col_s2 = st.columns(2)
+            with col_s1:
+                st.markdown(f"**{t('sim_1')}**")
+                st.selectbox(
+                    t("mc_sim_select"), case_ids,
+                    format_func=lambda x: case_labels[x],
+                    key="mc_sel_1", index=0
+                )
+            with col_s2:
+                st.markdown(f"**{t('sim_2')}**")
+                st.selectbox(
+                    t("mc_sim_select"), case_ids,
+                    format_func=lambda x: case_labels[x],
+                    key="mc_sel_2", index=1
+                )
+
+            # Boutons
+            _, btn_col1, btn_col2, _ = st.columns([1, 1, 1, 1])
+            with btn_col1:
+                if st.button(t("btn_launch"), type="primary",
+                             use_container_width=True, key="btn_mc_g"):
+                    s1 = st.session_state.mc_sel_1
+                    s2 = st.session_state.mc_sel_2
+                    file_1 = os.path.join(ASSETS_PATH, "microchannel/gif",
+                                          f"{s1}.gif")
+                    file_2 = os.path.join(ASSETS_PATH, "microchannel/gif",
+                                          f"{s2}.gif")
+                    st.session_state.run_mc_g = True
+                    st.session_state.files_mc_g = (file_1, file_2)
+            with btn_col2:
+                if st.button(t("btn_reset"), type="secondary",
+                             use_container_width=True, key="rst_mc_g"):
+                    st.session_state.run_mc_g = False
+                    st.rerun()
+
+        if st.session_state.get('run_mc_g', False):
+            with st.container(border=True):
+                res_cols = st.columns(2)
+                files = st.session_state.files_mc_g
+
+                for col_idx, col in enumerate(res_cols):
+                    with col:
+                        st.subheader(t("sim_1") if col_idx == 0
+                                     else t("sim_2"))
+                        fpath = files[col_idx]
+                        if fpath and os.path.exists(fpath):
+                            with open(fpath, "rb") as f:
+                                gif_data = base64.b64encode(
+                                    f.read()).decode()
+                            st.markdown(
+                                f'<img src="data:image/gif;base64,'
+                                f'{gif_data}" style="width:100%; '
+                                f'border-radius: 8px;">',
+                                unsafe_allow_html=True,
+                            )
+                            case_id = os.path.basename(fpath).replace(
+                                ".gif", "")
+                            st.caption(
+                                f"{case_labels.get(case_id, '')} | "
+                                f"{fill_times.get(case_id, '')}")
+                        else:
+                            st.warning(t("image_unavailable"))
+
+        # --- Comparaison globale ---
+        st.markdown("---")
+        st.subheader(t("mc_comparison"))
+
+        # GIF combiné
+        combined_gif = os.path.join(ASSETS_PATH, "microchannel/gif",
+                                    "filling_combined.gif")
+        if os.path.exists(combined_gif):
+            st.markdown(f"**{t('mc_combined_gif')}**")
+            st.image(combined_gif, use_container_width=True)
+
+        st.markdown("")
+
+        # Courbes de remplissage côte à côte
+        col_c1, col_c2 = st.columns(2)
+        curves_1 = os.path.join(ASSETS_PATH, "microchannel/png",
+                                "filling_curves.png")
+        curves_2 = os.path.join(ASSETS_PATH, "microchannel/png",
+                                "filling_curves_v2.png")
+
+        with col_c1:
+            if os.path.exists(curves_1):
+                st.image(curves_1, use_container_width=True)
+                st.caption(t("mc_filling_curves"))
+
+        with col_c2:
+            if os.path.exists(curves_2):
+                st.image(curves_2, use_container_width=True)
+                st.caption(t("mc_filling_curves_v2"))
+
+
+def page_encapsulation():
+    st.title(t("title_encapsulation"))
+    tabs = st.tabs(t("enc_tabs"))
+
+    with tabs[0]:  # Physique
+        # Image de géométrie en haut
+        geom_img = os.path.join(ASSETS_PATH, "encapsulation/png",
+                                "geometry_v1.png")
+        photo_img = os.path.join(ASSETS_PATH, "encapsulation/png",
+                                 "glob_top_photo.png")
+        if os.path.exists(geom_img) or os.path.exists(photo_img):
+            col_g, col_p = st.columns(2)
+            with col_g:
+                if os.path.exists(geom_img):
+                    st.image(geom_img, use_container_width=True)
+                    st.caption(t("enc_geometry"))
+            with col_p:
+                if os.path.exists(photo_img):
+                    st.image(photo_img, use_container_width=True)
+                    st.caption("Glob top (COB)")
+            st.markdown("---")
+        st.markdown(load_file_content("encapsulation/physics_encapsulation.md"))
+
+    with tabs[1]:  # Code
+        display_smart_markdown(
+            load_file_content("encapsulation/code_encapsulation.md"))
+
+    with tabs[2]:  # Résultats
+        case_labels = t("enc_case_labels")
+        case_ids = list(case_labels.keys())
+
+        # --- Comparaison 2 à 2 ---
+        st.subheader(t("gif_viewer"))
+        with st.container(border=True):
+            col_s1, col_s2 = st.columns(2)
+            with col_s1:
+                st.markdown(f"**{t('sim_1')}**")
+                st.selectbox(
+                    t("enc_sim_select"), case_ids,
+                    format_func=lambda x: case_labels[x],
+                    key="enc_sel_1", index=0
+                )
+            with col_s2:
+                st.markdown(f"**{t('sim_2')}**")
+                st.selectbox(
+                    t("enc_sim_select"), case_ids,
+                    format_func=lambda x: case_labels[x],
+                    key="enc_sel_2",
+                    index=min(6, len(case_ids) - 1)
+                )
+
+            # Boutons
+            _, btn_col1, btn_col2, _ = st.columns([1, 1, 1, 1])
+            with btn_col1:
+                if st.button(t("btn_launch"), type="primary",
+                             use_container_width=True, key="btn_enc_g"):
+                    s1 = st.session_state.enc_sel_1
+                    s2 = st.session_state.enc_sel_2
+                    file_1 = os.path.join(ASSETS_PATH,
+                                          "encapsulation/gif",
+                                          f"{s1}.gif")
+                    file_2 = os.path.join(ASSETS_PATH,
+                                          "encapsulation/gif",
+                                          f"{s2}.gif")
+                    st.session_state.run_enc_g = True
+                    st.session_state.files_enc_g = (file_1, file_2)
+            with btn_col2:
+                if st.button(t("btn_reset"), type="secondary",
+                             use_container_width=True, key="rst_enc_g"):
+                    st.session_state.run_enc_g = False
+                    st.rerun()
+
+        if st.session_state.get('run_enc_g', False):
+            with st.container(border=True):
+                res_cols = st.columns(2)
+                files = st.session_state.files_enc_g
+
+                for col_idx, col in enumerate(res_cols):
+                    with col:
+                        st.subheader(t("sim_1") if col_idx == 0
+                                     else t("sim_2"))
+                        fpath = files[col_idx]
+                        if fpath and os.path.exists(fpath):
+                            with open(fpath, "rb") as f:
+                                gif_data = base64.b64encode(
+                                    f.read()).decode()
+                            st.markdown(
+                                f'<img src="data:image/gif;base64,'
+                                f'{gif_data}" style="width:100%; '
+                                f'border-radius: 8px;">',
+                                unsafe_allow_html=True,
+                            )
+                            case_id = os.path.basename(fpath).replace(
+                                ".gif", "")
+                            st.caption(case_labels.get(case_id, ''))
+                        else:
+                            st.warning(t("image_unavailable"))
+
+
 # =====================================================================
 # Sidebar + Navigation
 # =====================================================================
@@ -1416,12 +1723,17 @@ _ANNEX_PAGES = [
         ["conclusion", "glossary", "equations", "history", "bibliography"],
     )
 ]
+_OTHER_PAGES = [
+    st.Page(page_microchannel, title=t("mc_nav"), url_path="microchannel"),
+    st.Page(page_encapsulation, title=t("enc_nav"), url_path="encapsulation"),
+]
 
 # Routing via st.navigation (caché - sidebar custom ci-dessous)
 nav = st.navigation(
     {
         t("gen_header"): _GEN_PAGES,
         t("models_header"): _MODEL_PAGES,
+        t("other_models_header"): _OTHER_PAGES,
         t("annex_header"): _ANNEX_PAGES,
     },
     position="hidden",
@@ -1431,6 +1743,7 @@ nav = st.navigation(
 _GROUPS = [
     (t("gen_header"), _GEN_PAGES),
     (t("models_header"), _MODEL_PAGES),
+    (t("other_models_header"), _OTHER_PAGES),
     (t("annex_header"), _ANNEX_PAGES),
 ]
 
