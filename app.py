@@ -22,6 +22,7 @@ TRANSLATIONS = {
         "model_pages": ["1. VOF (OpenFOAM)", "2. LBM (Palabos)", "3. SPH (PySPH)"],
         "annex_pages": ["Conclusion et perspectives", "Lexique", "Équations clés", "Un peu d'histoire", "Références bibliographiques"],
         "tabs_dual": ["Physique", "Code", "▸ Résultats de modélisation (GIF)", "▸ Résultats de modélisation (PNG)"],
+        "tabs_vof": ["Physique", "Code", "▸ Résultats de modélisation (GIF)", "▸ Résultats de modélisation (PNG)", "▸ Visualisation 3D"],
         "tabs_other": ["Physique", "Code", "▸ Résultats de modélisation"],
         "overview_title": "5. Aperçu des résultats des 3 modèles",
         "overview_subtitle": "voir les pages 'Résultats de modélisation' pour l'ensemble des modélisations",
@@ -34,6 +35,10 @@ TRANSLATIONS = {
         "image_unavailable": "Image non disponible",
         "gif_viewer": "Visualisation dynamique (GIF)",
         "png_viewer": "Visualisation état final (PNG)",
+        "3d_viewer": "Visualisation 3D interactive",
+        "3d_viewer_desc": "Rendus 3D interactifs des simulations OpenFOAM (rotation, zoom, animation). Cliquer sur une visualisation pour l'ouvrir.",
+        "3d_sim_016": "Run 016 - v = 0.0175 m/s, angle plateau = 15 deg.",
+        "3d_sim_003": "Run 003 - geometrie cylindrique, piston glissant.",
         "lbl_avail_sims": "📋 Simulations disponibles",
         # Titres Modèles
         "title_model_1": "Modèle 1 : Méthode Volume of Fluid (OpenFOAM)",
@@ -172,6 +177,7 @@ La méthode SPH a été testée de manière exhaustive (~115 versions de codes d
         "model_pages": ["1. VOF (OpenFOAM)", "2. LBM (Palabos)", "3. SPH (PySPH)"],
         "annex_pages": ["Conclusion and Perspectives", "Glossary", "Key Equations", "A Bit of History", "Bibliographical References"],
         "tabs_dual": ["Physics", "Code", "▸ Modeling Results (GIF)", "▸ Modeling Results (PNG)"],
+        "tabs_vof": ["Physics", "Code", "▸ Modeling Results (GIF)", "▸ Modeling Results (PNG)", "▸ 3D Visualization"],
         "tabs_other": ["Physics", "Code", "▸ Modeling Results"],
         "overview_title": "5. Overview of the 3 Simulation Models",
         "overview_subtitle": "see the 'Modeling Results' pages for all simulations",
@@ -184,6 +190,10 @@ La méthode SPH a été testée de manière exhaustive (~115 versions de codes d
         "image_unavailable": "Image not available",
         "gif_viewer": "Dynamic Visualization (GIF)",
         "png_viewer": "Final State Visualization (PNG)",
+        "3d_viewer": "Interactive 3D visualization",
+        "3d_viewer_desc": "Interactive 3D renders of OpenFOAM simulations (rotate, zoom, animate). Click a visualization to open it.",
+        "3d_sim_016": "Run 016 - v = 0.0175 m/s, plateau angle = 15 deg.",
+        "3d_sim_003": "Run 003 - cylindrical geometry, slip piston.",
         "lbl_avail_sims": "📋 Available Simulations",
         # Model Titles
         "title_model_1": "Model 1 : Volume of Fluid Method (OpenFOAM)",
@@ -1121,7 +1131,7 @@ def page_comparison():
 
 def page_vof():
     st.title(t("title_model_1"))
-    tabs = st.tabs(t("tabs_dual"))
+    tabs = st.tabs(t("tabs_vof"))
 
     with tabs[0]:  # Physique
         st.markdown(load_file_content("physics/physics_vof.md"))
@@ -1238,6 +1248,28 @@ def page_vof():
                             st.warning(t("image_unavailable"))
         else:
             st.warning(t("mapping_missing"))
+
+    with tabs[4]:  # Visualisation 3D
+        st.subheader(t("3d_viewer"))
+        st.info(t("3d_viewer_desc"))
+
+        vof_3d_files = {
+            "3d_sim_016": "vof_3d_016_v0175ms_CA15plateau.html",
+            "3d_sim_003": "vof_3d_003_cylindrical_slip_piston.html",
+        }
+
+        col1, col2 = st.columns(2)
+        for idx, (label_key, filename) in enumerate(vof_3d_files.items()):
+            with [col1, col2][idx]:
+                st.markdown(f"**{t(label_key)}**")
+                if os.path.exists(os.path.join("static", filename)):
+                    st.components.v1.iframe(
+                        f"/_stcore/static/{filename}",
+                        height=600,
+                        scrolling=False,
+                    )
+                else:
+                    st.warning(t("image_unavailable"))
 
 
 def page_lbm():
