@@ -38,7 +38,7 @@ TRANSLATIONS = {
         "gif_viewer": "Visualisation dynamique (GIF)",
         "png_viewer": "Visualisation état final (PNG)",
         "3d_viewer": "Visualisation 3D interactive",
-        "3d_viewer_desc": "Rendus 3D interactifs de simulations en 3D (rotation, zoom, animation). Il s'agit de 3D issus de modélisation déterministes comme les 2D précédents.\n\nL'intérêt est plutôt visuel que scientifiquement intéressant. Le challenge était principalement sur la capacité et le temps de calcul ainsi que sur la faisabilité de montrer un résultat visuellement exploitable.\n\nSuite à la taille des fichiers (> 10 Mb), seuls 2 exemples sont donnés :\n- buse centrée (étalement symétrique),\n- buse décalée (étalement dissymétrique avec migration de l'encre en dehors du via).",
+        "3d_viewer_desc": "Rendus 3D interactifs de simulations en 3D (rotation, zoom, animation). Il s'agit de 3D issus de modélisation déterministes comme les 2D précédents.\n\nL'intérêt est plutôt visuel que scientifiquement intéressant. Le challenge était principalement sur la capacité et le temps de calcul ainsi que sur la faisabilité de montrer un résultat visuellement exploitable.\n\nSuite à la taille des fichiers (16 Mb même allégés), seuls 2 exemples sont donnés :\n- buse centrée (étalement symétrique),\n- buse décalée (étalement dissymétrique avec migration de l'encre en dehors du via).",
         "3d_select": "Configuration de la buse",
         "3d_label_centered": "Buse centree (run 003)",
         "3d_label_offset": "Buse decentree (run 016)",
@@ -197,7 +197,7 @@ La méthode SPH a été testée de manière exhaustive (~115 versions de codes d
         "gif_viewer": "Dynamic Visualization (GIF)",
         "png_viewer": "Final State Visualization (PNG)",
         "3d_viewer": "Interactive 3D visualization",
-        "3d_viewer_desc": "Interactive 3D renders of deterministic simulations (rotate, zoom, animate), similar to the previous 2D results.\n\nThe interest is more visual than scientifically significant. The challenge was primarily in computational capacity and time, as well as the feasibility of producing a visually exploitable result.\n\nDue to file sizes (> 10 Mb), only 2 examples are provided:\n- centered nozzle (symmetric spreading),\n- offset nozzle (asymmetric spreading with ink migration outside the via).",
+        "3d_viewer_desc": "Interactive 3D renders of deterministic simulations (rotate, zoom, animate), similar to the previous 2D results.\n\nThe interest is more visual than scientifically significant. The challenge was primarily in computational capacity and time, as well as the feasibility of producing a visually exploitable result.\n\nDue to file sizes (16 Mb even when optimized), only 2 examples are provided:\n- centered nozzle (symmetric spreading),\n- offset nozzle (asymmetric spreading with ink migration outside the via).",
         "3d_select": "Nozzle configuration",
         "3d_label_centered": "Centered nozzle (run 003)",
         "3d_label_offset": "Offset nozzle (run 016)",
@@ -1760,7 +1760,7 @@ if new_lang != old_lang:
 st.session_state.lang = new_lang
 
 st.sidebar.title(t("sidebar_title"))
-st.sidebar.markdown(f'<p style="font-size:0.95em; margin-top:-10px; color:#666;"><em>({t("sidebar_subtitle")})</em></p>', unsafe_allow_html=True)
+st.sidebar.markdown(f'<p style="font-size:1.05em; margin-top:-10px; color:#666;"><em>({t("sidebar_subtitle")})</em></p>', unsafe_allow_html=True)
 st.sidebar.markdown("---")
 
 # Listes de titres de pages (traduites)
