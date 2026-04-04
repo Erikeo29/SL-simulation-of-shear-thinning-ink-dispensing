@@ -38,8 +38,8 @@ TRANSLATIONS = {
         "3d_viewer": "Visualisation 3D interactive",
         "3d_viewer_desc": "Rendus 3D interactifs des simulations OpenFOAM (rotation, zoom, animation).",
         "3d_select": "Configuration de la buse",
-        "3d_label_centered": "Buse centree (run 016)",
-        "3d_label_offset": "Buse decentree (run 003)",
+        "3d_label_centered": "Buse centree (run 003)",
+        "3d_label_offset": "Buse decentree (run 016)",
         "lbl_avail_sims": "📋 Simulations disponibles",
         # Titres Modèles
         "title_model_1": "Modèle 1 : Méthode Volume of Fluid (OpenFOAM)",
@@ -194,8 +194,8 @@ La méthode SPH a été testée de manière exhaustive (~115 versions de codes d
         "3d_viewer": "Interactive 3D visualization",
         "3d_viewer_desc": "Interactive 3D renders of OpenFOAM simulations (rotate, zoom, animate).",
         "3d_select": "Nozzle configuration",
-        "3d_label_centered": "Centered nozzle (run 016)",
-        "3d_label_offset": "Offset nozzle (run 003)",
+        "3d_label_centered": "Centered nozzle (run 003)",
+        "3d_label_offset": "Offset nozzle (run 016)",
         "lbl_avail_sims": "📋 Available Simulations",
         # Model Titles
         "title_model_1": "Model 1 : Volume of Fluid Method (OpenFOAM)",
@@ -1256,8 +1256,8 @@ def page_vof():
         st.info(t("3d_viewer_desc"))
 
         vof_3d_options = {
-            t("3d_label_centered"): "vof_3d_016_v0175ms_CA15plateau.html",
-            t("3d_label_offset"): "vof_3d_003_cylindrical_slip_piston.html",
+            t("3d_label_centered"): "vof_3d_003_cylindrical_slip_piston.html",
+            t("3d_label_offset"): "vof_3d_016_v0175ms_CA15plateau.html",
         }
 
         selected_3d = st.radio(
