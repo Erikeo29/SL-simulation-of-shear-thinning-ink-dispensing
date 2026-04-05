@@ -39,8 +39,8 @@ docs/               # Markdown documentation
 ## Installation
 
 ```bash
-git clone https://github.com/Erikeo29/dispense-encre.git
-cd dispense-encre
+git clone https://github.com/Erikeo29/SL-simulation-of-shear-thinning-ink-dispensing.git
+cd SL-simulation-of-shear-thinning-ink-dispensing
 pip install -r requirements.txt
 streamlit run app.py
 ```
