@@ -73,7 +73,6 @@ TRANSLATIONS = {
 - Autres simulations de µfluidique
 - Assistant IA
 - Navigation améliorée""",
-        "caption_fem": "Méthode des éléments finis - Python/FEniCS",
         "caption_vof": "Volume of Fluid - C++/OpenFOAM",
         "caption_lbm": "Lattice Boltzmann - C++/Palabos",
         "caption_sph": "Smoothed Particle Hydrodynamics - Python/PySPH",
@@ -230,7 +229,6 @@ La méthode SPH a été testée de manière exhaustive (~115 versions de codes d
 - Other µfluidic simulations
 - AI Assistant
 - Improved navigation""",
-        "caption_fem": "Finite Element Method - Python/FEniCS",
         "caption_vof": "Volume of Fluid - C++/OpenFOAM",
         "caption_lbm": "Lattice Boltzmann - C++/Palabos",
         "caption_sph": "Smoothed Particle Hydrodynamics - Python/PySPH",
@@ -379,52 +377,11 @@ LBM_SRC = os.path.join(DOC_PATH, "fr/code/code_lbm.cpp")
 SPH_SRC = os.path.join(DOC_PATH, "fr/code/code_sph.py")
 
 # Chemins vers les exemples visuels
-FEM_GIF_EX = os.path.join(ASSETS_PATH, "fem/gif/gif_a01.gif")
 VOF_GIF_EX = os.path.join(ASSETS_PATH, "vof/gif/run_039_y_gap_buse0.03_x_gap_buse0_eta01.5_ratio_surface0.8.gif")
 LBM_GIF_EX = os.path.join(ASSETS_PATH, "lbm/gif/lbm_020.gif")
 SPH_GIF_EX = os.path.join(ASSETS_PATH, "sph/gif/NOK_2.gif")
 
 # --- Fonctions Utilitaires ---
-
-@st.cache_data(ttl=600)
-def load_fem_gif_mapping():
-    """Charge le mapping FEM GIF et retourne (mapping_dict, DataFrame)."""
-    try:
-        df = pd.read_csv(os.path.join(DATA_PATH, 'fem_gif_mapping.csv'), sep=';', encoding='utf-8')
-        # Convertir les virgules en points pour les floats
-        df['viscosity'] = df["Viscosité de l'encre (Pa.s)"].apply(lambda x: float(str(x).replace(',', '.')))
-        mapping = {}
-        for _, row in df.iterrows():
-            key = (
-                int(row['diamètre du puit (µm)']), int(row['diamètre de la buse (µm)']),
-                int(row['shift buse en x (µm)']), row['viscosity'],
-                int(row['CA wall right']), int(row['CA gold'])
-            )
-            mapping[key] = os.path.join(ASSETS_PATH, "fem/gif", row['nom fichier gif'])
-        return mapping, df
-    except Exception:
-        return {}, pd.DataFrame()
-
-@st.cache_data(ttl=600)
-def load_fem_png_mapping():
-    """Charge le mapping FEM PNG et retourne (mapping_dict, DataFrame)."""
-    try:
-        df = pd.read_csv(os.path.join(DATA_PATH, 'fem_png_mapping.csv'), sep=';', encoding='utf-8')
-        # Convertir les virgules en points pour les floats
-        df['viscosity'] = df["Viscosité de l'encre (Pa.s)"].apply(lambda x: float(str(x).replace(',', '.')))
-        df['remplissage_f'] = df['remplissage'].apply(lambda x: float(str(x).replace(',', '.')))
-        mapping = {}
-        for _, row in df.iterrows():
-            key = (
-                int(row['temps dispense (ms)']), row['viscosity'],
-                int(row['shift buse en x (µm)']), int(row['shift buse en z (µm)']),
-                int(row['CA gold']), row['remplissage_f']
-            )
-            filename = row['nom fichier gif'].replace('.png', '.jpg')
-            mapping[key] = os.path.join(ASSETS_PATH, "fem/png", filename)
-        return mapping, df
-    except Exception:
-        return {}, pd.DataFrame()
 
 @st.cache_data(ttl=600)
 def load_vof_gif_mapping():
@@ -625,73 +582,6 @@ def render_lbm_cascading_filters(df_origin: pd.DataFrame, key_prefix: str,
     return None
 
 
-def render_fem_gif_cascading_filters(df_origin: pd.DataFrame, key_prefix: str,
-                                      sim_num: int) -> str | None:
-    """
-    Génère les filtres en cascade pour FEM GIF (6 paramètres sur une ligne).
-
-    Args:
-        df_origin: DataFrame source avec toutes les combinaisons
-        key_prefix: Préfixe pour les clés des widgets (ex: "fg" pour FEM GIF)
-        sim_num: 1 ou 2 (pour l'index par défaut différent)
-
-    Returns:
-        Chemin complet du fichier ou None si non trouvé
-    """
-    df = df_origin.copy()
-    default_idx = 0 if sim_num == 1 else (1 if len(df) > 1 else 0)
-
-    # Colonnes pour les filtres
-    col_well = 'diamètre du puit (µm)'
-    col_nozzle = 'diamètre de la buse (µm)'
-    col_shift = 'shift buse en x (µm)'
-    col_visc = 'viscosity'  # Colonne convertie en float
-    col_ca_wall = 'CA wall right'
-    col_ca_gold = 'CA gold'
-    col_file = 'nom fichier gif'
-
-    st.markdown(f"**{t('sim_1') if sim_num == 1 else t('sim_2')}**")
-
-    # 6 paramètres sur une seule ligne (avec espaceurs)
-    _, c1, c2, c3, c4, c5, c6, _ = st.columns([0.5, 1, 1, 1, 1, 1, 1, 0.5])
-
-    with c1:
-        opts = sorted(df[col_well].unique())
-        idx = min(default_idx, len(opts) - 1)
-        val_well = st.selectbox(t("lbl_well"), opts, key=f"{key_prefix}_w{sim_num}", index=idx)
-        df = df[df[col_well] == val_well]
-
-    with c2:
-        opts = sorted(df[col_nozzle].unique())
-        val_nozzle = st.selectbox(t("lbl_nozzle"), opts, key=f"{key_prefix}_n{sim_num}")
-        df = df[df[col_nozzle] == val_nozzle]
-
-    with c3:
-        opts = sorted(df[col_shift].unique(), reverse=True)  # 0, -75, -150
-        val_shift = st.selectbox(t("lbl_shift_x"), opts, key=f"{key_prefix}_s{sim_num}")
-        df = df[df[col_shift] == val_shift]
-
-    with c4:
-        opts = sorted(df[col_visc].unique(), reverse=True)  # 5.0, 1.5
-        val_visc = st.selectbox(t("lbl_viscosity"), opts, key=f"{key_prefix}_v{sim_num}")
-        df = df[df[col_visc] == val_visc]
-
-    with c5:
-        opts = sorted(df[col_ca_wall].unique(), reverse=True)  # 90, 35
-        val_ca_wall = st.selectbox(t("lbl_ca_wall"), opts, key=f"{key_prefix}_cw{sim_num}")
-        df = df[df[col_ca_wall] == val_ca_wall]
-
-    with c6:
-        opts = sorted(df[col_ca_gold].unique())
-        val_ca_gold = st.selectbox(t("lbl_ca_gold"), opts, key=f"{key_prefix}_cg{sim_num}")
-        df = df[df[col_ca_gold] == val_ca_gold]
-
-    # Retourner le chemin du fichier
-    if not df.empty:
-        return os.path.join(ASSETS_PATH, "fem/gif", df.iloc[0][col_file])
-    return None
-
-
 def render_vof_cascading_filters(df_origin: pd.DataFrame, key_prefix: str,
                                   sim_num: int, file_type: str = "gif") -> str | None:
     """
@@ -767,81 +657,8 @@ def render_vof_cascading_filters(df_origin: pd.DataFrame, key_prefix: str,
     return None
 
 
-def render_fem_png_cascading_filters(df_origin: pd.DataFrame, key_prefix: str,
-                                      sim_num: int) -> str | None:
-    """
-    Génère les filtres en cascade pour FEM PNG (6 paramètres sur une ligne).
-
-    Args:
-        df_origin: DataFrame source avec toutes les combinaisons
-        key_prefix: Préfixe pour les clés des widgets (ex: "fp" pour FEM PNG)
-        sim_num: 1 ou 2 (pour l'index par défaut différent)
-
-    Returns:
-        Chemin complet du fichier ou None si non trouvé
-    """
-    df = df_origin.copy()
-    default_idx = 0 if sim_num == 1 else (1 if len(df) > 1 else 0)
-
-    # Colonnes pour les filtres
-    col_time = 'temps dispense (ms)'
-    col_visc = 'viscosity'
-    col_shift_x = 'shift buse en x (µm)'
-    col_shift_z = 'shift buse en z (µm)'
-    col_ca_gold = 'CA gold'
-    col_ratio = 'remplissage_f'
-    col_file = 'nom fichier gif'
-
-    st.markdown(f"**{t('sim_1') if sim_num == 1 else t('sim_2')}**")
-
-    # 6 paramètres sur une seule ligne (avec espaceurs)
-    _, c1, c2, c3, c4, c5, c6, _ = st.columns([0.5, 1, 1, 1, 1, 1, 1, 0.5])
-
-    with c1:
-        opts = sorted(df[col_time].unique())
-        idx = min(default_idx, len(opts) - 1)
-        val_time = st.selectbox(t("lbl_time"), opts, key=f"{key_prefix}_t{sim_num}", index=idx)
-        df = df[df[col_time] == val_time]
-
-    with c2:
-        opts = sorted(df[col_visc].unique())
-        val_visc = st.selectbox(t("lbl_viscosity"), opts, key=f"{key_prefix}_v{sim_num}")
-        df = df[df[col_visc] == val_visc]
-
-    with c3:
-        opts = sorted(df[col_shift_x].unique(), reverse=True)
-        val_shift_x = st.selectbox(t("lbl_shift_x"), opts, key=f"{key_prefix}_sx{sim_num}")
-        df = df[df[col_shift_x] == val_shift_x]
-
-    with c4:
-        opts = sorted(df[col_shift_z].unique(), reverse=True)
-        val_shift_z = st.selectbox(t("lbl_shift_z"), opts, key=f"{key_prefix}_sz{sim_num}")
-        df = df[df[col_shift_z] == val_shift_z]
-
-    with c5:
-        opts = sorted(df[col_ca_gold].unique())
-        val_ca_gold = st.selectbox(t("lbl_ca_gold"), opts, key=f"{key_prefix}_cg{sim_num}")
-        df = df[df[col_ca_gold] == val_ca_gold]
-
-    with c6:
-        opts = sorted(df[col_ratio].unique())
-        val_ratio = st.selectbox(t("lbl_ratio"), opts, key=f"{key_prefix}_r{sim_num}")
-        df = df[df[col_ratio] == val_ratio]
-
-    # Retourner le chemin du fichier
-    if not df.empty:
-        filename = df.iloc[0][col_file].replace('.png', '.jpg')
-        return os.path.join(ASSETS_PATH, "fem/png", filename)
-    return None
-
-
 # --- Initialisation Centralisée des États ---
 DEFAULT_SESSION_STATES = {
-    # FEM Visualization
-    'run_g': False,           # GIF viewer actif
-    'run_p': False,           # PNG viewer actif
-    'files_fem_g': (None, None),  # Fichiers GIF (sim1, sim2)
-    'files_fem_p': (None, None),  # Fichiers PNG (sim1, sim2)
     # LBM Visualization
     'run_lbm_g': False,
     'run_lbm_p': False,
