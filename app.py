@@ -1729,6 +1729,14 @@ def page_encapsulation():
                             case_id = os.path.basename(fpath).replace(
                                 ".gif", "")
                             st.caption(case_labels.get(case_id, ''))
+                            # PNG tfinal en dessous du GIF
+                            png_path = os.path.join(
+                                ASSETS_PATH, "encapsulation/png",
+                                f"{case_id}_tfinal.png")
+                            if os.path.exists(png_path):
+                                st.image(png_path,
+                                         use_container_width=True,
+                                         caption="t = t_final")
                         else:
                             st.warning(t("image_unavailable"))
 
