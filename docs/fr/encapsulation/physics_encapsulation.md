@@ -55,10 +55,10 @@ Coupe 2D dans le plan XY (1 cellule en Z).
 |---------|-----------|----------|
 | Die | 1.0 × 0.3 mm | SiN (passivation). |
 | Pads Au | 0.4 mm (×2, de chaque côté) | Or |
-| Dam (barrage) | 0.5 × 0.5-1.0 mm (×2) | Résine époxy |
-| Buse | Ø 0.6 mm, hauteur 1.5 mm | Acier + PTFE (extérieur). |
+| Dam (barrage) | 0.5 × 1.04 mm (×2) | Résine époxy |
+| Buse | Ø 0.6 mm, mobile (4 phases) | Acier + PTFE (extérieur). |
 | PCB | Largeur totale 3.0 mm | FR-4 + solder mask |
-| Maillage | ~100k cellules hex | 10-20 µm résolution. |
+| Maillage | ~28 500 cellules hex | 15 µm résolution (10 µm en production). |
 
 ---
 
@@ -70,18 +70,20 @@ $$\eta(\dot{\gamma}) = \eta_\infty + (\eta_0 - \eta_\infty) \left[1 + (\lambda \
 
 | Paramètre | Symbole | Valeur de référence | Unité |
 |-----------|---------|-------------------|-------|
-| Viscosité au repos | η₀ | 15-50 | Pa·s |
+| Viscosité au repos | η₀ | 15 | Pa·s |
 | Viscosité à cisaillement infini | η∞ | 1.0 | Pa·s |
 | Temps de relaxation | λ | 10 | s |
 | Indice rhéofluidifiant | n | 0.4 | - |
-| Masse volumique | ρ | 1200 | kg/m³ |
+| Masse volumique | ρ | 1600 | kg/m³ |
+
+**Note :** η₀ = 15 Pa·s correspond à la température de process (70-80°C). A 25°C, η₀ ≈ 50 Pa·s (datasheet). La simulation utilise la valeur à température de process.
 
 **Interprétation physique :**
-- **Au repos** (γ̇ → 0) : η → η₀ = 50 Pa·s → la résine reste en place (pas de drainage gravitaire).
+- **Au repos** (γ̇ → 0) : η → η₀ = 15 Pa·s → la résine reste en place (pas de drainage gravitaire).
 - **Sous la buse** (γ̇ ~ 100 s⁻¹) : η → η∞ = 1 Pa·s → la résine s'écoule facilement.
 - **Après dispensing** (γ̇ → 0) : η remonte → auto-nivellement capillaire lent, contrôlé.
 
-Le rapport de viscosité résine/air est extrême : **5×10⁶**. Ce contraste impose un traitement numérique soigneux (solveur implicite pour la diffusion visqueuse).
+Le rapport de viscosité résine/air est extrême : **1.5×10⁶**. Ce contraste impose un traitement numérique soigneux (solveur implicite pour la diffusion visqueuse).
 
 ---
 
@@ -89,7 +91,7 @@ Le rapport de viscosité résine/air est extrême : **5×10⁶**. Ce contraste i
 
 ### 4.1 Tension de surface
 
-$\sigma$ = 0.038 N/m (38 mN/m, résine époxy / air à 25°C, non polymérisée)
+$\sigma$ = 0.035 N/m (35 mN/m, résine époxy / air à température de process, non polymérisée)
 
 ### 4.2 Angles de contact dynamiques
 
@@ -119,20 +121,26 @@ L'angle de contact traduit l'équilibre des énergies de surface à la ligne tri
 
 ## 5. Analyse dimensionnelle
 
-**Conditions de référence :** U = 1 mm/s (vitesse de dispensing), L = 0.6 mm (Ø buse)
+**Conditions de référence :** U = 3.5 mm/s (v_disp, vitesse de dispensing), L = 0.6 mm (Ø buse), η₀ = 15 Pa·s (T_process).
 
 | Nombre | Expression | Valeur | Interprétation |
 |--------|-----------|--------|----------------|
-| **Re** | ρUL/μ | 0.012 | Stokes : inertie négligeable. |
-| **Ca** | μU/σ | 1.3 | Viscoélastique ≈ capillaire. |
-| **Bo** | ρgL²/σ | 0.077 | Gravité négligeable. |
-| **Oh** | μ/√(ρσL) | 330 | Extrêmement visqueux (pas d'oscillations). |
+| **Re** | ρUL/η₀ | 2×10⁻⁴ | Stokes pur : inertie totalement négligeable. |
+| **Ca** | η₀U/σ | 1.5 | Visqueux ≈ capillaire pendant la dispense. |
+| **Bo** | ρgL²/σ | 0.16 | Gravité négligeable. |
+| **Oh** | η₀/√(ρσL) | 82 | Très visqueux (pas d'oscillations). |
 
-**Régime biphasique :**
-- **Pendant le dispensing** (Ca ~ 1) : les forces visqueuses et capillaires sont comparables → la forme de l'écoulement dépend de la rhéologie ET de la mouillabilité.
-- **Pendant le repos** (Ca → 0.1) : la capillarité domine → auto-nivellement, le résine s'étale et mouille les surfaces hydrophiles.
+**Régime biphasique (4 phases) :**
+- **Phases 1-3 : dispensing** (Ca ~ 1.5) : les forces visqueuses et capillaires sont comparables → la forme de l'écoulement dépend de la rhéologie ET de la mouillabilité.
+- **Phase 4 : settling** (Ca → 0) : la capillarité domine → auto-nivellement, la résine s'étale et mouille les surfaces hydrophiles.
 
 Ce caractère biphasique (dispensing visqueux → repos capillaire) est la signature physique clé du procédé.
+
+**Séquence temporelle de la buse mobile (2.8 s total) :**
+1. Phase 1 [0 - 0.05 s] : dépôt stationnaire à x = -1.1 mm (côté gauche).
+2. Phase 2 [0.05 - 0.49 s] : translation de -1.1 à +1.1 mm à v_lat = 5 mm/s.
+3. Phase 3 [0.49 - 1.29 s] : dépôt stationnaire à x = +1.1 mm (0.8 s).
+4. Phase 4 [1.29 - 2.8 s] : buse retirée, relaxation capillaire (1.5 s).
 
 ---
 
@@ -190,38 +198,38 @@ Le coefficient de compression artificielle **cAlpha** est fixé à **0** (désac
 - deltaT initial : 0.1 µs
 - maxCo = 0.3, maxAlphaCo = 0.3
 - maxDeltaT : 500 µs
-- endTime : 1.0 s (0.5 s dispensing + 0.5 s repos).
+- endTime : 2.8 s (1.29 s dispensing + 1.51 s settling).
 
 ---
 
-## 8. Matrice de l'étude
+## 8. Étude paramétrique (3 axes)
 
-38 cas ont été simulés. Voici les cas représentatifs disponibles dans cet outil :
+L'étude paramétrique porte sur 7 cas (039-045), organisés autour de 3 axes avec le cas 039 comme référence.
 
-| ID | Description | Paramètre clé | Die (%) | Dam spillage | Verdict |
-|----|-------------|---------------|---------|--------------|---------|
-| **025** | **Meilleur cas (offset die)** | x_start = −0.5 mm | **96%** | **0%** | ✅ Validé |
-| 026 | Baseline physique corrigée | Référence | ~90% | Faible | ✅ |
-| 028 | Maillage 10 µm | cell = 10 µm | 95% | 0% | ✅ |
-| 033 | Dispensing symétrique | v_lat symétrique | 100% | Asymétrie L/R | ⚠️ |
-| 034 | 10 µm + nozzle | cell = 10 µm, nozzle | 100% | 0% | ✅ |
-| 035 | Settling étendu | t₁_end = 0.8 s | 100% | 0% | ✅ |
-| 036 | Viscosité faible | η₀ = 7.5 Pa·s | 55% | Drainage | ❌ |
-| 037 | Tension de surface réduite | σ = 35 mN/m | 100% | 0% | ✅ |
-| 038 | Buse rapide | v_lat = 5 mm/s | 90% | Symétrie dam | ⚠️ |
+**Cas de référence (039) :** v_disp = 3.5 mm/s, v_lat = 5.0 mm/s, η₀ = 15 Pa·s. Résultat : remplissage optimal, dôme ~1.4 mm, volume dispensé 2.71 mm².
+
+| ID | Axe | Paramètre varié | V_disp (mm²) | Delta vol. | Verdict |
+|----|-----|-----------------|-------------|-----------|---------|
+| **039** | **Référence** | - | **2.71** | - | Optimal. |
+| 040 | v_disp | 2.0 mm/s (-43%) | 1.55 | -43% | Sous-remplissage, die exposé. |
+| 041 | v_disp | 5.0 mm/s (+43%) | 3.87 | +43% | Sur-remplissage, dôme massif. |
+| 042 | v_lat | 3.5 mm/s (lent) | 3.11 | +15% | Bonne symétrie, léger surplus. |
+| 043 | v_lat | 7.5 mm/s (rapide) | 2.40 | -11% | Légère asymétrie droite. |
+| 044 | η₀ | 5 Pa·s (fluide) | 2.71 | 0% | Résultat final identique. |
+| 045 | η₀ | 25 Pa·s (visqueux) | 2.71 | 0% | Résultat final identique. |
 
 ---
 
 ## 9. Enseignements physiques
 
-1. **La position de la buse domine.** L'asymétrie L/R est cinématique (timing du dispensing), pas due aux propriétés matériaux. Décaler la buse (cas 025) corrige l'asymétrie.
+1. **Le débit de dispense (v_disp) est le levier principal.** Le volume dispensé est strictement proportionnel à v_disp (V = v_disp × Ø_buse × t_dispense). Un écart de ±43% en débit produit ±43% en volume. Fenêtre de process : 3.0-4.0 mm/s.
 
-2. **La résolution du maillage est critique.** 10 µm résout les détails capillaires (bord du die, pads Au de 25-30 µm). À 15-20 µm, l'interface est pixellisée et les asymétries sont des artefacts numériques.
+2. **La vitesse latérale (v_lat) a un effet indirect via le temps de traversée.** Une buse plus lente (v_lat = 3.5 mm/s) met plus longtemps à traverser le die → temps de dispense total plus long → plus de volume (+15%). Ce n'est pas la distribution latérale qui change, c'est le volume total.
 
-3. **La hauteur du barrage (dam) compte plus que l'angle de contact.** Un barrage physique (0.8-1.0 mm) est plus efficace qu'un angle de contact élevé pour empêcher le débordement.
+3. **La viscosité (η₀) n'affecte pas le résultat final** dans la plage 5-25 Pa·s. Le settling (1.5 s) est suffisamment long pour que la capillarité homogénéise la forme finale quelle que soit la viscosité. Conséquence favorable : la température de process n'a pas besoin d'être très précise.
 
-4. **La viscosité tolère une large gamme.** Entre 7.5 et 50 Pa·s, l'encapsulation fonctionne. En dessous de 7.5 Pa·s, le drainage gravitaire devient problématique (cas 036).
+4. **Le régime est biphasique.** Pendant le dispensing (Ca ~ 1.5), la rhéologie pilote ; pendant le settling (Ca → 0), la capillarité prend le relais. Les deux phases doivent être simulées.
 
-5. **Le régime est biphasique.** Pendant le dispensing (Ca ~ 1), la rhéologie pilote ; pendant le repos (Ca → 0.1), la capillarité prend le relais. Les deux phases doivent être simulées.
+5. **cAlpha = 0 est non négociable.** Activer la compression artificielle (cAlpha = 1) rend les angles de contact inopérants. L'interface diffuse (~5-7 cellules) est le prix à payer pour une physique correcte.
 
-6. **cAlpha = 0 est non négociable.** Activer la compression artificielle (cAlpha = 1) rend les angles de contact inopérants. L'interface diffuse (~5-7 cellules) est le prix à payer pour une physique correcte.
+6. **Hiérarchie de sensibilité :** v_disp (±43%) >> v_lat (±15%) >> η₀ (0%).

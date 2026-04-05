@@ -55,10 +55,10 @@ This project models **glob top encapsulation** of a Chip-On-Board (COB) componen
 |---------|-----------|----------|
 | Die | 1.0 × 0.3 mm | SiN (passivation). |
 | Au pads | 0.4 mm (×2, each side) | Gold |
-| Dam (barrier) | 0.5 × 0.5-1.0 mm (×2) | Epoxy compound |
-| Nozzle | Ø 0.6 mm, height 1.5 mm | Steel + PTFE (exterior). |
+| Dam (barrier) | 0.5 × 1.04 mm (×2) | Epoxy compound |
+| Nozzle | Ø 0.6 mm, mobile (4 phases) | Steel + PTFE (exterior). |
 | PCB | Total width 3.0 mm | FR-4 + solder mask |
-| Mesh | ~100k hex cells | 10-20 µm resolution. |
+| Mesh | ~28,500 hex cells | 15 µm resolution (10 µm for production). |
 
 ---
 
@@ -70,18 +70,20 @@ $$\eta(\dot{\gamma}) = \eta_\infty + (\eta_0 - \eta_\infty) \left[1 + (\lambda \
 
 | Parameter | Symbol | Reference value | Unit |
 |-----------|--------|----------------|------|
-| Zero-shear viscosity | η₀ | 15-50 | Pa·s |
+| Zero-shear viscosity | η₀ | 15 | Pa·s |
 | Infinite-shear viscosity | η∞ | 1.0 | Pa·s |
 | Relaxation time | λ | 10 | s |
 | Shear-thinning index | n | 0.4 | - |
-| Density | ρ | 1200 | kg/m³ |
+| Density | ρ | 1600 | kg/m³ |
+
+**Note:** η₀ = 15 Pa·s corresponds to process temperature (70-80°C). At 25°C, η₀ ≈ 50 Pa·s (datasheet). The simulation uses the value at process temperature.
 
 **Physical interpretation:**
-- **At rest** (γ̇ → 0): η → η₀ = 50 Pa·s → resin stays in place (no gravity drainage).
+- **At rest** (γ̇ → 0): η → η₀ = 15 Pa·s → resin stays in place (no gravity drainage).
 - **Under the nozzle** (γ̇ ~ 100 s⁻¹): η → η∞ = 1 Pa·s → resin flows easily.
 - **After dispensing** (γ̇ → 0): η rises → slow, controlled capillary self-leveling.
 
-The resin/air viscosity ratio is extreme: **5×10⁶**. This contrast requires careful numerical treatment (implicit solver for viscous diffusion).
+The resin/air viscosity ratio is extreme: **1.5×10⁶**. This contrast requires careful numerical treatment (implicit solver for viscous diffusion).
 
 ---
 
@@ -89,7 +91,7 @@ The resin/air viscosity ratio is extreme: **5×10⁶**. This contrast requires c
 
 ### 4.1 Surface tension
 
-$\sigma$ = 0.038 N/m (38 mN/m, epoxy resin / air at 25°C, uncured)
+$\sigma$ = 0.035 N/m (35 mN/m, epoxy resin / air at process temperature, uncured)
 
 ### 4.2 Dynamic contact angles
 
@@ -119,20 +121,26 @@ The contact angle reflects the surface energy balance at the triple line (solid-
 
 ## 5. Dimensional Analysis
 
-**Reference conditions:** U = 1 mm/s (dispensing velocity), L = 0.6 mm (nozzle Ø)
+**Reference conditions:** U = 3.5 mm/s (v_disp, dispensing velocity), L = 0.6 mm (nozzle Ø), η₀ = 15 Pa·s (T_process).
 
 | Number | Expression | Value | Interpretation |
 |--------|-----------|-------|----------------|
-| **Re** | ρUL/μ | 0.012 | Stokes : inertia negligible. |
-| **Ca** | μU/σ | 1.3 | Viscoelastic ≈ capillary. |
-| **Bo** | ρgL²/σ | 0.077 | Gravity negligible. |
-| **Oh** | μ/√(ρσL) | 330 | Extremely viscous (no oscillations). |
+| **Re** | ρUL/η₀ | 2×10⁻⁴ | Pure Stokes: inertia completely negligible. |
+| **Ca** | η₀U/σ | 1.5 | Viscous ≈ capillary during dispensing. |
+| **Bo** | ρgL²/σ | 0.16 | Gravity negligible. |
+| **Oh** | η₀/√(ρσL) | 82 | Very viscous (no oscillations). |
 
-**Two-phase regime:**
-- **During dispensing** (Ca ~ 1): viscous and capillary forces are comparable → flow shape depends on rheology AND wettability.
-- **During settling** (Ca → 0.1): capillarity dominates → self-leveling, resin spreads on hydrophilic surfaces.
+**Two-phase regime (4 phases):**
+- **Phases 1-3: dispensing** (Ca ~ 1.5): viscous and capillary forces are comparable → flow shape depends on rheology AND wettability.
+- **Phase 4: settling** (Ca → 0): capillarity dominates → self-leveling, resin spreads on hydrophilic surfaces.
 
 This two-phase character (viscous dispensing → capillary settling) is the key physical signature of the process.
+
+**Mobile nozzle sequence (2.8 s total):**
+1. Phase 1 [0 - 0.05 s]: stationary deposit at x = -1.1 mm (left side).
+2. Phase 2 [0.05 - 0.49 s]: translation from -1.1 to +1.1 mm at v_lat = 5 mm/s.
+3. Phase 3 [0.49 - 1.29 s]: stationary deposit at x = +1.1 mm (0.8 s).
+4. Phase 4 [1.29 - 2.8 s]: nozzle retracted, capillary relaxation (1.5 s).
 
 ---
 
@@ -190,38 +198,38 @@ The artificial compression coefficient **cAlpha** is set to **0** (disabled). Th
 - Initial deltaT: 0.1 µs
 - maxCo = 0.3, maxAlphaCo = 0.3
 - maxDeltaT: 500 µs
-- endTime: 1.0 s (0.5 s dispensing + 0.5 s settling).
+- endTime: 2.8 s (1.29 s dispensing + 1.51 s settling).
 
 ---
 
-## 8. Study Matrix
+## 8. Parametric Study (3 axes)
 
-38 cases were simulated. Here are the representative cases available in this tool:
+The parametric study covers 7 cases (039-045), organized around 3 axes with case 039 as reference.
 
-| ID | Description | Key parameter | Die (%) | Dam spillage | Verdict |
-|----|-------------|--------------|---------|--------------|---------|
-| **025** | **Best case (offset die)** | x_start = −0.5 mm | **96%** | **0%** | ✅ Validated |
-| 026 | Corrected physics baseline | Reference | ~90% | Low | ✅ |
-| 028 | 10 µm mesh | cell = 10 µm | 95% | 0% | ✅ |
-| 033 | Symmetric dispensing | v_lat symmetric | 100% | L/R asymmetry | ⚠️ |
-| 034 | 10 µm + nozzle | cell = 10 µm, nozzle | 100% | 0% | ✅ |
-| 035 | Extended settling | t₁_end = 0.8 s | 100% | 0% | ✅ |
-| 036 | Low viscosity | η₀ = 7.5 Pa·s | 55% | Drainage | ❌ |
-| 037 | Reduced surface tension | σ = 35 mN/m | 100% | 0% | ✅ |
-| 038 | Fast nozzle | v_lat = 5 mm/s | 90% | Dam symmetry | ⚠️ |
+**Reference case (039):** v_disp = 3.5 mm/s, v_lat = 5.0 mm/s, η₀ = 15 Pa·s. Result: optimal filling, dome ~1.4 mm, dispensed volume 2.71 mm².
+
+| ID | Axis | Varied parameter | V_disp (mm²) | Delta vol. | Verdict |
+|----|------|-----------------|-------------|-----------|---------|
+| **039** | **Reference** | - | **2.71** | - | Optimal. |
+| 040 | v_disp | 2.0 mm/s (-43%) | 1.55 | -43% | Under-fill, die exposed. |
+| 041 | v_disp | 5.0 mm/s (+43%) | 3.87 | +43% | Over-fill, massive dome. |
+| 042 | v_lat | 3.5 mm/s (slow) | 3.11 | +15% | Good symmetry, slight surplus. |
+| 043 | v_lat | 7.5 mm/s (fast) | 2.40 | -11% | Slight right asymmetry. |
+| 044 | η₀ | 5 Pa·s (fluid) | 2.71 | 0% | Identical final result. |
+| 045 | η₀ | 25 Pa·s (viscous) | 2.71 | 0% | Identical final result. |
 
 ---
 
 ## 9. Physical Insights
 
-1. **Nozzle positioning dominates.** L/R asymmetry is kinematic (dispensing timing), not due to material properties. Offsetting the nozzle (case 025) corrects the asymmetry.
+1. **Dispensing flow rate (v_disp) is the primary lever.** Dispensed volume is strictly proportional to v_disp (V = v_disp × nozzle_Ø × t_dispense). A ±43% flow rate variation produces ±43% volume change. Process window: 3.0-4.0 mm/s.
 
-2. **Mesh resolution is critical.** 10 µm resolves capillary details (die edge, 25-30 µm Au pads). At 15-20 µm, the interface is pixelated and asymmetries are numerical artifacts.
+2. **Lateral velocity (v_lat) has an indirect effect via traverse time.** A slower nozzle (v_lat = 3.5 mm/s) takes longer to cross the die → longer total dispensing time → more volume (+15%). It is not the lateral distribution that changes, but the total volume.
 
-3. **Dam height matters more than contact angle.** A physical barrier (0.8-1.0 mm) is more effective than a high contact angle for preventing overflow.
+3. **Viscosity (η₀) does not affect the final result** in the 5-25 Pa·s range. The settling phase (1.5 s) is long enough for capillarity to homogenize the final shape regardless of viscosity. Favorable consequence: process temperature does not need to be tightly controlled.
 
-4. **Viscosity tolerates a wide range.** Between 7.5 and 50 Pa·s, encapsulation works. Below 7.5 Pa·s, gravity drainage becomes problematic (case 036).
+4. **The regime is two-phase.** During dispensing (Ca ~ 1.5), rheology drives the flow; during settling (Ca → 0), capillarity takes over. Both phases must be simulated.
 
-5. **The regime is two-phase.** During dispensing (Ca ~ 1), rheology drives the flow; during settling (Ca → 0.1), capillarity takes over. Both phases must be simulated.
+5. **cAlpha = 0 is non-negotiable.** Enabling artificial compression (cAlpha = 1) renders contact angles inoperable. The diffuse interface (~5-7 cells) is the price for correct physics.
 
-6. **cAlpha = 0 is non-negotiable.** Enabling artificial compression (cAlpha = 1) renders contact angles inoperable. The diffuse interface (~5-7 cells) is the price for correct physics.
+6. **Sensitivity hierarchy:** v_disp (±43%) >> v_lat (±15%) >> η₀ (0%).

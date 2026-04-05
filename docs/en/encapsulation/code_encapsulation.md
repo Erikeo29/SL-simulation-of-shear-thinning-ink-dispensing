@@ -39,13 +39,13 @@ water  // Epoxy resin phase (glob top)
 
     BirdCarreauCoeffs
     {
-        nu0     nu0  [0 2 -1 0 0 0 0] 4.167e-2;  // η₀/ρ = 50/1200 m²/s
-        nuInf   nuInf [0 2 -1 0 0 0 0] 8.33e-4;   // η∞/ρ = 1.0/1200 m²/s
+        nu0     nu0  [0 2 -1 0 0 0 0] 9.375e-3;  // η₀/ρ = 15/1600 m²/s
+        nuInf   nuInf [0 2 -1 0 0 0 0] 6.25e-4;   // η∞/ρ = 1.0/1600 m²/s
         k       k    [0 0 1 0 0 0 0] 10;           // λ = 10 s
         n       n    [0 0 0 0 0 0 0] 0.4;          // shear-thinning index
     }
 
-    rho     1200;    // kg/m³ — silica-filled epoxy resin
+    rho     1600;    // kg/m³ — silica-filled epoxy resin
 }
 
 air
@@ -55,12 +55,12 @@ air
     rho             1.2;      // kg/m³
 }
 
-sigma   0.038;    // N/m — resin/air surface tension (38 mN/m)
+sigma   0.035;    // N/m — resin/air surface tension (35 mN/m)
 ```
 
 **Key points:**
 - **BirdCarreau** (not Carreau): OpenFOAM v2406 uses this name for the full model with both plateaus.
-- The ν₀/ν∞ ratio = 50 → strong shear-thinning.
+- The ν₀/ν∞ ratio = 15 → strong shear-thinning.
 - Conversion: ν = η / ρ (OpenFOAM expects kinematic viscosity).
 
 ---
@@ -75,7 +75,7 @@ application     interFoam;
 startFrom       startTime;
 startTime       0;
 stopAt          endTime;
-endTime         1.0;              // 1 s total (0.5 s dispensing + 0.5 s settling)
+endTime         2.8;              // 2.8 s total (1.29 s dispensing + 1.51 s settling)
 
 deltaT          1e-7;             // Initial time step (0.1 µs)
 
@@ -89,9 +89,10 @@ maxDeltaT       5e-4;             // Max 500 µs
 ```
 
 **Key points:**
-- **endTime = 1.0 s**: long simulation to capture both dispensing AND settling.
-- **writeInterval = 10 ms**: compromise between temporal resolution and data volume.
-- The settling phase (0.5 s) is essential : resin continues flowing by capillarity after dispensing stops.
+- **endTime = 2.8 s**: long simulation to capture dispensing (4 phases) AND settling (1.5 s).
+- **writeInterval = 10 ms**: compromise between temporal resolution and data volume (~280 frames).
+- The nozzle is mobile: a `codedFunctionObject` in the controlDict computes the nozzle x-position as a function of time (4 phases: stationary deposit, translation, final deposit, retraction).
+- The settling phase (1.5 s) is essential: resin continues flowing by capillarity after nozzle retraction.
 
 ---
 
@@ -283,27 +284,27 @@ boundaryField
 
 ---
 
-## 7. Injection Profile (`U`)
+## 7. Injection Profile (`U`) and Mobile Nozzle
+
+The inlet velocity and nozzle position are managed by a `codedFunctionObject` in the controlDict. The nozzle is mobile in x and dispensing is active during phases 1-3.
 
 ```cpp
-// 0/U — inlet boundary condition
-
-inlet
-{
-    type            uniformFixedValue;
-    uniformValue    table
-    (
-        (0.000    (0 -0.002 0))     // Start dispensing: 2 mm/s downward
-        (0.500    (0 -0.002 0))     // End dispensing at t = 0.5 s
-        (0.501    (0  0     0))     // Abrupt stop
-        (1.000    (0  0     0))     // Settling (rest)
-    );
-}
+// Temporal sequence (codedFunctionObject in controlDict):
+//
+// Phase 1 [0, 0.05 s]      : stationary at x = -1.1 mm, dispense ON
+// Phase 2 [0.05, 0.49 s]   : translation -1.1 → +1.1 mm at v_lat = 5 mm/s
+// Phase 3 [0.49, 1.29 s]   : stationary at x = +1.1 mm, dispense ON
+// Phase 4 [1.29, 2.8 s]    : nozzle retracted, settling (capillarity)
+//
+// v_disp = 3.5 mm/s (dispensing velocity, constant phases 1-3)
+// V_total = v_disp × nozzle_Ø × t_disp = 3.5 × 0.6 × 1.29 = 2.71 mm²
 ```
 
 **Simulation phases:**
-1. **t = 0 → 0.5 s**: active dispensing (v = 2 mm/s, flow rate Q ≈ 0.56 µL/s)
-2. **t = 0.5 → 1.0 s**: settling : resin spreads by capillarity + gravity.
+1. **t = 0 → 0.05 s**: stationary deposit on left side (x = -1.1 mm).
+2. **t = 0.05 → 0.49 s**: nozzle translation (-1.1 → +1.1 mm).
+3. **t = 0.49 → 1.29 s**: stationary deposit on right side (0.8 s).
+4. **t = 1.29 → 2.8 s**: settling, resin spreads by capillarity.
 
 ---
 
@@ -367,15 +368,14 @@ def generate_patches() -> dict:
 
 ## 9. Summary of Studied Parameters
 
-| Parameter | Min | Ref. | Max | Unit |
-|-----------|-----|------|-----|------|
-| Cell size | 10 | 15 | 20 | µm |
-| η₀ (zero-shear viscosity) | 5 | 15 | 50 | Pa·s |
-| σ (surface tension) | 0.030 | 0.038 | 0.040 | N/m |
-| θ_chip (die angle) | 15 | 25 | 60 | ° |
-| θ_dam (dam angle) | 40 | 70 | 120 | ° |
-| y_dam (dam height) | 0.5 | 0.8 | 1.04 | mm |
-| v_lateral (nozzle) | 1.7 | 2.5 | 5.0 | mm/s |
-| t₁_end (end dispensing) | 0.2 | 0.5 | 0.8 | s |
+| Parameter | Min | Ref. (039) | Max | Unit |
+|-----------|-----|-----------|-----|------|
+| v_disp (nozzle flow rate) | 2.0 | 3.5 | 5.0 | mm/s |
+| v_lat (lateral velocity) | 3.5 | 5.0 | 7.5 | mm/s |
+| η₀ (zero-shear viscosity) | 5 | 15 | 25 | Pa·s |
+| σ (surface tension) | - | 0.035 | - | N/m |
+| θ_chip (die angle) | - | 25 | - | ° |
+| θ_dam (dam angle) | - | 70 | - | ° |
+| Cell size | - | 15 | - | µm |
 
-**Total: 38 simulated cases** (unstructured exploration, no formal DoE).
+**Structured parametric study: 7 cases (039-045), 3 axes.**

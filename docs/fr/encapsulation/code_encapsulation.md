@@ -39,13 +39,13 @@ water  // Phase résine époxy (glob top)
 
     BirdCarreauCoeffs
     {
-        nu0     nu0  [0 2 -1 0 0 0 0] 4.167e-2;  // η₀/ρ = 50/1200 m²/s
-        nuInf   nuInf [0 2 -1 0 0 0 0] 8.33e-4;   // η∞/ρ = 1.0/1200 m²/s
+        nu0     nu0  [0 2 -1 0 0 0 0] 9.375e-3;  // η₀/ρ = 15/1600 m²/s
+        nuInf   nuInf [0 2 -1 0 0 0 0] 6.25e-4;   // η∞/ρ = 1.0/1600 m²/s
         k       k    [0 0 1 0 0 0 0] 10;           // λ = 10 s
         n       n    [0 0 0 0 0 0 0] 0.4;          // indice rhéofluidifiant
     }
 
-    rho     1200;    // kg/m³ — résine époxy chargée silice
+    rho     1600;    // kg/m³ — résine époxy chargée silice
 }
 
 air
@@ -55,12 +55,12 @@ air
     rho             1.2;      // kg/m³
 }
 
-sigma   0.038;    // N/m — tension de surface résine/air (38 mN/m)
+sigma   0.035;    // N/m — tension de surface résine/air (35 mN/m)
 ```
 
 **Points clés :**
 - **BirdCarreau** (et non Carreau) : OpenFOAM v2406 utilise ce nom pour le modèle complet avec les deux plateaux.
-- Le rapport ν₀/ν∞ = 50 → forte rhéofluidification.
+- Le rapport ν₀/ν∞ = 15 → forte rhéofluidification.
 - Conversion : ν = η / ρ (OpenFOAM attend la viscosité cinématique).
 
 ---
@@ -75,7 +75,7 @@ application     interFoam;
 startFrom       startTime;
 startTime       0;
 stopAt          endTime;
-endTime         1.0;              // 1 s total (0.5 s dispensing + 0.5 s settling)
+endTime         2.8;              // 2.8 s total (1.29 s dispensing + 1.51 s settling)
 
 deltaT          1e-7;             // Pas de temps initial (0.1 µs)
 
@@ -89,9 +89,10 @@ maxDeltaT       5e-4;             // Max 500 µs
 ```
 
 **Points clés :**
-- **endTime = 1.0 s** : simulation longue pour capturer le dispensing ET le repos (settling).
-- **writeInterval = 10 ms** : compromis entre résolution temporelle et volume de données.
-- La phase de settling (0.5 s) est essentielle : la résine continue de s'écouler par capillarité après l'arrêt du dispensing.
+- **endTime = 2.8 s** : simulation longue pour capturer le dispensing (4 phases) ET le settling (1.5 s).
+- **writeInterval = 10 ms** : compromis entre résolution temporelle et volume de données (~280 frames).
+- La buse est mobile : une `codedFunctionObject` dans le controlDict calcule la position x de la buse en fonction du temps (4 phases : dépôt stationnaire, translation, dépôt final, retrait).
+- La phase de settling (1.5 s) est essentielle : la résine continue de s'écouler par capillarité après le retrait de la buse.
 
 ---
 
@@ -283,27 +284,27 @@ boundaryField
 
 ---
 
-## 7. Profil d'injection (`U`)
+## 7. Profil d'injection (`U`) et buse mobile
+
+La vitesse d'entrée et la position de la buse sont gérées par une `codedFunctionObject` dans le controlDict. La buse est mobile en x et la dispense est active pendant les phases 1-3.
 
 ```cpp
-// 0/U — condition d'entrée (inlet)
-
-inlet
-{
-    type            uniformFixedValue;
-    uniformValue    table
-    (
-        (0.000    (0 -0.002 0))     // Début dispensing : 2 mm/s vers le bas
-        (0.500    (0 -0.002 0))     // Fin dispensing à t = 0.5 s
-        (0.501    (0  0     0))     // Arrêt brutal
-        (1.000    (0  0     0))     // Settling (repos)
-    );
-}
+// Séquence temporelle (codedFunctionObject dans controlDict) :
+//
+// Phase 1 [0, 0.05 s]      : stationnaire à x = -1.1 mm, dispense ON
+// Phase 2 [0.05, 0.49 s]   : translation -1.1 → +1.1 mm à v_lat = 5 mm/s
+// Phase 3 [0.49, 1.29 s]   : stationnaire à x = +1.1 mm, dispense ON
+// Phase 4 [1.29, 2.8 s]    : buse retirée, settling (capillarité)
+//
+// v_disp = 3.5 mm/s (vitesse de dispensing, constante phases 1-3)
+// V_total = v_disp × Ø_buse × t_disp = 3.5 × 0.6 × 1.29 = 2.71 mm²
 ```
 
 **Phases de la simulation :**
-1. **t = 0 → 0.5 s** : dispensing actif (v = 2 mm/s, débit Q ≈ 0.56 µL/s)
-2. **t = 0.5 → 1.0 s** : repos : la résine s'étale par capillarité + gravité.
+1. **t = 0 → 0.05 s** : dépôt stationnaire côté gauche (x = -1.1 mm).
+2. **t = 0.05 → 0.49 s** : translation de la buse (-1.1 → +1.1 mm).
+3. **t = 0.49 → 1.29 s** : dépôt stationnaire côté droit (0.8 s).
+4. **t = 1.29 → 2.8 s** : settling, la résine s'étale par capillarité.
 
 ---
 
@@ -367,15 +368,14 @@ def generate_patches() -> dict:
 
 ## 9. Résumé des paramètres étudiés
 
-| Paramètre | Min | Réf. | Max | Unité |
-|-----------|-----|------|-----|-------|
-| Taille maille | 10 | 15 | 20 | µm |
-| η₀ (viscosité repos) | 5 | 15 | 50 | Pa·s |
-| σ (tension surface) | 0.030 | 0.038 | 0.040 | N/m |
-| θ_chip (angle die) | 15 | 25 | 60 | ° |
-| θ_dam (angle barrage) | 40 | 70 | 120 | ° |
-| y_dam (hauteur barrage) | 0.5 | 0.8 | 1.04 | mm |
-| v_latérale (buse) | 1.7 | 2.5 | 5.0 | mm/s |
-| t₁_end (fin dispensing) | 0.2 | 0.5 | 0.8 | s |
+| Paramètre | Min | Réf. (039) | Max | Unité |
+|-----------|-----|-----------|-----|-------|
+| v_disp (débit buse) | 2.0 | 3.5 | 5.0 | mm/s |
+| v_lat (vitesse latérale) | 3.5 | 5.0 | 7.5 | mm/s |
+| η₀ (viscosité repos) | 5 | 15 | 25 | Pa·s |
+| σ (tension surface) | - | 0.035 | - | N/m |
+| θ_chip (angle die) | - | 25 | - | ° |
+| θ_dam (angle barrage) | - | 70 | - | ° |
+| Taille maille | - | 15 | - | µm |
 
-**Total : 38 cas simulés** (exploration non structurée, pas de DoE formel).
+**Étude paramétrique structurée : 7 cas (039-045), 3 axes.**
